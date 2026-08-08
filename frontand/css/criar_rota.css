@@ -1,0 +1,600 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f7f5;
+
+    color: #173b2c;
+}
+
+
+/* =========================================
+   PÁGINA
+========================================= */
+
+.pagina {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    background: #f4f7f5;
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.cabecalho {
+
+    width: 100%;
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 14px 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087c48,
+            #13a45b
+        );
+
+    color: white;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   BOTÃO VOLTAR
+========================================= */
+
+.btn-voltar {
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(255, 255, 255, 0.14);
+
+    color: white;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-voltar:hover {
+
+    background:
+        rgba(255, 255, 255, 0.25);
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.titulo-cabecalho {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.icone {
+
+    font-size: 28px;
+}
+
+
+.titulo-cabecalho h1 {
+
+    font-size: 21px;
+
+    font-weight: 600;
+}
+
+
+.titulo-cabecalho p {
+
+    margin-top: 3px;
+
+    font-size: 12px;
+
+    opacity: 0.85;
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.conteudo {
+
+    width: min(100%, 850px);
+
+    margin: 0 auto;
+
+    padding:
+        30px
+        24px
+        50px;
+}
+
+
+/* =========================================
+   INTRODUÇÃO
+========================================= */
+
+.introducao {
+
+    margin-bottom: 25px;
+}
+
+
+.introducao > span {
+
+    color: #13a45b;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+.introducao h2 {
+
+    margin-top: 6px;
+
+    color: #173b2c;
+
+    font-size: 27px;
+}
+
+
+.introducao p {
+
+    margin-top: 7px;
+
+    color: #718078;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   FORMULÁRIO
+========================================= */
+
+.formulario {
+
+    padding: 25px;
+
+    background: white;
+
+    border:
+        1px solid #e2ebe5;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30, 80, 55, 0.07);
+}
+
+
+/* =========================================
+   GRUPOS
+========================================= */
+
+.grupo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 19px;
+}
+
+
+.grupo label {
+
+    color: #315243;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   CAMPOS
+========================================= */
+
+.grupo input,
+.grupo select,
+.grupo textarea {
+
+    width: 100%;
+
+    border:
+        1px solid #d8e4dc;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #fbfdfc;
+
+    color: #244536;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.grupo input,
+.grupo select {
+
+    height: 46px;
+
+    padding: 0 13px;
+}
+
+
+.grupo textarea {
+
+    padding: 12px 13px;
+
+    resize: vertical;
+
+    min-height: 100px;
+}
+
+
+.grupo input:focus,
+.grupo select:focus,
+.grupo textarea:focus {
+
+    border-color: #13a45b;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(19, 164, 91, 0.10);
+
+    background: white;
+}
+
+
+.grupo input::placeholder,
+.grupo textarea::placeholder {
+
+    color: #9aa6a0;
+}
+
+
+/* =========================================
+   CAMPOS LADO A LADO
+========================================= */
+
+.linha-campos {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 16px;
+}
+
+
+/* =========================================
+   DIAS
+========================================= */
+
+.dias {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+
+.dia {
+
+    cursor: pointer;
+}
+
+
+.dia input {
+
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+}
+
+
+.dia span {
+
+    min-width: 55px;
+
+    height: 38px;
+
+    padding: 0 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid #d8e4dc;
+
+    border-radius: 9px;
+
+    background: #f8fbf9;
+
+    color: #52665b;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    transition:
+        background 0.2s ease,
+        border 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.dia input:checked + span {
+
+    background: #e2f5ea;
+
+    border-color: #13a45b;
+
+    color: #0d934d;
+}
+
+
+/* =========================================
+   BOTÕES
+========================================= */
+
+.acoes-formulario {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    padding-top: 5px;
+}
+
+
+.btn-cancelar,
+.btn-cadastrar {
+
+    min-height: 45px;
+
+    padding:
+        0 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.btn-cancelar {
+
+    background: #eef3ef;
+
+    color: #52665b;
+}
+
+
+.btn-cancelar:hover {
+
+    background: #e2e9e4;
+
+    transform:
+        translateY(-1px);
+}
+
+
+.btn-cadastrar {
+
+    background:
+        linear-gradient(
+            135deg,
+            #087c48,
+            #13a45b
+        );
+
+    color: white;
+
+    box-shadow:
+        0 4px 10px
+        rgba(19, 164, 91, 0.20);
+}
+
+
+.btn-cadastrar:hover {
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 6px 15px
+        rgba(19, 164, 91, 0.25);
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .cabecalho {
+
+        min-height: 68px;
+
+        padding:
+            12px
+            15px;
+
+    }
+
+
+    .btn-voltar {
+
+        width: 38px;
+
+        height: 38px;
+
+    }
+
+
+    .titulo-cabecalho h1 {
+
+        font-size: 18px;
+
+    }
+
+
+    .conteudo {
+
+        padding:
+            22px
+            15px
+            40px;
+
+    }
+
+
+    .introducao h2 {
+
+        font-size: 23px;
+
+    }
+
+
+    .formulario {
+
+        padding: 20px 16px;
+
+    }
+
+
+    .linha-campos {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+
+    }
+
+
+    .acoes-formulario {
+
+        flex-direction: column-reverse;
+
+    }
+
+
+    .btn-cancelar,
+    .btn-cadastrar {
+
+        width: 100%;
+
+    }
+
+}

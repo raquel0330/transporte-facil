@@ -1,0 +1,630 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+html,
+body {
+
+    width: 100%;
+    height: 100%;
+
+}
+
+
+body {
+
+    overflow: hidden;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #073d2a;
+
+}
+
+
+/* =========================================
+   TELA
+========================================= */
+
+.tela-inicial {
+
+    width: 100%;
+    height: 100vh;
+
+    min-height: 600px;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding:
+        13vh
+        6%
+        5vh;
+
+
+    background-image:
+        url("../lagoa alegre.jpeg");
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+}
+
+
+/* =========================================
+   OVERLAY
+========================================= */
+
+.overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(3, 51, 35, 0.12),
+            rgba(3, 55, 37, 0.30),
+            rgba(1, 36, 25, 0.62)
+        );
+
+    z-index: 0;
+
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.conteudo {
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    text-align: center;
+
+    animation:
+        aparecer 0.9s ease forwards;
+
+}
+
+
+/* =========================================
+   LOGO
+========================================= */
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+}
+
+
+/* =========================================
+   ÍCONE
+========================================= */
+
+.icone-onibus {
+
+    width: 72px;
+
+    height: 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.88);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.30);
+
+}
+
+
+.icone-onibus span {
+
+    font-size: 39px;
+
+    line-height: 1;
+
+}
+
+
+/* =========================================
+   NOME
+========================================= */
+
+.nome-aplicativo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    line-height: 0.9;
+
+}
+
+
+/* Transporte */
+
+.transporte {
+
+    color: #ffffff;
+
+    font-size:
+        clamp(30px, 5vw, 50px);
+
+    font-weight: 400;
+
+    letter-spacing: -1px;
+
+}
+
+
+/* Fácil */
+
+.facil {
+
+    color: #19b35e;
+
+    font-family: cursive;
+
+    font-size:
+        clamp(38px, 6vw, 57px);
+
+    font-weight: bold;
+
+    font-style: italic;
+
+    text-shadow:
+        0 2px 8px
+        rgba(0, 0, 0, 0.20);
+
+}
+
+
+/* =========================================
+   SUBTÍTULO
+========================================= */
+
+.subtitulo {
+
+    margin-top: 25px;
+
+    color: rgba(255, 255, 255, 0.92);
+
+    font-size: 17px;
+
+    letter-spacing: 0.4px;
+
+}
+
+
+/* =========================================
+   ÁREA DO BOTÃO
+========================================= */
+
+.area-botao {
+
+    width: 100%;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    animation:
+        subir 1s ease 0.2s forwards;
+
+    opacity: 0;
+
+}
+
+
+/* =========================================
+   BOTÃO
+========================================= */
+
+.btn-entrar {
+
+    width: min(100%, 540px);
+
+    height: 72px;
+
+    padding:
+        0 28px;
+
+    border: none;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #20b866,
+            #0d994d
+        );
+
+    color: white;
+
+    font-size: 25px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 12px 30px
+        rgba(0, 0, 0, 0.30),
+
+        inset 0 1px 0
+        rgba(255, 255, 255, 0.20);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+
+}
+
+
+/* =========================================
+   SETA
+========================================= */
+
+.seta {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(255, 255, 255, 0.18);
+
+    font-size: 24px;
+
+    transition:
+        transform 0.25s ease;
+
+}
+
+
+/* =========================================
+   HOVER
+========================================= */
+
+.btn-entrar:hover {
+
+    transform:
+        translateY(-3px);
+
+    filter:
+        brightness(1.06);
+
+    box-shadow:
+        0 16px 35px
+        rgba(0, 0, 0, 0.35),
+
+        0 0 25px
+        rgba(25, 179, 94, 0.25);
+
+}
+
+
+.btn-entrar:hover .seta {
+
+    transform:
+        translateX(5px);
+
+}
+
+
+/* =========================================
+   CLICK
+========================================= */
+
+.btn-entrar:active {
+
+    transform:
+        translateY(1px)
+        scale(0.98);
+
+}
+
+
+/* =========================================
+   RODAPÉ
+========================================= */
+
+.rodape {
+
+    margin-top: 15px;
+
+    color:
+        rgba(255, 255, 255, 0.70);
+
+    font-size: 12px;
+
+    letter-spacing: 0.3px;
+
+}
+
+
+/* =========================================
+   ANIMAÇÕES
+========================================= */
+
+@keyframes aparecer {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(-20px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes subir {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =========================================
+   TABLET
+========================================= */
+
+@media (max-width: 800px) {
+
+    .tela-inicial {
+
+        padding:
+            14vh
+            6%
+            5vh;
+
+    }
+
+}
+
+
+/* =========================================
+   CELULAR
+========================================= */
+
+@media (max-width: 600px) {
+
+    .tela-inicial {
+
+        min-height: 100vh;
+
+        padding:
+            17vh
+            7%
+            5vh;
+
+    }
+
+
+    .logo {
+
+        gap: 11px;
+
+    }
+
+
+    .icone-onibus {
+
+        width: 58px;
+
+        height: 58px;
+
+        border-radius: 11px;
+
+    }
+
+
+    .icone-onibus span {
+
+        font-size: 31px;
+
+    }
+
+
+    .transporte {
+
+        font-size: 29px;
+
+    }
+
+
+    .facil {
+
+        font-size: 38px;
+
+    }
+
+
+    .subtitulo {
+
+        margin-top: 20px;
+
+        font-size: 15px;
+
+    }
+
+
+    .btn-entrar {
+
+        width: 92%;
+
+        height: 64px;
+
+        border-radius: 18px;
+
+        font-size: 22px;
+
+    }
+
+
+    .seta {
+
+        width: 34px;
+
+        height: 34px;
+
+        font-size: 21px;
+
+    }
+
+}
+
+
+/* =========================================
+   CELULAR PEQUENO
+========================================= */
+
+@media (max-width: 380px) {
+
+    .tela-inicial {
+
+        padding-top: 14vh;
+
+    }
+
+
+    .icone-onibus {
+
+        width: 52px;
+
+        height: 52px;
+
+    }
+
+
+    .icone-onibus span {
+
+        font-size: 28px;
+
+    }
+
+
+    .transporte {
+
+        font-size: 26px;
+
+    }
+
+
+    .facil {
+
+        font-size: 34px;
+
+    }
+
+
+    .btn-entrar {
+
+        width: 94%;
+
+    }
+
+}

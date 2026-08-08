@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login - Transporte Fácil</title>
+
+    <link
+        rel="stylesheet"
+        href="css/login.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="tela-login">
+
+        <!-- =====================================
+            CARD DE LOGIN
+        ====================================== -->
+
+        <section class="card-login">
+
+
+            <!-- LOGO -->
+
+            <div class="logo-login">
+
+                <span class="transporte">
+                    Transporte
+                </span>
+
+                <span class="facil">
+                    Fácil
+                </span>
+
+            </div>
+
+
+            <p class="subtitulo-login">
+                Acesse sua conta
+            </p>
+
+
+            <!-- =================================
+                TIPO DE ACESSO
+            ================================== -->
+
+            <div class="tipo-acesso">
+
+                <button
+                    id="btnUsuario"
+                    class="tipo-btn ativo"
+                    type="button"
+                >
+                    👤 Usuário
+                </button>
+
+
+                <button
+                    id="btnAdministrador"
+                    class="tipo-btn"
+                    type="button"
+                >
+                    🛡️ Administrador
+                </button>
+
+            </div>
+
+
+            <!-- =================================
+                FORMULÁRIO
+            ================================== -->
+
+            <form id="formLogin">
+
+
+                <!-- E-MAIL -->
+
+                <div class="campo">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Digite seu e-mail"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- SENHA -->
+
+                <div class="campo">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <div class="campo-senha">
+
+                        <input
+                            type="password"
+                            id="senha"
+                            placeholder="Digite sua senha"
+                            autocomplete="current-password"
+                            required
+                        >
+
+                        <button
+                            id="btnMostrarSenha"
+                            class="btn-mostrar-senha"
+                            type="button"
+                            aria-label="Mostrar senha"
+                        >
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MENSAGEM DE ERRO -->
+
+                <p
+                    id="mensagemErro"
+                    class="mensagem-erro"
+                ></p>
+
+
+                <!-- BOTÃO ENTRAR -->
+
+                <button
+                    id="btnEntrar"
+                    class="btn-entrar"
+                    type="submit"
+                >
+
+                    Entrar
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <!-- =================================
+                VOLTAR
+            ================================== -->
+
+            <button
+                id="btnVoltar"
+                class="btn-voltar"
+                type="button"
+            >
+                ← Voltar
+            </button>
+
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================
+        JAVASCRIPT
+    ====================================== -->
+
+    <script src="js/login.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Dashboard - Transporte Fácil</title>
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="dashboard">
+
+
+        <!-- =====================================
+             CABEÇALHO
+        ====================================== -->
+
+        <header class="cabecalho">
+
+            <div class="titulo-cabecalho">
+
+                <span class="icone-dashboard">
+                    🚌
+                </span>
+
+                <div>
+
+                    <h1>
+                        Transporte Fácil
+                    </h1>
+
+                    <p>
+                        Painel Administrativo
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="btnSair"
+                class="btn-sair"
+                type="button"
+            >
+                ↪
+                Sair
+            </button>
+
+        </header>
+
+
+        <!-- =====================================
+             CONTEÚDO
+        ====================================== -->
+
+        <main class="conteudo">
+
+
+            <!-- =================================
+                 BOAS-VINDAS
+            ================================== -->
+
+            <section class="boas-vindas">
+
+                <div>
+
+                    <span>
+                        Painel de controle
+                    </span>
+
+                    <h2>
+                        Olá, Administrador! 👋
+                    </h2>
+
+                    <p>
+                        Gerencie as rotas, veículos,
+                        horários e agências do
+                        Transporte Fácil.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 RESUMO
+            ================================== -->
+
+            <section class="resumo">
+
+                <div class="card-resumo">
+
+                    <div class="icone-resumo">
+                        🛣️
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Rotas
+                        </span>
+
+                        <strong>
+                            4
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-resumo">
+
+                    <div class="icone-resumo">
+                        🚌
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Veículos
+                        </span>
+
+                        <strong>
+                            4
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-resumo">
+
+                    <div class="icone-resumo">
+                        🕐
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Horários
+                        </span>
+
+                        <strong>
+                            12
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="card-resumo">
+
+                    <div class="icone-resumo">
+                        🏢
+                    </div>
+
+                    <div>
+
+                        <span>
+                            Agências
+                        </span>
+
+                        <strong>
+                            4
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 AÇÕES RÁPIDAS
+            ================================== -->
+
+            <section class="secao">
+
+                <div class="titulo-secao">
+
+                    <div>
+
+                        <h2>
+                            Gerenciamento
+                        </h2>
+
+                        <p>
+                            Acesse rapidamente as
+                            principais funções.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="acoes">
+
+
+                    <button
+                        class="card-acao"
+                        data-acao="rotas"
+                        type="button"
+                    >
+
+                        <span class="icone-acao">
+                            🛣️
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Gerenciar Rotas
+                            </strong>
+
+                            <span>
+                                Adicionar e editar rotas
+                            </span>
+
+                        </div>
+
+                        <span class="seta">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="card-acao"
+                        data-acao="horarios"
+                        type="button"
+                    >
+
+                        <span class="icone-acao">
+                            🕐
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Gerenciar Horários
+                            </strong>
+
+                            <span>
+                                Controlar horários das viagens
+                            </span>
+
+                        </div>
+
+                        <span class="seta">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="card-acao"
+                        data-acao="veiculos"
+                        type="button"
+                    >
+
+                        <span class="icone-acao">
+                            🚌
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Gerenciar Veículos
+                            </strong>
+
+                            <span>
+                                Cadastrar e editar veículos
+                            </span>
+
+                        </div>
+
+                        <span class="seta">
+                            →
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="card-acao"
+                        data-acao="agencias"
+                        type="button"
+                    >
+
+                        <span class="icone-acao">
+                            🏢
+                        </span>
+
+                        <div>
+
+                            <strong>
+                                Gerenciar Agências
+                            </strong>
+
+                            <span>
+                                Administrar empresas e agências
+                            </span>
+
+                        </div>
+
+                        <span class="seta">
+                            →
+                        </span>
+
+                    </button>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================
+                 ROTAS CADASTRADAS
+            ================================== -->
+
+            <section class="secao">
+
+                <div class="titulo-lista">
+
+                    <div>
+
+                        <h2>
+                            Rotas cadastradas
+                        </h2>
+
+                        <p>
+                            Visualização das rotas
+                            atualmente disponíveis.
+                        </p>
+
+                    </div>
+
+                    <button
+                        id="btnAdicionarRota"
+                        class="btn-adicionar"
+                        type="button"
+                    >
+                        + Adicionar rota
+                    </button>
+
+                </div>
+
+
+                <div class="lista-rotas">
+
+
+                    <!-- VIAÇÃO SETE -->
+
+                    <article class="card-rota">
+
+                        <div class="icone-rota">
+                            🚌
+                        </div>
+
+                        <div class="info-rota">
+
+                            <h3>
+                                Viação Sete
+                            </h3>
+
+                            <p>
+                                Lagoa Alegre → Teresina
+                            </p>
+
+                        </div>
+
+                        <span class="status ativo">
+                            Ativa
+                        </span>
+
+                        <button
+                            class="btn-editar"
+                            data-rota="Viação Sete"
+                            type="button"
+                        >
+                            Editar
+                        </button>
+
+                    </article>
+
+
+                    <!-- J ARAÚJO -->
+
+                    <article class="card-rota">
+
+                        <div class="icone-rota">
+                            🚌
+                        </div>
+
+                        <div class="info-rota">
+
+                            <h3>
+                                J Araújo
+                            </h3>
+
+                            <p>
+                                Lagoa Alegre → Teresina
+                            </p>
+
+                        </div>
+
+                        <span class="status ativo">
+                            Ativa
+                        </span>
+
+                        <button
+                            class="btn-editar"
+                            data-rota="J Araújo"
+                            type="button"
+                        >
+                            Editar
+                        </button>
+
+                    </article>
+
+
+                    <!-- VAN DO ZÉ LUIZ -->
+
+                    <article class="card-rota">
+
+                        <div class="icone-rota">
+                            🚐
+                        </div>
+
+                        <div class="info-rota">
+
+                            <h3>
+                                Van do Zé Luiz
+                            </h3>
+
+                            <p>
+                                Lagoa Alegre → Teresina
+                            </p>
+
+                        </div>
+
+                        <span class="status ativo">
+                            Ativa
+                        </span>
+
+                        <button
+                            class="btn-editar"
+                            data-rota="Van do Zé Luiz"
+                            type="button"
+                        >
+                            Editar
+                        </button>
+
+                    </article>
+
+
+                    <!-- VAN DO DOMINGUINHO -->
+
+                    <article class="card-rota">
+
+                        <div class="icone-rota">
+                            🚐
+                        </div>
+
+                        <div class="info-rota">
+
+                            <h3>
+                                Van do Dominguinho
+                            </h3>
+
+                            <p>
+                                Lagoa Alegre → Teresina
+                            </p>
+
+                        </div>
+
+                        <span class="status ativo">
+                            Ativa
+                        </span>
+
+                        <button
+                            class="btn-editar"
+                            data-rota="Van do Dominguinho"
+                            type="button"
+                        >
+                            Editar
+                        </button>
+
+                    </article>
+
+
+                </div>
+
+            </section>
+
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

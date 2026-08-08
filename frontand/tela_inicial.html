@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Transporte Fácil</title>
+
+    <link
+        rel="stylesheet"
+        href="css/tela_inicial.css"
+    >
+
+</head>
+
+<body>
+
+    <main class="tela-inicial">
+
+        <div class="overlay"></div>
+
+        <div class="conteudo">
+
+            <section class="logo">
+
+                <div class="nome-aplicativo">
+
+                    <span class="transporte">
+                        Transporte
+                    </span>
+
+                    <span class="facil">
+                        Fácil
+                    </span>
+
+                </div>
+
+            </section>
+
+            <p class="subtitulo">
+                Seu caminho mais simples.
+            </p>
+
+        </div>
+
+        <div class="area-botao">
+
+            <button
+                id="btnEntrar"
+                class="btn-entrar"
+                type="button"
+            >
+
+                <span>
+                    Entrar
+                </span>
+
+                <span class="seta">
+                    →
+                </span>
+
+            </button>
+
+        </div>
+
+    </main>
+
+    <script src="js/tela_inicial.js"></script>
+
+</body>
+
+</html>

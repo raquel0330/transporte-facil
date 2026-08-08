@@ -1,0 +1,948 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f7f5;
+
+    color: #173b2c;
+}
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+.dashboard {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    background: #f4f7f5;
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.cabecalho {
+
+    width: 100%;
+
+    min-height: 76px;
+
+    padding: 0 28px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087c48,
+            #13a45b
+        );
+
+    color: white;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   TÍTULO DO CABEÇALHO
+========================================= */
+
+.titulo-cabecalho {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.icone-dashboard {
+
+    width: 46px;
+
+    height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255, 255, 255, 0.16);
+
+    font-size: 25px;
+}
+
+
+.titulo-cabecalho h1 {
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.2px;
+}
+
+
+.titulo-cabecalho p {
+
+    margin-top: 3px;
+
+    color:
+        rgba(255, 255, 255, 0.78);
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   BOTÃO SAIR
+========================================= */
+
+.btn-sair {
+
+    min-height: 40px;
+
+    padding: 0 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    background:
+        rgba(255, 255, 255, 0.14);
+
+    color: white;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-sair:hover {
+
+    background:
+        rgba(255, 255, 255, 0.25);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.conteudo {
+
+    width:
+        min(100%, 1100px);
+
+    margin: 0 auto;
+
+    padding:
+        30px
+        24px
+        55px;
+}
+
+
+/* =========================================
+   BOAS-VINDAS
+========================================= */
+
+.boas-vindas {
+
+    width: 100%;
+
+    padding: 26px;
+
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8f7ef,
+            #f7fcf9
+        );
+
+    border:
+        1px solid #d5eddf;
+
+    box-shadow:
+        0 4px 15px
+        rgba(20, 80, 50, 0.05);
+}
+
+
+.boas-vindas span {
+
+    color: #0d934d;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+
+.boas-vindas h2 {
+
+    margin-top: 7px;
+
+    color: #173b2c;
+
+    font-size: 25px;
+}
+
+
+.boas-vindas p {
+
+    max-width: 700px;
+
+    margin-top: 7px;
+
+    color: #718078;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   RESUMO
+========================================= */
+
+.resumo {
+
+    width: 100%;
+
+    margin-top: 22px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 15px;
+}
+
+
+.card-resumo {
+
+    min-height: 110px;
+
+    padding: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    background: white;
+
+    border:
+        1px solid #e4ece7;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(30, 80, 55, 0.06);
+}
+
+
+.icone-resumo {
+
+    width: 48px;
+
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #e6f6ed;
+
+    font-size: 23px;
+}
+
+
+.card-resumo div:last-child {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.card-resumo span {
+
+    color: #78877f;
+
+    font-size: 12px;
+}
+
+
+.card-resumo strong {
+
+    color: #173b2c;
+
+    font-size: 25px;
+}
+
+
+/* =========================================
+   SEÇÕES
+========================================= */
+
+.secao {
+
+    margin-top: 32px;
+}
+
+
+.titulo-secao {
+
+    margin-bottom: 16px;
+}
+
+
+.titulo-secao h2 {
+
+    color: #173b2c;
+
+    font-size: 20px;
+}
+
+
+.titulo-secao p {
+
+    margin-top: 5px;
+
+    color: #78877f;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   AÇÕES
+========================================= */
+
+.acoes {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 14px;
+}
+
+
+.card-acao {
+
+    min-height: 90px;
+
+    padding: 16px;
+
+    border:
+        1px solid #e4ece7;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    background: white;
+
+    color: #173b2c;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 15px
+        rgba(30, 80, 55, 0.05);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.card-acao:hover {
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        #bfe3ce;
+
+    box-shadow:
+        0 8px 22px
+        rgba(30, 80, 55, 0.10);
+}
+
+
+.icone-acao {
+
+    width: 48px;
+
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #e6f6ed;
+
+    font-size: 23px;
+}
+
+
+.card-acao div {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.card-acao strong {
+
+    color: #244536;
+
+    font-size: 15px;
+}
+
+
+.card-acao div span {
+
+    color: #87948e;
+
+    font-size: 12px;
+}
+
+
+.card-acao .seta {
+
+    color: #13a45b;
+
+    font-size: 22px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   TÍTULO DA LISTA
+========================================= */
+
+.titulo-lista {
+
+    margin-bottom: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+
+.titulo-lista h2 {
+
+    color: #173b2c;
+
+    font-size: 20px;
+}
+
+
+.titulo-lista p {
+
+    margin-top: 5px;
+
+    color: #78877f;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   BOTÃO ADICIONAR
+========================================= */
+
+.btn-adicionar {
+
+    min-height: 40px;
+
+    padding:
+        0 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #13a45b;
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-adicionar:hover {
+
+    background: #087c48;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================
+   LISTA DE ROTAS
+========================================= */
+
+.lista-rotas {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+
+/* =========================================
+   CARD DA ROTA
+========================================= */
+
+.card-rota {
+
+    min-height: 76px;
+
+    padding: 14px 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    background: white;
+
+    border:
+        1px solid #e4ece7;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(30, 80, 55, 0.05);
+}
+
+
+.icone-rota {
+
+    width: 45px;
+
+    height: 45px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 11px;
+
+    background: #e6f6ed;
+
+    font-size: 22px;
+}
+
+
+/* =========================================
+   INFORMAÇÕES DA ROTA
+========================================= */
+
+.info-rota {
+
+    flex: 1;
+}
+
+
+.info-rota h3 {
+
+    color: #244536;
+
+    font-size: 15px;
+}
+
+
+.info-rota p {
+
+    margin-top: 4px;
+
+    color: #87948e;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.status {
+
+    padding:
+        5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: bold;
+}
+
+
+.status.ativo {
+
+    background: #e1f4e9;
+
+    color: #11894b;
+}
+
+
+/* =========================================
+   BOTÃO EDITAR
+========================================= */
+
+.btn-editar {
+
+    min-height: 36px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid #d5e6dc;
+
+    border-radius: 9px;
+
+    background: #f7faf8;
+
+    color: #11894b;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.btn-editar:hover {
+
+    background: #e8f7ef;
+
+    border-color: #bfe3ce;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 800px) {
+
+    .resumo {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .acoes {
+
+        grid-template-columns:
+            1fr;
+    }
+
+}
+
+
+/* =========================================
+   CELULAR
+========================================= */
+
+@media (max-width: 600px) {
+
+    .cabecalho {
+
+        min-height: 68px;
+
+        padding:
+            0 15px;
+    }
+
+
+    .icone-dashboard {
+
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 21px;
+    }
+
+
+    .titulo-cabecalho h1 {
+
+        font-size: 18px;
+    }
+
+
+    .titulo-cabecalho p {
+
+        font-size: 10px;
+    }
+
+
+    .btn-sair {
+
+        min-height: 36px;
+
+        padding:
+            0 10px;
+
+        font-size: 12px;
+    }
+
+
+    .conteudo {
+
+        padding:
+            22px
+            15px
+            40px;
+    }
+
+
+    .boas-vindas {
+
+        padding: 20px;
+    }
+
+
+    .boas-vindas h2 {
+
+        font-size: 21px;
+    }
+
+
+    .resumo {
+
+        grid-template-columns:
+            1fr 1fr;
+
+        gap: 10px;
+    }
+
+
+    .card-resumo {
+
+        min-height: 95px;
+
+        padding: 13px;
+
+        gap: 10px;
+    }
+
+
+    .icone-resumo {
+
+        width: 40px;
+
+        height: 40px;
+
+        font-size: 19px;
+    }
+
+
+    .card-resumo strong {
+
+        font-size: 21px;
+    }
+
+
+    .titulo-lista {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .btn-adicionar {
+
+        width: 100%;
+    }
+
+
+    .card-rota {
+
+        align-items: flex-start;
+
+        flex-wrap: wrap;
+    }
+
+
+    .info-rota {
+
+        min-width: 120px;
+    }
+
+
+    .status {
+
+        margin-left: auto;
+    }
+
+
+    .btn-editar {
+
+        width: 100%;
+
+        margin-top: 5px;
+    }
+
+}
+
+
+/* =========================================
+   CELULARES PEQUENOS
+========================================= */
+
+@media (max-width: 380px) {
+
+    .resumo {
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .titulo-cabecalho p {
+
+        display: none;
+    }
+
+
+    .boas-vindas h2 {
+
+        font-size: 19px;
+    }
+
+}

@@ -1,0 +1,765 @@
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f7f5;
+
+    color: #173b2c;
+}
+
+
+/* =========================================
+   TELA PRINCIPAL
+========================================= */
+
+.dashboard {
+    width: 100%;
+    min-height: 100vh;
+    background: #f4f7f5;
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.cabecalho {
+    height: 72px;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087c48,
+            #13a45b
+        );
+
+    color: white;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+.cabecalho h1 {
+    font-size: 24px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* =========================================
+   BOTÕES DO CABEÇALHO
+========================================= */
+
+.btn-voltar,
+.btn-menu {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(255, 255, 255, 0.14);
+
+    color: white;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-menu {
+    font-size: 30px;
+}
+
+
+.btn-voltar:hover,
+.btn-menu:hover {
+    background:
+        rgba(255, 255, 255, 0.25);
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================
+   MENU DROPDOWN
+========================================= */
+
+.menu-dropdown {
+    position: absolute;
+
+    top: 62px;
+    right: 18px;
+
+    width: 225px;
+
+    padding: 8px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: white;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.20);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transform:
+        translateY(-8px);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+}
+
+
+.menu-dropdown.aberto {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================
+   ITENS DO MENU
+========================================= */
+
+.item-menu {
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 0 13px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    background: transparent;
+
+    color: #244536;
+
+    font-size: 15px;
+
+    text-align: left;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease;
+}
+
+
+.item-menu:hover {
+    background: #edf7f1;
+}
+
+
+.icone-menu {
+    width: 25px;
+
+    text-align: center;
+
+    font-size: 18px;
+}
+
+
+.item-menu.sair {
+    margin-top: 5px;
+
+    border-top:
+        1px solid #eeeeee;
+
+    border-radius: 0;
+
+    color: #c0392b;
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.conteudo {
+    width: min(100%, 900px);
+
+    margin: 0 auto;
+
+    padding:
+        28px
+        24px
+        50px;
+}
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.titulo-secao {
+    margin-bottom: 22px;
+}
+
+
+.titulo-secao h2 {
+    color: #173b2c;
+
+    font-size: 28px;
+
+    font-weight: 700;
+}
+
+
+.titulo-secao p {
+    margin-top: 6px;
+
+    color: #718078;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   CAMPO DE BUSCA
+========================================= */
+
+.area-busca {
+    width: 100%;
+
+    height: 56px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 0 16px;
+
+    background: white;
+
+    border:
+        1px solid #dfe9e3;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(20, 80, 50, 0.06);
+}
+
+
+.icone-busca {
+    font-size: 19px;
+}
+
+
+.area-busca input {
+    width: 100%;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    color: #244536;
+
+    background: transparent;
+
+    font-size: 15px;
+}
+
+
+.area-busca input::placeholder {
+    color: #9aa6a0;
+}
+
+
+.btn-limpar {
+    width: 30px;
+    height: 30px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #eef3ef;
+
+    color: #718078;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    cursor: pointer;
+}
+
+
+.btn-limpar:hover {
+    background: #e2ebe5;
+}
+
+
+/* =========================================
+   CABEÇALHO DOS RESULTADOS
+========================================= */
+
+.cabecalho-resultados {
+    margin-top: 28px;
+
+    margin-bottom: 13px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.cabecalho-resultados h3 {
+    font-size: 17px;
+
+    color: #244536;
+}
+
+
+.cabecalho-resultados span {
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    background: #e1f4e9;
+
+    color: #11894b;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   LISTA
+========================================= */
+
+.lista-linhas {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* =========================================
+   CARD DA ROTA
+========================================= */
+
+.card-linha {
+    padding: 18px;
+
+    background: white;
+
+    border:
+        1px solid #e4ece7;
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(30, 80, 55, 0.07);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.card-linha:hover {
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        0 9px 24px
+        rgba(30, 80, 55, 0.12);
+}
+
+
+/* =========================================
+   CABEÇALHO DO CARD
+========================================= */
+
+.cabecalho-card {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.icone-onibus {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #e6f6ed;
+
+    font-size: 25px;
+}
+
+
+.informacoes {
+    flex: 1;
+}
+
+
+.informacoes h3 {
+    color: #173b2c;
+
+    font-size: 17px;
+}
+
+
+.informacoes p {
+    margin-top: 4px;
+
+    color: #78877f;
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   FAVORITO
+========================================= */
+
+.btn-favorito {
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f2f6f3;
+
+    color: #687a70;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition:
+        color 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-favorito:hover {
+    background: #e7f5ed;
+
+    color: #13a45b;
+}
+
+
+.btn-favorito.favoritado {
+    background: #e0f5e9;
+
+    color: #13a45b;
+
+    transform: scale(1.05);
+}
+
+
+/* =========================================
+   DETALHES DA ROTA
+========================================= */
+
+.detalhes {
+    margin-top: 17px;
+
+    padding-top: 14px;
+
+    border-top:
+        1px solid #edf1ee;
+
+    display: flex;
+
+    gap: 50px;
+}
+
+
+.detalhes div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.detalhes span {
+    color: #8a9891;
+
+    font-size: 11px;
+}
+
+
+.detalhes strong {
+    color: #315243;
+
+    font-size: 14px;
+}
+
+
+/* =========================================
+   BOTÃO VER PARADAS E HORÁRIOS
+========================================= */
+
+.btn-horarios {
+    width: 100%;
+
+    height: 44px;
+
+    margin-top: 17px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    background: #e8f7ef;
+
+    color: #0d934d;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-horarios:hover {
+    background: #d9f1e3;
+
+    transform:
+        translateY(-1px);
+}
+
+
+.btn-horarios:active {
+    transform:
+        scale(0.98);
+}
+
+
+/* =========================================
+   SEM RESULTADOS
+========================================= */
+
+.sem-resultados {
+    display: none;
+
+    padding: 45px 20px;
+
+    text-align: center;
+}
+
+
+.sem-resultados.mostrar {
+    display: block;
+}
+
+
+.sem-resultados > span {
+    font-size: 35px;
+}
+
+
+.sem-resultados h3 {
+    margin-top: 12px;
+
+    color: #40584b;
+
+    font-size: 17px;
+}
+
+
+.sem-resultados p {
+    margin-top: 6px;
+
+    color: #87948e;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .cabecalho {
+        height: 64px;
+
+        padding: 0 15px;
+    }
+
+
+    .cabecalho h1 {
+        font-size: 21px;
+    }
+
+
+    .btn-voltar,
+    .btn-menu {
+        width: 38px;
+        height: 38px;
+    }
+
+
+    .menu-dropdown {
+        top: 57px;
+
+        right: 12px;
+    }
+
+
+    .conteudo {
+        padding:
+            22px
+            15px
+            40px;
+    }
+
+
+    .titulo-secao h2 {
+        font-size: 24px;
+    }
+
+
+    .detalhes {
+        gap: 30px;
+    }
+
+}
+
+
+@media (max-width: 380px) {
+
+    .cabecalho-resultados {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 8px;
+    }
+
+
+    .card-linha {
+        padding: 15px;
+    }
+
+
+    .informacoes h3 {
+        font-size: 15px;
+    }
+
+
+    .informacoes p {
+        font-size: 11px;
+    }
+
+
+    .detalhes {
+        gap: 20px;
+    }
+
+}
