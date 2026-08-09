@@ -3,15 +3,18 @@
 // TRANSPORTE FÁCIL
 // =========================================
 
+
 // =========================================
 // ELEMENTOS
 // =========================================
 
 const formLogin =
-    document.getElementById("formLogin");
+document.getElementById("formLogin");
+
 
 const btnVoltar =
-    document.getElementById("btnVoltar");
+document.getElementById("btnVoltar");
+
 
 
 // =========================================
@@ -33,6 +36,7 @@ if (btnVoltar) {
 }
 
 
+
 // =========================================
 // LOGIN
 // =========================================
@@ -46,6 +50,7 @@ if (formLogin) {
             evento.preventDefault();
 
 
+
             // =================================
             // PEGAR DADOS
             // =================================
@@ -56,10 +61,12 @@ if (formLogin) {
                 ).value.trim();
 
 
+
             const senha =
                 document.getElementById(
                     "senha"
                 ).value;
+
 
 
             // =================================
@@ -69,8 +76,10 @@ if (formLogin) {
             const usuarioCorreto =
                 "admin@teste.com";
 
+
             const senhaCorreta =
-                "admnin123";
+                "admin123";
+
 
 
             // =================================
@@ -82,9 +91,22 @@ if (formLogin) {
                 senha === senhaCorreta
             ) {
 
+
                 console.log(
                     "Login administrativo realizado."
                 );
+
+
+
+                // =================================
+                // CRIAR SESSÃO ADMINISTRATIVA
+                // =================================
+
+                sessionStorage.setItem(
+                    "adminLogado",
+                    "true"
+                );
+
 
 
                 // =================================
@@ -94,15 +116,20 @@ if (formLogin) {
                 window.location.href =
                     "dashboard.html";
 
+
             }
 
+
             else {
+
 
                 alert(
                     "Usuário ou senha incorretos."
                 );
 
+
             }
+
 
         }
     );

@@ -1,0 +1,312 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Informações da rota - Transporte Fácil</title>
+
+    <link
+        rel="stylesheet"
+        href="css/detalhes_rota.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="pagina">
+
+        <!-- =====================================
+             CABEÇALHO
+        ====================================== -->
+
+        <header class="cabecalho">
+
+            <button
+                id="btnVoltar"
+                class="btn-voltar"
+                type="button"
+                aria-label="Voltar"
+            >
+                ←
+            </button>
+
+
+            <h1>
+                Transporte Fácil
+            </h1>
+
+        </header>
+
+
+        <!-- =====================================
+             CONTEÚDO
+        ====================================== -->
+
+        <main class="conteudo">
+
+            <!-- CARREGANDO -->
+
+            <section
+                id="carregando"
+                class="estado"
+            >
+
+                <div class="icone-estado">
+                    🔄
+                </div>
+
+                <h2>
+                    Carregando rota...
+                </h2>
+
+                <p>
+                    Buscando as informações da rota.
+                </p>
+
+            </section>
+
+
+            <!-- ERRO -->
+
+            <section
+                id="erro"
+                class="estado"
+                style="display: none;"
+            >
+
+                <div class="icone-estado">
+                    ⚠️
+                </div>
+
+                <h2>
+                    Não foi possível carregar a rota
+                </h2>
+
+                <p id="mensagemErro">
+                    Verifique sua conexão e tente novamente.
+                </p>
+
+
+                <button
+                    id="btnVoltarErro"
+                    class="btn-principal"
+                    type="button"
+                >
+                    Voltar para as rotas
+                </button>
+
+            </section>
+
+
+            <!-- =================================
+                 INFORMAÇÕES DA ROTA
+            ================================== -->
+
+            <section
+                id="conteudoRota"
+                style="display: none;"
+            >
+
+                <div class="titulo-rota">
+
+                    <div
+                        id="iconeTransporte"
+                        class="icone-transporte"
+                    >
+                        🚌
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Informações da rota
+                        </span>
+
+                        <h2 id="nomeRota">
+                            -
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TRAJETO -->
+
+                <div class="card">
+
+                    <h3>
+                        🗺️ Trajeto
+                    </h3>
+
+
+                    <div class="trajeto">
+
+                        <div class="local">
+
+                            <span>
+                                Origem
+                            </span>
+
+                            <strong id="origem">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="seta">
+                            →
+                        </div>
+
+
+                        <div class="local">
+
+                            <span>
+                                Destino
+                            </span>
+
+                            <strong id="destino">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HORÁRIOS -->
+
+                <div class="card">
+
+                    <h3>
+                        🕐 Horários
+                    </h3>
+
+
+                    <div class="grade-informacoes">
+
+                        <div class="informacao">
+
+                            <span>
+                                Saída
+                            </span>
+
+                            <strong id="horarioSaida">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="informacao">
+
+                            <span>
+                                Chegada
+                            </span>
+
+                            <strong id="horarioChegada">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DIAS E TRANSPORTE -->
+
+                <div class="card">
+
+                    <h3>
+                        📅 Funcionamento
+                    </h3>
+
+
+                    <div class="grade-informacoes">
+
+                        <div class="informacao">
+
+                            <span>
+                                Dias
+                            </span>
+
+                            <strong id="dias">
+                                -
+                            </strong>
+
+                        </div>
+
+
+                        <div class="informacao">
+
+                            <span>
+                                Transporte
+                            </span>
+
+                            <strong id="tipoTransporte">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMAÇÕES ADICIONAIS -->
+
+                <div class="card">
+
+                    <h3>
+                        ℹ️ Informações adicionais
+                    </h3>
+
+
+                    <p
+                        id="informacoes"
+                        class="texto-informacoes"
+                    >
+                        Nenhuma informação adicional.
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="btnVoltarPrincipal"
+                    class="btn-principal"
+                    type="button"
+                >
+                    ← Voltar para as rotas
+                </button>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <script src="js/detalhes_rota.js"></script>
+
+</body>
+
+</html>
+```

@@ -1,567 +1,231 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<meta charset="UTF-8">
 
-<head>
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <meta charset="UTF-8">
+<title>Transporte Fácil</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>Transporte Fácil</title>
-
-    <link
-        rel="stylesheet"
-        href="css/tela_principal.css"
-    >
-
-</head>
+<link
+    rel="stylesheet"
+    href="css/tela_principal.css"
+>
 
 
-<body>
+<div class="dashboard">
 
-    <div class="dashboard">
+    <!-- =====================================
+         CABEÇALHO
+    ====================================== -->
 
-        <!-- =====================================
-             CABEÇALHO
-        ====================================== -->
+    <header class="cabecalho">
 
-        <header class="cabecalho">
+        <button
+            id="btnVoltar"
+            class="btn-voltar"
+            type="button"
+            aria-label="Voltar"
+        >
+            ←
+        </button>
+
+
+        <h1>
+            Transporte Fácil
+        </h1>
+
+
+        <button
+            id="btnMenu"
+            class="btn-menu"
+            type="button"
+            aria-label="Abrir menu"
+        >
+            ☰
+        </button>
+
+
+        <!-- MENU -->
+
+        <div
+            id="menuDropdown"
+            class="menu-dropdown"
+        >
 
             <button
-                id="btnVoltar"
-                class="btn-voltar"
+                class="item-menu"
+                data-acao="login"
                 type="button"
-                aria-label="Voltar"
             >
-                ←
+                <span class="icone-menu">🔐</span>
+                Login
             </button>
 
 
-            <h1>
-                Transporte Fácil
-            </h1>
-
-
             <button
-                id="btnMenu"
-                class="btn-menu"
+                class="item-menu"
+                data-acao="favoritos"
                 type="button"
-                aria-label="Abrir menu"
             >
-                ☰
+                <span class="icone-menu">♡</span>
+                Favoritos
             </button>
 
 
-            <!-- MENU -->
-
-            <div
-                id="menuDropdown"
-                class="menu-dropdown"
+            <button
+                class="item-menu"
+                data-acao="compartilhar"
+                type="button"
             >
-
-                <button
-                    class="item-menu"
-                    data-acao="login"
-                    type="button"
-                >
-                    <span class="icone-menu">🔐</span>
-                    Login
-                </button>
+                <span class="icone-menu">↗</span>
+                Compartilhar
+            </button>
 
 
-                <button
-                    class="item-menu"
-                    data-acao="favoritos"
-                    type="button"
-                >
-                    <span class="icone-menu">♡</span>
-                    Favoritos
-                </button>
-
-
-                <button
-                    class="item-menu"
-                    data-acao="compartilhar"
-                    type="button"
-                >
-                    <span class="icone-menu">↗</span>
-                    Compartilhar
-                </button>
-
-
-                <button
-                    class="item-menu"
-                    data-acao="configuracoes"
-                    type="button"
-                >
-                    <span class="icone-menu">⚙</span>
-                    Configurações
-                </button>
-
-
-                <button
-                    class="item-menu sair"
-                    data-acao="sair"
-                    type="button"
-                >
-                    <span class="icone-menu">↪</span>
-                    Sair
-                </button>
-
-            </div>
-
-        </header>
-
-
-        <!-- =====================================
-             CONTEÚDO
-        ====================================== -->
-
-        <main class="conteudo">
-
-            <!-- TÍTULO -->
-
-            <section class="titulo-secao">
-
-                <h2>
-                    Linhas disponíveis
-                </h2>
-
-                <p>
-                    Encontre sua rota e consulte os horários.
-                </p>
-
-            </section>
-
-
-            <!-- =================================
-                 BUSCA
-            ================================== -->
-
-            <div class="area-busca">
-
-                <span class="icone-busca">
-                    🔎
-                </span>
-
-                <input
-                    type="text"
-                    id="campoBusca"
-                    placeholder="Buscar linha ou destino..."
-                    autocomplete="off"
-                >
-
-                <button
-                    id="btnLimpar"
-                    class="btn-limpar"
-                    type="button"
-                    aria-label="Limpar busca"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-            <!-- =================================
-                 LISTA DE ROTAS
-            ================================== -->
-
-            <section class="cabecalho-resultados">
-
-                <h3>
-                    Rotas
-                </h3>
-
-                <span id="contadorLinhas">
-                    4 linhas
-                </span>
-
-            </section>
-
-
-            <div
-                id="listaLinhas"
-                class="lista-linhas"
+            <button
+                class="item-menu"
+                data-acao="configuracoes"
+                type="button"
             >
-
-
-                <!-- =================================
-                     VIAÇÃO SETE
-                ================================== -->
-
-                <article
-                    class="card-linha"
-                    data-nome="Viação Sete"
-                    data-origem="Lagoa Alegre"
-                    data-destino="Teresina"
-                >
-
-                    <div class="cabecalho-card">
-
-                        <div class="icone-onibus">
-                            🚌
-                        </div>
-
-
-                        <div class="informacoes">
-
-                            <h3>
-                                Viação Sete
-                            </h3>
-
-                            <p>
-                                Lagoa Alegre → Teresina
-                            </p>
-
-                        </div>
-
-
-                        <button
-                            class="btn-favorito"
-                            type="button"
-                            aria-label="Adicionar aos favoritos"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-
-                    <div class="detalhes">
-
-                        <div>
-
-                            <span>
-                                Origem
-                            </span>
-
-                            <strong>
-                                Lagoa Alegre
-                            </strong>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Destino
-                            </span>
-
-                            <strong>
-                                Teresina
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="btn-horarios"
-                        type="button"
-                        data-rota="rota_viacao_sete.html"
-                    >
-                        Ver paradas e horários
-                        <span>→</span>
-                    </button>
-
-                </article>
-
-
-                <!-- =================================
-                     J ARAÚJO
-                ================================== -->
-
-                <article
-                    class="card-linha"
-                    data-nome="J Araújo"
-                    data-origem="Lagoa Alegre"
-                    data-destino="Teresina"
-                >
-
-                    <div class="cabecalho-card">
-
-                        <div class="icone-onibus">
-                            🚌
-                        </div>
-
-
-                        <div class="informacoes">
-
-                            <h3>
-                                J Araújo
-                            </h3>
-
-                            <p>
-                                Lagoa Alegre → Teresina
-                            </p>
-
-                        </div>
-
-
-                        <button
-                            class="btn-favorito"
-                            type="button"
-                            aria-label="Adicionar aos favoritos"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-
-                    <div class="detalhes">
-
-                        <div>
-
-                            <span>
-                                Origem
-                            </span>
-
-                            <strong>
-                                Lagoa Alegre
-                            </strong>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Destino
-                            </span>
-
-                            <strong>
-                                Teresina
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="btn-horarios"
-                        type="button"
-                        data-rota="rota_jaraujo.html"
-                    >
-                        Ver paradas e horários
-                        <span>→</span>
-                    </button>
-
-                </article>
-
-
-                <!-- =================================
-                     VAN DO ZÉ LUIZ
-                ================================== -->
-
-                <article
-                    class="card-linha"
-                    data-nome="Van do Zé Luiz"
-                    data-origem="Lagoa Alegre"
-                    data-destino="Teresina"
-                >
-
-                    <div class="cabecalho-card">
-
-                        <div class="icone-onibus">
-                            🚐
-                        </div>
-
-
-                        <div class="informacoes">
-
-                            <h3>
-                                Van do Zé Luiz
-                            </h3>
-
-                            <p>
-                                Lagoa Alegre → Teresina
-                            </p>
-
-                        </div>
-
-
-                        <button
-                            class="btn-favorito"
-                            type="button"
-                            aria-label="Adicionar aos favoritos"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-
-                    <div class="detalhes">
-
-                        <div>
-
-                            <span>
-                                Origem
-                            </span>
-
-                            <strong>
-                                Lagoa Alegre
-                            </strong>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Destino
-                            </span>
-
-                            <strong>
-                                Teresina
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="btn-horarios"
-                        type="button"
-                        data-rota="rota_van_ze_luiz.html"
-                    >
-                        Ver paradas e horários
-                        <span>→</span>
-                    </button>
-
-                </article>
-
-
-                <!-- =================================
-                     VAN DO DOMINGUINHO
-                ================================== -->
-
-                <article
-                    class="card-linha"
-                    data-nome="Van do Dominguinho"
-                    data-origem="Lagoa Alegre"
-                    data-destino="Teresina"
-                >
-
-                    <div class="cabecalho-card">
-
-                        <div class="icone-onibus">
-                            🚐
-                        </div>
-
-
-                        <div class="informacoes">
-
-                            <h3>
-                                Van do Dominguinho
-                            </h3>
-
-                            <p>
-                                Lagoa Alegre → Teresina
-                            </p>
-
-                        </div>
-
-
-                        <button
-                            class="btn-favorito"
-                            type="button"
-                            aria-label="Adicionar aos favoritos"
-                        >
-                            ♡
-                        </button>
-
-                    </div>
-
-
-                    <div class="detalhes">
-
-                        <div>
-
-                            <span>
-                                Origem
-                            </span>
-
-                            <strong>
-                                Lagoa Alegre
-                            </strong>
-
-                        </div>
-
-
-                        <div>
-
-                            <span>
-                                Destino
-                            </span>
-
-                            <strong>
-                                Teresina
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        class="btn-horarios"
-                        type="button"
-                        data-rota="rota_van_do_dominguinho.html"
-                    >
-                        Ver paradas e horários
-                        <span>→</span>
-                    </button>
-
-                </article>
-
-
-            </div>
-
-
-            <!-- =================================
-                 SEM RESULTADOS
-            ================================== -->
-
-            <div
-                id="semResultados"
-                class="sem-resultados"
+                <span class="icone-menu">⚙</span>
+                Configurações
+            </button>
+
+
+            <button
+                class="item-menu sair"
+                data-acao="sair"
+                type="button"
             >
+                <span class="icone-menu">↪</span>
+                Sair
+            </button>
 
-                <span>
-                    🔎
-                </span>
+        </div>
 
-                <h3>
-                    Nenhuma rota encontrada
-                </h3>
-
-                <p>
-                    Tente buscar por outro nome ou destino.
-                </p>
-
-            </div>
-
-        </main>
-
-    </div>
+    </header>
 
 
     <!-- =====================================
-         JAVASCRIPT
+         CONTEÚDO
     ====================================== -->
 
-    <script src="js/tela_principal.js"></script>
+    <main class="conteudo">
 
-</body>
+        <!-- TÍTULO -->
 
-</html>
+        <section class="titulo-secao">
+
+            <h2>
+                Linhas disponíveis
+            </h2>
+
+            <p>
+                Encontre sua rota e consulte os horários.
+            </p>
+
+        </section>
+
+
+        <!-- =================================
+             BUSCA
+        ================================== -->
+
+        <div class="area-busca">
+
+            <span class="icone-busca">
+                🔎
+            </span>
+
+
+            <input
+                type="text"
+                id="campoBusca"
+                placeholder="Buscar linha ou destino..."
+                autocomplete="off"
+            >
+
+
+            <button
+                id="btnLimpar"
+                class="btn-limpar"
+                type="button"
+                aria-label="Limpar busca"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <!-- =================================
+             LISTA DE ROTAS
+        ================================== -->
+
+        <section class="cabecalho-resultados">
+
+            <h3>
+                Rotas
+            </h3>
+
+
+            <span id="contadorLinhas">
+                Carregando...
+            </span>
+
+        </section>
+
+
+        <!-- =================================
+             ROTAS VINDAS DO POSTGRESQL
+        ================================== -->
+
+        <div
+            id="listaLinhas"
+            class="lista-linhas"
+        >
+
+            <!--
+                As rotas cadastradas no PostgreSQL
+                serão inseridas aqui pelo JavaScript.
+            -->
+
+        </div>
+
+
+        <!-- =================================
+             SEM RESULTADOS
+        ================================== -->
+
+        <div
+            id="semResultados"
+            class="sem-resultados"
+        >
+
+            <span>
+                🔎
+            </span>
+
+
+            <h3>
+                Nenhuma rota encontrada
+            </h3>
+
+
+            <p>
+                Tente buscar por outro nome ou destino.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- =====================================
+     JAVASCRIPT
+====================================== -->
+
+<script src="js/tela_principal.js"></script>

@@ -1,0 +1,531 @@
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f7f5;
+
+    color: #173b2c;
+}
+
+
+/* =========================================
+   PÁGINA
+========================================= */
+
+.pagina {
+    width: 100%;
+    min-height: 100vh;
+
+    background: #f4f7f5;
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.cabecalho {
+    height: 72px;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087c48,
+            #13a45b
+        );
+
+    color: white;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.15);
+}
+
+
+/* =========================================
+   TÍTULO DO CABEÇALHO
+========================================= */
+
+.cabecalho h1 {
+    width: 100%;
+
+    margin-right: 42px;
+
+    text-align: center;
+
+    font-size: 22px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.2px;
+}
+
+
+/* =========================================
+   BOTÃO VOLTAR
+========================================= */
+
+.btn-voltar {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(255, 255, 255, 0.14);
+
+    color: white;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-voltar:hover {
+    background:
+        rgba(255, 255, 255, 0.25);
+
+    transform: scale(1.05);
+}
+
+
+.btn-voltar:active {
+    transform: scale(0.96);
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.conteudo {
+    width: min(100%, 900px);
+
+    margin: 0 auto;
+
+    padding:
+        28px
+        24px
+        50px;
+}
+
+
+/* =========================================
+   ESTADOS
+========================================= */
+
+.estado {
+    padding: 70px 20px;
+
+    text-align: center;
+}
+
+
+.icone-estado {
+    font-size: 42px;
+
+    margin-bottom: 16px;
+}
+
+
+.estado h2 {
+    color: #244536;
+
+    font-size: 20px;
+}
+
+
+.estado p {
+    margin-top: 8px;
+
+    color: #7b8982;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================
+   TÍTULO DA ROTA
+========================================= */
+
+.titulo-rota {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+}
+
+
+.icone-transporte {
+    width: 58px;
+    height: 58px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 15px;
+
+    background: #e2f5ea;
+
+    font-size: 30px;
+}
+
+
+.titulo-rota span {
+    color: #7c8983;
+
+    font-size: 12px;
+}
+
+
+.titulo-rota h2 {
+    margin-top: 3px;
+
+    color: #173b2c;
+
+    font-size: 26px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   CARDS
+========================================= */
+
+.card {
+    margin-bottom: 15px;
+
+    padding: 20px;
+
+    background: white;
+
+    border:
+        1px solid #e4ece7;
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 5px 18px
+        rgba(30, 80, 55, 0.07);
+}
+
+
+.card h3 {
+    margin-bottom: 18px;
+
+    color: #244536;
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================
+   TRAJETO
+========================================= */
+
+.trajeto {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+.local {
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.local span {
+    color: #8a9891;
+
+    font-size: 11px;
+}
+
+
+.local strong {
+    color: #315243;
+
+    font-size: 15px;
+}
+
+
+.seta {
+    color: #13a45b;
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+
+/* =========================================
+   GRADE DE INFORMAÇÕES
+========================================= */
+
+.grade-informacoes {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 15px;
+}
+
+
+.informacao {
+    padding: 14px;
+
+    background: #f5f8f6;
+
+    border-radius: 11px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+
+.informacao span {
+    color: #89968f;
+
+    font-size: 11px;
+}
+
+
+.informacao strong {
+    color: #315243;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================
+   INFORMAÇÕES ADICIONAIS
+========================================= */
+
+.texto-informacoes {
+    color: #617269;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================
+   BOTÃO PRINCIPAL
+========================================= */
+
+.btn-principal {
+    width: 100%;
+
+    height: 46px;
+
+    margin-top: 8px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background: #e8f7ef;
+
+    color: #0d934d;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.btn-principal:hover {
+    background: #d9f1e3;
+
+    transform: translateY(-1px);
+}
+
+
+.btn-principal:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .cabecalho {
+        height: 64px;
+
+        padding: 0 15px;
+    }
+
+
+    .cabecalho h1 {
+        margin-right: 38px;
+
+        font-size: 20px;
+    }
+
+
+    .btn-voltar {
+        width: 38px;
+        height: 38px;
+
+        font-size: 25px;
+    }
+
+
+    .conteudo {
+        padding:
+            22px
+            15px
+            40px;
+    }
+
+
+    .titulo-rota h2 {
+        font-size: 22px;
+    }
+
+
+    .trajeto {
+        gap: 12px;
+    }
+
+
+    .local strong {
+        font-size: 13px;
+    }
+
+
+    .grade-informacoes {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* =========================================
+   TELAS MUITO PEQUENAS
+========================================= */
+
+@media (max-width: 380px) {
+
+    .titulo-rota {
+        gap: 11px;
+    }
+
+
+    .icone-transporte {
+        width: 50px;
+        height: 50px;
+
+        font-size: 25px;
+    }
+
+
+    .titulo-rota h2 {
+        font-size: 19px;
+    }
+
+
+    .card {
+        padding: 16px;
+    }
+
+
+    .trajeto {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+    }
+
+
+    .seta {
+        transform:
+            rotate(90deg);
+
+        margin-left: 5px;
+    }
+
+}

@@ -1,28 +1,52 @@
-
 // =========================================
 // DASHBOARD ADMINISTRATIVO
 // TRANSPORTE FÁCIL
 // =========================================
+
+
+// =========================================
+// PROTEÇÃO DO DASHBOARD
+// =========================================
+
+const adminLogado =
+sessionStorage.getItem(
+    "adminLogado"
+);
+
+
+if (adminLogado !== "true") {
+
+    window.location.href =
+        "login_admin.html";
+
+}
+
+
 
 // =========================================
 // ENDEREÇO DA API
 // =========================================
 
 const API_URL =
-    "https://transporte-facil-api.onrender.com";
+"https://transporte-facil-api.onrender.com";
+
+
 
 // =========================================
 // ELEMENTOS DA TELA
 // =========================================
 
 const btnSair =
-    document.getElementById("btnSair");
+document.getElementById("btnSair");
+
 
 const btnAdicionarRota =
-    document.getElementById("btnAdicionarRota");
+document.getElementById("btnAdicionarRota");
+
 
 const cardsAcao =
-    document.querySelectorAll(".card-acao");
+document.querySelectorAll(".card-acao");
+
 
 
 
@@ -36,6 +60,7 @@ if (btnSair) {
         "click",
         function () {
 
+
             const confirmar =
                 confirm(
                     "Deseja realmente sair do painel administrativo?"
@@ -45,10 +70,19 @@ if (btnSair) {
 
             if (confirmar) {
 
+
+                sessionStorage.removeItem(
+                    "adminLogado"
+                );
+
+
+
                 window.location.href =
                     "tela_inicial.html";
 
+
             }
+
 
         }
     );
@@ -64,9 +98,11 @@ if (btnSair) {
 cardsAcao.forEach(
     function (card) {
 
+
         card.addEventListener(
             "click",
             function () {
+
 
                 const acao =
                     card.dataset.acao;
@@ -79,8 +115,10 @@ cardsAcao.forEach(
 
                 if (acao === "rotas") {
 
+
                     window.location.href =
                         "criar_rota.html";
+
 
                 }
 
@@ -90,11 +128,15 @@ cardsAcao.forEach(
                 // HORÁRIOS
                 // =================================
 
-                else if (acao === "horarios") {
+                else if (
+                    acao === "horarios"
+                ) {
+
 
                     alert(
                         "Área de gerenciamento de horários em desenvolvimento."
                     );
+
 
                 }
 
@@ -104,11 +146,15 @@ cardsAcao.forEach(
                 // VEÍCULOS
                 // =================================
 
-                else if (acao === "veiculos") {
+                else if (
+                    acao === "veiculos"
+                ) {
+
 
                     alert(
                         "Área de gerenciamento de veículos em desenvolvimento."
                     );
+
 
                 }
 
@@ -118,16 +164,22 @@ cardsAcao.forEach(
                 // AGÊNCIAS
                 // =================================
 
-                else if (acao === "agencias") {
+                else if (
+                    acao === "agencias"
+                ) {
+
 
                     alert(
                         "Área de gerenciamento de agências em desenvolvimento."
                     );
 
+
                 }
+
 
             }
         );
+
 
     }
 );
@@ -140,15 +192,19 @@ cardsAcao.forEach(
 
 if (btnAdicionarRota) {
 
+
     btnAdicionarRota.addEventListener(
         "click",
         function () {
 
+
             window.location.href =
                 "criar_rota.html";
 
+
         }
     );
+
 
 }
 
@@ -160,6 +216,7 @@ if (btnAdicionarRota) {
 
 function formatarDias(dias) {
 
+
     if (!dias) {
 
         return "Não informado";
@@ -170,13 +227,34 @@ function formatarDias(dias) {
 
     const nomesDias = {
 
-        segunda: "Segunda",
-        terca: "Terça",
-        quarta: "Quarta",
-        quinta: "Quinta",
-        sexta: "Sexta",
-        sabado: "Sábado",
-        domingo: "Domingo"
+
+        segunda:
+            "Segunda",
+
+
+        terca:
+            "Terça",
+
+
+        quarta:
+            "Quarta",
+
+
+        quinta:
+            "Quinta",
+
+
+        sexta:
+            "Sexta",
+
+
+        sabado:
+            "Sábado",
+
+
+        domingo:
+            "Domingo"
+
 
     };
 
@@ -184,20 +262,27 @@ function formatarDias(dias) {
 
     const listaDias =
         dias
-            .split(",")
-            .map(
-                function (dia) {
+        .split(",")
+        .map(
+            function (dia) {
 
-                    return nomesDias[
+
+                return (
+                    nomesDias[
                         dia.trim()
-                    ] || dia.trim();
+                    ]
+                    ||
+                    dia.trim()
+                );
 
-                }
-            );
+
+            }
+        );
 
 
 
     return listaDias.join(", ");
+
 
 }
 
@@ -209,9 +294,12 @@ function formatarDias(dias) {
 
 function formatarTipo(tipo) {
 
+
     if (tipo === "van") {
 
+
         return "🚐 Van";
+
 
     }
 
@@ -219,7 +307,9 @@ function formatarTipo(tipo) {
 
     if (tipo === "onibus") {
 
+
         return "🚌 Ônibus";
+
 
     }
 
@@ -227,9 +317,8 @@ function formatarTipo(tipo) {
 
     return "🚍 Transporte";
 
+
 }
-
-
 
 // =========================================
 // EDITAR ROTA
@@ -248,11 +337,6 @@ function editarRota(id) {
     }
 
 
-
-    // =================================
-    // ABRIR FORMULÁRIO COM O ID
-    // =================================
-
     window.location.href =
         "criar_rota.html?id=" + id;
 
@@ -266,6 +350,7 @@ function editarRota(id) {
 
 async function excluirRota(id, nome) {
 
+
     const confirmar =
         confirm(
             "Deseja realmente excluir esta rota?\n\n" +
@@ -273,7 +358,7 @@ async function excluirRota(id, nome) {
             "\n\n" +
             "Essa ação não poderá ser desfeita."
         );
-        
+
 
     if (!confirmar) {
 
@@ -285,11 +370,13 @@ async function excluirRota(id, nome) {
 
     try {
 
+
         const resposta =
             await fetch(
                 API_URL + "/rotas/" + id,
                 {
-                    method: "DELETE"
+                    method:
+                        "DELETE"
                 }
             );
 
@@ -302,10 +389,12 @@ async function excluirRota(id, nome) {
 
         if (!resposta.ok) {
 
+
             throw new Error(
                 dados.mensagem ||
                 "Erro ao excluir a rota."
             );
+
 
         }
 
@@ -317,15 +406,13 @@ async function excluirRota(id, nome) {
 
 
 
-        // =================================
-        // ATUALIZAR DASHBOARD
-        // =================================
-
         carregarRotas();
+
 
     }
 
     catch (erro) {
+
 
         console.error(
             "Erro ao excluir rota:",
@@ -338,6 +425,7 @@ async function excluirRota(id, nome) {
             "Não foi possível excluir a rota."
         );
 
+
     }
 
 }
@@ -349,6 +437,7 @@ async function excluirRota(id, nome) {
 // =========================================
 
 function mostrarRotas(rotas) {
+
 
     const listaRotas =
         document.getElementById(
@@ -369,25 +458,24 @@ function mostrarRotas(rotas) {
 
 
 
-    // =================================
-    // LIMPAR LISTA
-    // =================================
-
     listaRotas.innerHTML = "";
 
 
 
-    // =================================
-    // NENHUMA ROTA
-    // =================================
+    if (
+        !rotas ||
+        rotas.length === 0
+    ) {
 
-    if (!rotas || rotas.length === 0) {
 
         listaRotas.innerHTML = `
+
             <p>
                 Nenhuma rota cadastrada.
             </p>
+
         `;
+
 
         return;
 
@@ -395,12 +483,9 @@ function mostrarRotas(rotas) {
 
 
 
-    // =================================
-    // CRIAR OS CARDS
-    // =================================
-
     rotas.forEach(
         function (rota) {
+
 
             const card =
                 document.createElement(
@@ -414,20 +499,12 @@ function mostrarRotas(rotas) {
 
 
 
-            // =================================
-            // ÍCONE
-            // =================================
-
             const icone =
                 rota.tipo === "van"
-                    ? "🚐"
-                    : "🚌";
+                ? "🚐"
+                : "🚌";
 
 
-
-            // =================================
-            // DIAS
-            // =================================
 
             const diasFormatados =
                 formatarDias(
@@ -436,10 +513,6 @@ function mostrarRotas(rotas) {
 
 
 
-            // =================================
-            // TIPO
-            // =================================
-
             const tipoFormatado =
                 formatarTipo(
                     rota.tipo
@@ -447,30 +520,25 @@ function mostrarRotas(rotas) {
 
 
 
-            // =================================
-            // INFORMAÇÕES ADICIONAIS
-            // =================================
-
             const informacoes =
-                rota.informacoes
-                    ? rota.informacoes
-                    : "Nenhuma informação adicional.";
+                rota.informacoes ||
+                "Nenhuma informação adicional.";
 
 
-
-            // =================================
-            // CARD
-            // =================================
 
             card.innerHTML = `
 
+
                 <div class="icone-rota">
+
                     ${icone}
+
                 </div>
 
 
 
                 <div class="info-rota">
+
 
                     <h3>
                         ${rota.nome}
@@ -479,62 +547,82 @@ function mostrarRotas(rotas) {
 
 
                     <p>
+
                         ${rota.origem}
+
                         →
+
                         ${rota.destino}
+
                     </p>
 
 
 
                     <p>
+
                         ${tipoFormatado}
+
                     </p>
 
 
 
                     <p>
+
                         🕐 Saída:
+
                         ${rota.horario_saida || "Não informado"}
+
                     </p>
 
 
 
                     <p>
+
                         🕐 Chegada:
+
                         ${rota.horario_chegada || "Não informado"}
+
                     </p>
 
 
 
                     <p>
-                        📅
-                        ${diasFormatados}
+
+                        📅 ${diasFormatados}
+
                     </p>
 
 
 
                     <p>
-                        📝
-                        ${informacoes}
+
+                        📝 ${informacoes}
+
                     </p>
+
 
                 </div>
 
 
 
                 <span class="status ativo">
+
                     Ativa
+
                 </span>
 
 
 
                 <div class="acoes-rota">
 
+
                     <button
                         class="btn-editar"
                         type="button"
                     >
+
                         Editar
+
                     </button>
 
 
@@ -543,18 +631,18 @@ function mostrarRotas(rotas) {
                         class="btn-excluir"
                         type="button"
                     >
+
                         Excluir
+
                     </button>
 
+
                 </div>
+
 
             `;
 
 
-
-            // =================================
-            // ADICIONAR À LISTA
-            // =================================
 
             listaRotas.appendChild(
                 card
@@ -562,33 +650,27 @@ function mostrarRotas(rotas) {
 
 
 
-            // =================================
-            // BOTÃO EDITAR
-            // =================================
-
             const botaoEditar =
                 card.querySelector(
                     ".btn-editar"
                 );
 
 
-                
+
             botaoEditar.addEventListener(
                 "click",
                 function () {
+
 
                     editarRota(
                         rota.id
                     );
 
+
                 }
             );
 
 
-
-            // =================================
-            // BOTÃO EXCLUIR
-            // =================================
 
             const botaoExcluir =
                 card.querySelector(
@@ -601,20 +683,22 @@ function mostrarRotas(rotas) {
                 "click",
                 function () {
 
+
                     excluirRota(
                         rota.id,
                         rota.nome
                     );
 
+
                 }
             );
+
 
         }
     );
 
+
 }
-
-
 
 // =========================================
 // BUSCAR ROTAS DO BANCO
@@ -622,7 +706,9 @@ function mostrarRotas(rotas) {
 
 async function carregarRotas() {
 
+
     try {
+
 
         const resposta =
             await fetch(
@@ -637,9 +723,11 @@ async function carregarRotas() {
 
         if (!resposta.ok) {
 
+
             throw new Error(
                 "Erro ao buscar as rotas."
             );
+
 
         }
 
@@ -654,10 +742,6 @@ async function carregarRotas() {
 
 
 
-        // =================================
-        // MOSTRAR NO CONSOLE
-        // =================================
-
         console.log(
             "Rotas recebidas do banco:",
             dados.rotas
@@ -666,7 +750,7 @@ async function carregarRotas() {
 
 
         // =================================
-        // MOSTRAR NA TELA
+        // MOSTRAR ROTAS
         // =================================
 
         mostrarRotas(
@@ -688,14 +772,20 @@ async function carregarRotas() {
 
         if (totalRotas) {
 
+
             totalRotas.textContent =
                 dados.rotas.length;
 
+
         }
+
+
 
     }
 
+
     catch (erro) {
+
 
         console.error(
             "Erro ao carregar rotas:",
@@ -713,17 +803,24 @@ async function carregarRotas() {
 
         if (listaRotas) {
 
+
             listaRotas.innerHTML = `
+
                 <p>
                     Não foi possível carregar as rotas.
                 </p>
+
             `;
+
 
         }
 
+
     }
 
+
 }
+
 
 
 

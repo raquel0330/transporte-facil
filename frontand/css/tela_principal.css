@@ -763,3 +763,71 @@ body {
     }
 
 }
+
+
+/* =========================================
+   CARREGAMENTO DAS ROTAS
+========================================= */
+
+.carregando-rotas {
+    padding: 45px 20px;
+
+    text-align: center;
+
+    color: #718078;
+}
+
+.carregando-rotas span {
+    display: block;
+
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+.carregando-rotas p {
+    font-size: 14px;
+}
+
+
+/* =========================================
+   BOTÃO TENTAR NOVAMENTE
+========================================= */
+
+.carregando-rotas button {
+    margin-top: 15px;
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #e8f7ef;
+
+    color: #0d934d;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.carregando-rotas button:hover {
+    background: #d9f1e3;
+}
+
+
+/* =========================================
+   RESPONSIVIDADE DOS DETALHES
+========================================= */
+
+@media (max-width: 600px) {
+
+    .detalhes {
+        gap: 25px;
+
+        flex-wrap: wrap;
+    }
+
+}
+
