@@ -1,3 +1,4 @@
+
 // =========================================
 // DASHBOARD ADMINISTRATIVO
 // TRANSPORTE FÁCIL
@@ -8,8 +9,7 @@
 // =========================================
 
 const API_URL =
-    "http://localhost:3000";
-
+    "https://transporte-facil-api.onrender.com";
 
 // =========================================
 // ELEMENTOS DA TELA
@@ -23,6 +23,7 @@ const btnAdicionarRota =
 
 const cardsAcao =
     document.querySelectorAll(".card-acao");
+
 
 
 // =========================================
@@ -41,6 +42,7 @@ if (btnSair) {
                 );
 
 
+
             if (confirmar) {
 
                 window.location.href =
@@ -52,6 +54,7 @@ if (btnSair) {
     );
 
 }
+
 
 
 // =========================================
@@ -69,6 +72,7 @@ cardsAcao.forEach(
                     card.dataset.acao;
 
 
+
                 // =================================
                 // ROTAS
                 // =================================
@@ -79,6 +83,7 @@ cardsAcao.forEach(
                         "criar_rota.html";
 
                 }
+
 
 
                 // =================================
@@ -94,6 +99,7 @@ cardsAcao.forEach(
                 }
 
 
+
                 // =================================
                 // VEÍCULOS
                 // =================================
@@ -105,6 +111,7 @@ cardsAcao.forEach(
                     );
 
                 }
+
 
 
                 // =================================
@@ -126,6 +133,7 @@ cardsAcao.forEach(
 );
 
 
+
 // =========================================
 // BOTÃO ADICIONAR ROTA
 // =========================================
@@ -145,6 +153,7 @@ if (btnAdicionarRota) {
 }
 
 
+
 // =========================================
 // CONVERTER DIAS
 // =========================================
@@ -158,6 +167,7 @@ function formatarDias(dias) {
     }
 
 
+
     const nomesDias = {
 
         segunda: "Segunda",
@@ -169,6 +179,7 @@ function formatarDias(dias) {
         domingo: "Domingo"
 
     };
+
 
 
     const listaDias =
@@ -185,9 +196,11 @@ function formatarDias(dias) {
             );
 
 
+
     return listaDias.join(", ");
 
 }
+
 
 
 // =========================================
@@ -203,6 +216,7 @@ function formatarTipo(tipo) {
     }
 
 
+
     if (tipo === "onibus") {
 
         return "🚌 Ônibus";
@@ -210,9 +224,11 @@ function formatarTipo(tipo) {
     }
 
 
+
     return "🚍 Transporte";
 
 }
+
 
 
 // =========================================
@@ -232,6 +248,7 @@ function editarRota(id) {
     }
 
 
+
     // =================================
     // ABRIR FORMULÁRIO COM O ID
     // =================================
@@ -240,6 +257,7 @@ function editarRota(id) {
         "criar_rota.html?id=" + id;
 
 }
+
 
 
 // =========================================
@@ -255,13 +273,14 @@ async function excluirRota(id, nome) {
             "\n\n" +
             "Essa ação não poderá ser desfeita."
         );
-
+        
 
     if (!confirmar) {
 
         return;
 
     }
+
 
 
     try {
@@ -275,8 +294,10 @@ async function excluirRota(id, nome) {
             );
 
 
+
         const dados =
             await resposta.json();
+
 
 
         if (!resposta.ok) {
@@ -289,9 +310,11 @@ async function excluirRota(id, nome) {
         }
 
 
+
         alert(
             "Rota excluída com sucesso!"
         );
+
 
 
         // =================================
@@ -310,6 +333,7 @@ async function excluirRota(id, nome) {
         );
 
 
+
         alert(
             "Não foi possível excluir a rota."
         );
@@ -317,6 +341,7 @@ async function excluirRota(id, nome) {
     }
 
 }
+
 
 
 // =========================================
@@ -331,6 +356,7 @@ function mostrarRotas(rotas) {
         );
 
 
+
     if (!listaRotas) {
 
         console.error(
@@ -342,11 +368,13 @@ function mostrarRotas(rotas) {
     }
 
 
+
     // =================================
     // LIMPAR LISTA
     // =================================
 
     listaRotas.innerHTML = "";
+
 
 
     // =================================
@@ -366,6 +394,7 @@ function mostrarRotas(rotas) {
     }
 
 
+
     // =================================
     // CRIAR OS CARDS
     // =================================
@@ -379,8 +408,10 @@ function mostrarRotas(rotas) {
                 );
 
 
+
             card.className =
                 "card-rota";
+
 
 
             // =================================
@@ -393,6 +424,7 @@ function mostrarRotas(rotas) {
                     : "🚌";
 
 
+
             // =================================
             // DIAS
             // =================================
@@ -401,6 +433,7 @@ function mostrarRotas(rotas) {
                 formatarDias(
                     rota.dias
                 );
+
 
 
             // =================================
@@ -413,6 +446,7 @@ function mostrarRotas(rotas) {
                 );
 
 
+
             // =================================
             // INFORMAÇÕES ADICIONAIS
             // =================================
@@ -421,6 +455,7 @@ function mostrarRotas(rotas) {
                 rota.informacoes
                     ? rota.informacoes
                     : "Nenhuma informação adicional.";
+
 
 
             // =================================
@@ -434,11 +469,13 @@ function mostrarRotas(rotas) {
                 </div>
 
 
+
                 <div class="info-rota">
 
                     <h3>
                         ${rota.nome}
                     </h3>
+
 
 
                     <p>
@@ -448,9 +485,11 @@ function mostrarRotas(rotas) {
                     </p>
 
 
+
                     <p>
                         ${tipoFormatado}
                     </p>
+
 
 
                     <p>
@@ -459,16 +498,19 @@ function mostrarRotas(rotas) {
                     </p>
 
 
+
                     <p>
                         🕐 Chegada:
                         ${rota.horario_chegada || "Não informado"}
                     </p>
 
 
+
                     <p>
                         📅
                         ${diasFormatados}
                     </p>
+
 
 
                     <p>
@@ -479,9 +521,11 @@ function mostrarRotas(rotas) {
                 </div>
 
 
+
                 <span class="status ativo">
                     Ativa
                 </span>
+
 
 
                 <div class="acoes-rota">
@@ -492,6 +536,7 @@ function mostrarRotas(rotas) {
                     >
                         Editar
                     </button>
+
 
 
                     <button
@@ -506,6 +551,7 @@ function mostrarRotas(rotas) {
             `;
 
 
+
             // =================================
             // ADICIONAR À LISTA
             // =================================
@@ -513,6 +559,7 @@ function mostrarRotas(rotas) {
             listaRotas.appendChild(
                 card
             );
+
 
 
             // =================================
@@ -525,6 +572,7 @@ function mostrarRotas(rotas) {
                 );
 
 
+                
             botaoEditar.addEventListener(
                 "click",
                 function () {
@@ -537,6 +585,7 @@ function mostrarRotas(rotas) {
             );
 
 
+
             // =================================
             // BOTÃO EXCLUIR
             // =================================
@@ -545,6 +594,7 @@ function mostrarRotas(rotas) {
                 card.querySelector(
                     ".btn-excluir"
                 );
+
 
 
             botaoExcluir.addEventListener(
@@ -565,6 +615,7 @@ function mostrarRotas(rotas) {
 }
 
 
+
 // =========================================
 // BUSCAR ROTAS DO BANCO
 // =========================================
@@ -577,6 +628,7 @@ async function carregarRotas() {
             await fetch(
                 API_URL + "/rotas"
             );
+
 
 
         // =================================
@@ -592,12 +644,14 @@ async function carregarRotas() {
         }
 
 
+
         // =================================
         // CONVERTER RESPOSTA
         // =================================
 
         const dados =
             await resposta.json();
+
 
 
         // =================================
@@ -610,6 +664,7 @@ async function carregarRotas() {
         );
 
 
+
         // =================================
         // MOSTRAR NA TELA
         // =================================
@@ -617,6 +672,7 @@ async function carregarRotas() {
         mostrarRotas(
             dados.rotas
         );
+
 
 
         // =================================
@@ -627,6 +683,7 @@ async function carregarRotas() {
             document.getElementById(
                 "totalRotas"
             );
+
 
 
         if (totalRotas) {
@@ -646,10 +703,12 @@ async function carregarRotas() {
         );
 
 
+
         const listaRotas =
             document.getElementById(
                 "listaRotas"
             );
+
 
 
         if (listaRotas) {
@@ -665,6 +724,7 @@ async function carregarRotas() {
     }
 
 }
+
 
 
 // =========================================

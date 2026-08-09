@@ -1,8 +1,15 @@
+
 // =========================================
 // CRIAR / EDITAR ROTA
 // TRANSPORTE FÁCIL
 // =========================================
 
+// =========================================
+// ENDEREÇO DA API
+// =========================================
+
+const API_URL =
+    "https://transporte-facil-api.onrender.com";
 
 // =========================================
 // ELEMENTOS
@@ -17,7 +24,6 @@ const btnCancelar =
 const formCriarRota =
     document.getElementById("formCriarRota");
 
-
 // =========================================
 // VERIFICAR SE ESTAMOS EDITANDO
 // =========================================
@@ -29,7 +35,6 @@ const parametros =
 
 const idRota =
     parametros.get("id");
-
 
 // =========================================
 // BOTÃO VOLTAR
@@ -48,7 +53,6 @@ if (btnVoltar) {
     );
 
 }
-
 
 // =========================================
 // BOTÃO CANCELAR
@@ -80,7 +84,6 @@ if (btnCancelar) {
 
 }
 
-
 // =========================================
 // CARREGAR ROTA PARA EDIÇÃO
 // =========================================
@@ -98,7 +101,8 @@ async function carregarRotaParaEditar() {
 
         const resposta =
             await fetch(
-                "http://localhost:3000/rotas/" +
+                API_URL +
+                "/rotas/" +
                 idRota
             );
 
@@ -276,7 +280,6 @@ async function carregarRotaParaEditar() {
 
 }
 
-
 // =========================================
 // ENVIAR FORMULÁRIO
 // =========================================
@@ -426,8 +429,11 @@ if (formCriarRota) {
 
             const endereco =
                 idRota
-                    ? "http://localhost:3000/rotas/" + idRota
-                    : "http://localhost:3000/rotas";
+                    ? API_URL +
+                    "/rotas/" +
+                    idRota
+                    : API_URL +
+                    "/rotas";
 
 
             // =================================
@@ -440,7 +446,8 @@ if (formCriarRota) {
                     await fetch(
                         endereco,
                         {
-                            method: metodo,
+                            method:
+                                metodo,
 
                             headers: {
                                 "Content-Type":
@@ -517,9 +524,9 @@ if (formCriarRota) {
 
 }
 
-
 // =========================================
 // EXECUTAR
 // =========================================
 
 carregarRotaParaEditar();
+
