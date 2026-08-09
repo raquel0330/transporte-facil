@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login Administrativo - Transporte Fácil</title>
+
+    <link
+        rel="stylesheet"
+        href="css/login_admin.css"
+    >
+
+</head>
+
+
+<body>
+
+    <main class="tela-login">
+
+        <div class="overlay"></div>
+
+
+        <section class="login-container">
+
+            <div class="logo-login">
+
+                <div class="icone-login">
+                    ⚙️
+                </div>
+
+                <div class="nome-aplicativo">
+
+                    <span class="transporte">
+                        Transporte
+                    </span>
+
+                    <span class="facil">
+                        Fácil
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="cabecalho-login">
+
+                <h1>
+                    Área administrativa
+                </h1>
+
+                <p>
+                    Entre para gerenciar o sistema.
+                </p>
+
+            </div>
+
+
+            <form
+                id="formLogin"
+                class="form-login"
+            >
+
+                <div class="campo">
+
+                    <label for="usuario">
+                        Usuário
+                    </label>
+
+                    <input
+                        type="text"
+                        id="usuario"
+                        name="usuario"
+                        placeholder="Digite seu usuário"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="campo">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <input
+                        type="password"
+                        id="senha"
+                        name="senha"
+                        placeholder="Digite sua senha"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    id="btnLogin"
+                    class="btn-login"
+                >
+
+                    <span>
+                        Entrar
+                    </span>
+
+                    <span class="seta">
+                        →
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <button
+                type="button"
+                id="btnVoltar"
+                class="btn-voltar"
+            >
+                ← Voltar para o início
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <script src="js/login_admin.js"></script>
+
+</body>
+
+</html>

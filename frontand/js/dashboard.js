@@ -4,20 +4,25 @@
 // =========================================
 
 // =========================================
+// ENDEREÇO DA API
+// =========================================
+
+const API_URL =
+    "http://localhost:3000";
+
+
+// =========================================
 // ELEMENTOS DA TELA
 // =========================================
 
 const btnSair =
-document.getElementById("btnSair");
+    document.getElementById("btnSair");
 
 const btnAdicionarRota =
-document.getElementById("btnAdicionarRota");
+    document.getElementById("btnAdicionarRota");
 
 const cardsAcao =
-document.querySelectorAll(".card-acao");
-
-const botoesEditar =
-document.querySelectorAll(".btn-editar");
+    document.querySelectorAll(".card-acao");
 
 
 // =========================================
@@ -141,28 +146,529 @@ if (btnAdicionarRota) {
 
 
 // =========================================
-// EDITAR ROTAS
+// CONVERTER DIAS
 // =========================================
 
-botoesEditar.forEach(
-    function (botao) {
+function formatarDias(dias) {
 
-        botao.addEventListener(
-            "click",
-            function () {
+    if (!dias) {
 
-                const nomeRota =
-                    botao.dataset.rota;
+        return "Não informado";
+
+    }
 
 
-                alert(
-                    "Você selecionou a rota:\n\n" +
-                    nomeRota +
-                    "\n\nA edição desta rota será implementada posteriormente."
-                );
+    const nomesDias = {
 
-            }
+        segunda: "Segunda",
+        terca: "Terça",
+        quarta: "Quarta",
+        quinta: "Quinta",
+        sexta: "Sexta",
+        sabado: "Sábado",
+        domingo: "Domingo"
+
+    };
+
+
+    const listaDias =
+        dias
+            .split(",")
+            .map(
+                function (dia) {
+
+                    return nomesDias[
+                        dia.trim()
+                    ] || dia.trim();
+
+                }
+            );
+
+
+    return listaDias.join(", ");
+
+}
+
+
+// =========================================
+// FORMATAR TIPO DE TRANSPORTE
+// =========================================
+
+function formatarTipo(tipo) {
+
+    if (tipo === "van") {
+
+        return "🚐 Van";
+
+    }
+
+
+    if (tipo === "onibus") {
+
+        return "🚌 Ônibus";
+
+    }
+
+
+    return "🚍 Transporte";
+
+}
+
+
+// =========================================
+// EDITAR ROTA
+// =========================================
+
+function editarRota(id) {
+
+    if (!id) {
+
+        alert(
+            "Não foi possível identificar esta rota."
+        );
+
+        return;
+
+    }
+
+
+    // =================================
+    // ABRIR FORMULÁRIO COM O ID
+    // =================================
+
+    window.location.href =
+        "criar_rota.html?id=" + id;
+
+}
+
+
+// =========================================
+// EXCLUIR ROTA
+// =========================================
+
+async function excluirRota(id, nome) {
+
+    const confirmar =
+        confirm(
+            "Deseja realmente excluir esta rota?\n\n" +
+            nome +
+            "\n\n" +
+            "Essa ação não poderá ser desfeita."
+        );
+
+
+    if (!confirmar) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const resposta =
+            await fetch(
+                API_URL + "/rotas/" + id,
+                {
+                    method: "DELETE"
+                }
+            );
+
+
+        const dados =
+            await resposta.json();
+
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                dados.mensagem ||
+                "Erro ao excluir a rota."
+            );
+
+        }
+
+
+        alert(
+            "Rota excluída com sucesso!"
+        );
+
+
+        // =================================
+        // ATUALIZAR DASHBOARD
+        // =================================
+
+        carregarRotas();
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro ao excluir rota:",
+            erro
+        );
+
+
+        alert(
+            "Não foi possível excluir a rota."
         );
 
     }
-);
+
+}
+
+
+// =========================================
+// MOSTRAR ROTAS NA TELA
+// =========================================
+
+function mostrarRotas(rotas) {
+
+    const listaRotas =
+        document.getElementById(
+            "listaRotas"
+        );
+
+
+    if (!listaRotas) {
+
+        console.error(
+            "Elemento #listaRotas não encontrado."
+        );
+
+        return;
+
+    }
+
+
+    // =================================
+    // LIMPAR LISTA
+    // =================================
+
+    listaRotas.innerHTML = "";
+
+
+    // =================================
+    // NENHUMA ROTA
+    // =================================
+
+    if (!rotas || rotas.length === 0) {
+
+        listaRotas.innerHTML = `
+            <p>
+                Nenhuma rota cadastrada.
+            </p>
+        `;
+
+        return;
+
+    }
+
+
+    // =================================
+    // CRIAR OS CARDS
+    // =================================
+
+    rotas.forEach(
+        function (rota) {
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+
+            card.className =
+                "card-rota";
+
+
+            // =================================
+            // ÍCONE
+            // =================================
+
+            const icone =
+                rota.tipo === "van"
+                    ? "🚐"
+                    : "🚌";
+
+
+            // =================================
+            // DIAS
+            // =================================
+
+            const diasFormatados =
+                formatarDias(
+                    rota.dias
+                );
+
+
+            // =================================
+            // TIPO
+            // =================================
+
+            const tipoFormatado =
+                formatarTipo(
+                    rota.tipo
+                );
+
+
+            // =================================
+            // INFORMAÇÕES ADICIONAIS
+            // =================================
+
+            const informacoes =
+                rota.informacoes
+                    ? rota.informacoes
+                    : "Nenhuma informação adicional.";
+
+
+            // =================================
+            // CARD
+            // =================================
+
+            card.innerHTML = `
+
+                <div class="icone-rota">
+                    ${icone}
+                </div>
+
+
+                <div class="info-rota">
+
+                    <h3>
+                        ${rota.nome}
+                    </h3>
+
+
+                    <p>
+                        ${rota.origem}
+                        →
+                        ${rota.destino}
+                    </p>
+
+
+                    <p>
+                        ${tipoFormatado}
+                    </p>
+
+
+                    <p>
+                        🕐 Saída:
+                        ${rota.horario_saida || "Não informado"}
+                    </p>
+
+
+                    <p>
+                        🕐 Chegada:
+                        ${rota.horario_chegada || "Não informado"}
+                    </p>
+
+
+                    <p>
+                        📅
+                        ${diasFormatados}
+                    </p>
+
+
+                    <p>
+                        📝
+                        ${informacoes}
+                    </p>
+
+                </div>
+
+
+                <span class="status ativo">
+                    Ativa
+                </span>
+
+
+                <div class="acoes-rota">
+
+                    <button
+                        class="btn-editar"
+                        type="button"
+                    >
+                        Editar
+                    </button>
+
+
+                    <button
+                        class="btn-excluir"
+                        type="button"
+                    >
+                        Excluir
+                    </button>
+
+                </div>
+
+            `;
+
+
+            // =================================
+            // ADICIONAR À LISTA
+            // =================================
+
+            listaRotas.appendChild(
+                card
+            );
+
+
+            // =================================
+            // BOTÃO EDITAR
+            // =================================
+
+            const botaoEditar =
+                card.querySelector(
+                    ".btn-editar"
+                );
+
+
+            botaoEditar.addEventListener(
+                "click",
+                function () {
+
+                    editarRota(
+                        rota.id
+                    );
+
+                }
+            );
+
+
+            // =================================
+            // BOTÃO EXCLUIR
+            // =================================
+
+            const botaoExcluir =
+                card.querySelector(
+                    ".btn-excluir"
+                );
+
+
+            botaoExcluir.addEventListener(
+                "click",
+                function () {
+
+                    excluirRota(
+                        rota.id,
+                        rota.nome
+                    );
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+// =========================================
+// BUSCAR ROTAS DO BANCO
+// =========================================
+
+async function carregarRotas() {
+
+    try {
+
+        const resposta =
+            await fetch(
+                API_URL + "/rotas"
+            );
+
+
+        // =================================
+        // VERIFICAR RESPOSTA
+        // =================================
+
+        if (!resposta.ok) {
+
+            throw new Error(
+                "Erro ao buscar as rotas."
+            );
+
+        }
+
+
+        // =================================
+        // CONVERTER RESPOSTA
+        // =================================
+
+        const dados =
+            await resposta.json();
+
+
+        // =================================
+        // MOSTRAR NO CONSOLE
+        // =================================
+
+        console.log(
+            "Rotas recebidas do banco:",
+            dados.rotas
+        );
+
+
+        // =================================
+        // MOSTRAR NA TELA
+        // =================================
+
+        mostrarRotas(
+            dados.rotas
+        );
+
+
+        // =================================
+        // ATUALIZAR TOTAL DE ROTAS
+        // =================================
+
+        const totalRotas =
+            document.getElementById(
+                "totalRotas"
+            );
+
+
+        if (totalRotas) {
+
+            totalRotas.textContent =
+                dados.rotas.length;
+
+        }
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro ao carregar rotas:",
+            erro
+        );
+
+
+        const listaRotas =
+            document.getElementById(
+                "listaRotas"
+            );
+
+
+        if (listaRotas) {
+
+            listaRotas.innerHTML = `
+                <p>
+                    Não foi possível carregar as rotas.
+                </p>
+            `;
+
+        }
+
+    }
+
+}
+
+
+// =========================================
+// EXECUTAR AO ABRIR O DASHBOARD
+// =========================================
+
+carregarRotas();

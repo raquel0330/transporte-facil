@@ -752,6 +752,52 @@ body {
 
 
 /* =========================================
+BOTÃO EXCLUIR
+========================================= */
+
+.btn-excluir {
+
+    min-height: 36px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid #f0caca;
+
+    border-radius: 9px;
+
+    background: #fff5f5;
+
+    color: #c62828;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+
+.btn-excluir:hover {
+
+    background: #ffe5e5;
+
+    border-color: #e8a8a8;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* =========================================
    RESPONSIVIDADE
 ========================================= */
 

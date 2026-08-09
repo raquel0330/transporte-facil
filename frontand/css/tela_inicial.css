@@ -1,5 +1,5 @@
 /* =========================================
-   RESET
+RESET
 ========================================= */
 
 * {
@@ -10,20 +10,16 @@
 
 
 /* =========================================
-   BODY
+BODY
 ========================================= */
 
 html,
 body {
-
     width: 100%;
     height: 100%;
-
 }
 
-
 body {
-
     overflow: hidden;
 
     font-family:
@@ -32,12 +28,11 @@ body {
         sans-serif;
 
     background: #073d2a;
-
 }
 
 
 /* =========================================
-   TELA
+TELA INICIAL
 ========================================= */
 
 .tela-inicial {
@@ -45,7 +40,7 @@ body {
     width: 100%;
     height: 100vh;
 
-    min-height: 600px;
+    min-height: 520px;
 
     position: relative;
 
@@ -55,13 +50,12 @@ body {
 
     align-items: center;
 
-    justify-content: space-between;
+    justify-content: center;
 
     padding:
-        13vh
+        5vh
         6%
-        5vh;
-
+        4vh;
 
     background-image:
         url("../lagoa alegre.jpeg");
@@ -71,12 +65,11 @@ body {
     background-position: center;
 
     background-repeat: no-repeat;
-
 }
 
 
 /* =========================================
-   OVERLAY
+CAMADA VERDE SOBRE A IMAGEM
 ========================================= */
 
 .overlay {
@@ -87,19 +80,18 @@ body {
 
     background:
         linear-gradient(
-            to bottom,
-            rgba(3, 51, 35, 0.12),
-            rgba(3, 55, 37, 0.30),
-            rgba(1, 36, 25, 0.62)
+            135deg,
+            rgba(4, 91, 59, 0.48),
+            rgba(7, 116, 73, 0.40),
+            rgba(2, 66, 44, 0.52)
         );
 
     z-index: 0;
-
 }
 
 
 /* =========================================
-   CONTEÚDO
+CONTEÚDO
 ========================================= */
 
 .conteudo {
@@ -108,22 +100,25 @@ body {
 
     z-index: 2;
 
+    width: 100%;
+
     display: flex;
 
     flex-direction: column;
 
     align-items: center;
 
+    justify-content: center;
+
     text-align: center;
 
     animation:
         aparecer 0.9s ease forwards;
-
 }
 
 
 /* =========================================
-   LOGO
+LOGO
 ========================================= */
 
 .logo {
@@ -132,13 +127,12 @@ body {
 
     align-items: center;
 
-    gap: 16px;
-
+    justify-content: center;
 }
 
 
 /* =========================================
-   ÍCONE
+ÍCONE
 ========================================= */
 
 .icone-onibus {
@@ -153,28 +147,26 @@ body {
 
     justify-content: center;
 
-    background: rgba(0, 0, 0, 0.88);
+    background:
+        rgba(0, 0, 0, 0.65);
 
     border-radius: 14px;
 
     box-shadow:
         0 8px 25px
-        rgba(0, 0, 0, 0.30);
-
+        rgba(0, 0, 0, 0.25);
 }
-
 
 .icone-onibus span {
 
     font-size: 39px;
 
     line-height: 1;
-
 }
 
 
 /* =========================================
-   NOME
+NOME DO APLICATIVO
 ========================================= */
 
 .nome-aplicativo {
@@ -183,70 +175,60 @@ body {
 
     flex-direction: column;
 
-    align-items: flex-start;
+    align-items: center;
+
+    justify-content: center;
 
     line-height: 0.9;
-
 }
 
 
-/* Transporte */
+/* =========================================
+TRANSPORTE
+========================================= */
 
 .transporte {
 
     color: #ffffff;
 
     font-size:
-        clamp(30px, 5vw, 50px);
+        clamp(34px, 6vw, 58px);
 
     font-weight: 400;
 
     letter-spacing: -1px;
 
+    text-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.20);
 }
 
 
-/* Fácil */
+/* =========================================
+FÁCIL
+========================================= */
 
 .facil {
 
-    color: #19b35e;
+    color: #35c875;
 
     font-family: cursive;
 
     font-size:
-        clamp(38px, 6vw, 57px);
+        clamp(42px, 7vw, 66px);
 
     font-weight: bold;
 
     font-style: italic;
 
     text-shadow:
-        0 2px 8px
-        rgba(0, 0, 0, 0.20);
-
+        0 2px 10px
+        rgba(0, 0, 0, 0.25);
 }
 
 
 /* =========================================
-   SUBTÍTULO
-========================================= */
-
-.subtitulo {
-
-    margin-top: 25px;
-
-    color: rgba(255, 255, 255, 0.92);
-
-    font-size: 17px;
-
-    letter-spacing: 0.4px;
-
-}
-
-
-/* =========================================
-   ÁREA DO BOTÃO
+ÁREA DOS BOTÕES
 ========================================= */
 
 .area-botao {
@@ -263,30 +245,35 @@ body {
 
     align-items: center;
 
+    justify-content: center;
+
+    gap: 11px;
+
+    margin-top: 7vh;
+
     animation:
         subir 1s ease 0.2s forwards;
 
     opacity: 0;
-
 }
 
 
 /* =========================================
-   BOTÃO
+BOTÃO ENTRAR
 ========================================= */
 
 .btn-entrar {
 
     width: min(100%, 540px);
 
-    height: 72px;
+    height: 68px;
 
     padding:
         0 28px;
 
     border: none;
 
-    border-radius: 20px;
+    border-radius: 18px;
 
     display: flex;
 
@@ -305,7 +292,7 @@ body {
 
     color: white;
 
-    font-size: 25px;
+    font-size: 24px;
 
     font-weight: 700;
 
@@ -324,19 +311,18 @@ body {
         transform 0.25s ease,
         box-shadow 0.25s ease,
         filter 0.25s ease;
-
 }
 
 
 /* =========================================
-   SETA
+SETA
 ========================================= */
 
 .seta {
 
-    width: 38px;
+    width: 37px;
 
-    height: 38px;
+    height: 37px;
 
     border-radius: 50%;
 
@@ -349,16 +335,15 @@ body {
     background:
         rgba(255, 255, 255, 0.18);
 
-    font-size: 24px;
+    font-size: 23px;
 
     transition:
         transform 0.25s ease;
-
 }
 
 
 /* =========================================
-   HOVER
+HOVER ENTRAR
 ========================================= */
 
 .btn-entrar:hover {
@@ -375,20 +360,17 @@ body {
 
         0 0 25px
         rgba(25, 179, 94, 0.25);
-
 }
-
 
 .btn-entrar:hover .seta {
 
     transform:
         translateX(5px);
-
 }
 
 
 /* =========================================
-   CLICK
+CLICK
 ========================================= */
 
 .btn-entrar:active {
@@ -396,17 +378,123 @@ body {
     transform:
         translateY(1px)
         scale(0.98);
-
 }
 
 
 /* =========================================
-   RODAPÉ
+FRASE ABAIXO DO BOTÃO
+========================================= */
+
+.area-botao .subtitulo {
+
+    margin-top: 0;
+
+    max-width: 600px;
+
+    color:
+        rgba(255, 255, 255, 0.90);
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+    letter-spacing: 0.4px;
+
+    text-align: center;
+
+    text-shadow:
+        0 2px 7px
+        rgba(0, 0, 0, 0.25);
+}
+
+
+/* =========================================
+BOTÃO ÁREA ADMINISTRATIVA
+========================================= */
+
+.btn-administrativo {
+
+    min-height: 38px;
+
+    padding:
+        0 18px;
+
+    margin-top: 4px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.28);
+
+    border-radius: 10px;
+
+    background:
+        rgba(4, 61, 40, 0.42);
+
+    color:
+        rgba(255, 255, 255, 0.88);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.2px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(4px);
+
+    -webkit-backdrop-filter: blur(4px);
+
+    box-shadow:
+        0 5px 15px
+        rgba(0, 0, 0, 0.15);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+
+/* =========================================
+HOVER ADMINISTRATIVO
+========================================= */
+
+.btn-administrativo:hover {
+
+    background:
+        rgba(5, 91, 59, 0.68);
+
+    border-color:
+        rgba(255, 255, 255, 0.45);
+
+    color: white;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================
+CLICK ADMINISTRATIVO
+========================================= */
+
+.btn-administrativo:active {
+
+    transform:
+        translateY(1px)
+        scale(0.98);
+}
+
+
+/* =========================================
+RODAPÉ
 ========================================= */
 
 .rodape {
 
-    margin-top: 15px;
+    margin-top: 8px;
 
     color:
         rgba(255, 255, 255, 0.70);
@@ -414,12 +502,11 @@ body {
     font-size: 12px;
 
     letter-spacing: 0.3px;
-
 }
 
 
 /* =========================================
-   ANIMAÇÕES
+ANIMAÇÃO DO CONTEÚDO
 ========================================= */
 
 @keyframes aparecer {
@@ -430,7 +517,6 @@ body {
 
         transform:
             translateY(-20px);
-
     }
 
     to {
@@ -439,11 +525,13 @@ body {
 
         transform:
             translateY(0);
-
     }
-
 }
 
+
+/* =========================================
+ANIMAÇÃO DOS BOTÕES
+========================================= */
 
 @keyframes subir {
 
@@ -453,7 +541,6 @@ body {
 
         transform:
             translateY(25px);
-
     }
 
     to {
@@ -462,52 +549,64 @@ body {
 
         transform:
             translateY(0);
-
     }
-
 }
 
 
 /* =========================================
-   TABLET
+TABLET
 ========================================= */
 
 @media (max-width: 800px) {
 
     .tela-inicial {
 
-        padding:
-            14vh
-            6%
-            5vh;
+        min-height: 520px;
 
+        padding:
+            5vh
+            6%
+            4vh;
     }
 
+
+    .area-botao {
+
+        margin-top: 6vh;
+    }
 }
 
 
 /* =========================================
-   CELULAR
+CELULAR
 ========================================= */
 
 @media (max-width: 600px) {
 
     .tela-inicial {
 
-        min-height: 100vh;
+        min-height: 500px;
+
+        height: 100vh;
 
         padding:
-            17vh
+            4vh
             7%
-            5vh;
+            3vh;
 
+        justify-content: center;
+    }
+
+
+    .conteudo {
+
+        margin-top: -4vh;
     }
 
 
     .logo {
 
         gap: 11px;
-
     }
 
 
@@ -518,50 +617,44 @@ body {
         height: 58px;
 
         border-radius: 11px;
-
     }
 
 
     .icone-onibus span {
 
         font-size: 31px;
-
     }
 
 
     .transporte {
 
-        font-size: 29px;
-
+        font-size: 30px;
     }
 
 
     .facil {
 
-        font-size: 38px;
-
+        font-size: 40px;
     }
 
 
-    .subtitulo {
+    .area-botao {
 
-        margin-top: 20px;
+        margin-top: 5vh;
 
-        font-size: 15px;
-
+        gap: 9px;
     }
 
 
     .btn-entrar {
 
-        width: 92%;
+        width: 94%;
 
-        height: 64px;
+        height: 61px;
 
-        border-radius: 18px;
+        border-radius: 17px;
 
-        font-size: 22px;
-
+        font-size: 21px;
     }
 
 
@@ -572,22 +665,53 @@ body {
         height: 34px;
 
         font-size: 21px;
-
     }
 
+
+    .area-botao .subtitulo {
+
+        font-size: 13px;
+
+        line-height: 1.4;
+
+        max-width: 330px;
+    }
+
+
+    .btn-administrativo {
+
+        min-height: 36px;
+
+        padding:
+            0 15px;
+
+        margin-top: 3px;
+
+        font-size: 11px;
+    }
 }
 
 
 /* =========================================
-   CELULAR PEQUENO
+CELULAR PEQUENO
 ========================================= */
 
 @media (max-width: 380px) {
 
     .tela-inicial {
 
-        padding-top: 14vh;
+        min-height: 480px;
 
+        padding:
+            3vh
+            6%
+            2vh;
+    }
+
+
+    .conteudo {
+
+        margin-top: -5vh;
     }
 
 
@@ -596,35 +720,56 @@ body {
         width: 52px;
 
         height: 52px;
-
     }
 
 
     .icone-onibus span {
 
         font-size: 28px;
-
     }
 
 
     .transporte {
 
-        font-size: 26px;
-
+        font-size: 27px;
     }
 
 
     .facil {
 
-        font-size: 34px;
+        font-size: 35px;
+    }
 
+
+    .area-botao {
+
+        margin-top: 4vh;
     }
 
 
     .btn-entrar {
 
-        width: 94%;
+        width: 96%;
 
+        height: 57px;
+
+        font-size: 20px;
     }
 
+
+    .area-botao .subtitulo {
+
+        font-size: 12px;
+    }
+
+
+    .btn-administrativo {
+
+        min-height: 34px;
+
+        padding:
+            0 13px;
+
+        font-size: 10px;
+    }
 }
