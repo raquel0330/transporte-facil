@@ -70,7 +70,11 @@ function gerarCodigoAcesso() {
 
     let codigo = "";
 
-    for (let i = 0; i < 6; i++) {
+    for (
+        let i = 0;
+        i < 6;
+        i++
+    ) {
 
         const indice =
             Math.floor(
@@ -111,72 +115,157 @@ function texto(valor) {
 // =========================================
 // NORMALIZAR HORÁRIOS
 // =========================================
+//
+// Formato esperado:
+//
+// [
+//     {
+//         saida: "09:00",
+//         chegada: "12:00"
+//     },
+//     {
+//         saida: "14:00",
+//         chegada: "16:00"
+//     }
+// ]
+//
+// Pode ter 1, 2, 3 ou vários horários.
+// Não existe quantidade mínima obrigatória.
+// =========================================
 
 function normalizarHorarios(horarios) {
 
-    // Se não houver horário,
-    // simplesmente salva uma lista vazia.
-
-    if (!horarios) {
+    if (!Array.isArray(horarios)) {
 
         return [];
 
     }
 
 
-    // =====================================
-    // FORMATO:
-    //
-    // [
-    //     {
-    //         saida: "06:00",
-    //         chegada: "07:30"
-    //     }
-    // ]
-    // =====================================
-
-    if (Array.isArray(horarios)) {
-
-        return horarios.filter(
-            function (horario) {
-
-                if (!horario) {
-                    return false;
-                }
-
-                const saida =
-                    texto(horario.saida);
-
-                const chegada =
-                    texto(horario.chegada);
-
-                // Só salva horários completos.
+    const horariosNormalizados =
+        horarios
+            .filter(function (horario) {
 
                 return (
-                    saida !== "" &&
-                    chegada !== ""
+                    horario &&
+                    texto(horario.saida) &&
+                    texto(horario.chegada)
+                );
+
+            })
+            .map(function (horario) {
+
+                return {
+
+                    saida:
+                        texto(
+                            horario.saida
+                        ),
+
+                    chegada:
+                        texto(
+                            horario.chegada
+                        )
+
+                };
+
+            });
+
+
+    return horariosNormalizados;
+
+}
+
+
+// =========================================
+// VALIDAR HORÁRIOS
+// =========================================
+//
+// Horário NÃO é obrigatório.
+//
+// Porém, se o usuário informar horário,
+// saída e chegada precisam estar preenchidos.
+// =========================================
+
+function validarHorarios(horarios) {
+
+    if (
+        horarios === undefined ||
+        horarios === null
+    ) {
+
+        return [];
+
+    }
+
+
+    if (
+        !Array.isArray(horarios)
+    ) {
+
+        return [
+            "Formato dos horários inválido."
+        ];
+
+    }
+
+
+    const erros = [];
+
+
+    horarios.forEach(
+        function (horario, indice) {
+
+            if (!horario) {
+
+                return;
+
+            }
+
+
+            const saida =
+                texto(
+                    horario.saida
+                );
+
+
+            const chegada =
+                texto(
+                    horario.chegada
+                );
+
+
+            // Se começou a preencher,
+            // precisa completar.
+
+            if (
+                saida &&
+                !chegada
+            ) {
+
+                erros.push(
+                    `Horário ${indice + 1}: informe a chegada.`
                 );
 
             }
-        );
-
-    }
 
 
-    // =====================================
-    // CASO ANTIGO
-    // =====================================
+            if (
+                !saida &&
+                chegada
+            ) {
 
-    if (
-        typeof horarios === "object"
-    ) {
+                erros.push(
+                    `Horário ${indice + 1}: informe a saída.`
+                );
 
-        return horarios;
+            }
 
-    }
+        }
+    );
 
 
-    return [];
+    return erros;
 
 }
 
@@ -224,6 +313,10 @@ function validarDadosRota(dados) {
         dados.dias;
 
 
+    const horarios =
+        dados.horarios;
+
+
     // =====================================
     // EMPRESA
     // =====================================
@@ -246,6 +339,31 @@ function validarDadosRota(dados) {
         erros.push(
             "E-mail do responsável"
         );
+
+    }
+
+
+    // =====================================
+    // VALIDAR FORMATO DO E-MAIL
+    // =====================================
+
+    if (emailResponsavel) {
+
+        const emailValido =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+        if (
+            !emailValido.test(
+                emailResponsavel
+            )
+        ) {
+
+            erros.push(
+                "E-mail do responsável inválido"
+            );
+
+        }
 
     }
 
@@ -306,12 +424,18 @@ function validarDadosRota(dados) {
 
 
     // =====================================
-    // IMPORTANTE
+    // HORÁRIOS
     // =====================================
-    //
-    // HORÁRIOS NÃO SÃO MAIS OBRIGATÓRIOS.
-    //
-    // =====================================
+
+    const errosHorarios =
+        validarHorarios(
+            horarios
+        );
+
+
+    erros.push(
+        ...errosHorarios
+    );
 
 
     return erros;
@@ -435,10 +559,7 @@ app.post(
                         "Não foi possível cadastrar a rota.",
 
                     camposPendentes:
-                        erros,
-
-                    detalhes:
-                        "Verifique os campos obrigatórios."
+                        erros
 
                 });
 
@@ -446,7 +567,7 @@ app.post(
 
 
             // =================================
-            // CAMPOS
+            // DADOS
             // =================================
 
             const empresa =
@@ -459,7 +580,7 @@ app.post(
                 texto(
                     dados.emailResponsavel
                 )
-                .toLowerCase();
+                    .toLowerCase();
 
 
             const origem =
@@ -486,19 +607,15 @@ app.post(
                 );
 
 
+            const dias =
+                dados.dias;
+
+
             const informacoes =
                 texto(
                     dados.informacoes
                 );
 
-
-            const dias =
-                dados.dias;
-
-
-            // =================================
-            // HORÁRIOS
-            // =================================
 
             const horarios =
                 normalizarHorarios(
@@ -583,19 +700,11 @@ app.post(
 
 
             console.log(
-                "================================="
-            );
-
-            console.log(
-                "ROTA SALVA NO POSTGRESQL:"
+                "Rota salva no PostgreSQL:"
             );
 
             console.log(
                 resultado.rows[0]
-            );
-
-            console.log(
-                "================================="
             );
 
 
@@ -659,7 +768,7 @@ Equipe Transporte Fácil`
             // SUCESSO
             // =================================
 
-            return res.status(201).json({
+            res.status(201).json({
 
                 mensagem:
                     "Rota cadastrada com sucesso!",
@@ -690,7 +799,7 @@ Equipe Transporte Fácil`
             );
 
 
-            return res.status(500).json({
+            res.status(500).json({
 
                 mensagem:
                     "Erro ao cadastrar rota.",
@@ -855,7 +964,14 @@ app.put(
 
 
             console.log(
-                "Dados recebidos para edição:",
+                "================================="
+            );
+
+            console.log(
+                "DADOS RECEBIDOS EM PUT /rotas/:id:"
+            );
+
+            console.log(
                 JSON.stringify(
                     dados,
                     null,
@@ -863,6 +979,14 @@ app.put(
                 )
             );
 
+            console.log(
+                "================================="
+            );
+
+
+            // =================================
+            // VALIDAR
+            // =================================
 
             const erros =
                 validarDadosRota(
@@ -887,6 +1011,10 @@ app.put(
             }
 
 
+            // =================================
+            // DADOS
+            // =================================
+
             const empresa =
                 texto(
                     dados.empresa
@@ -897,7 +1025,7 @@ app.put(
                 texto(
                     dados.emailResponsavel
                 )
-                .toLowerCase();
+                    .toLowerCase();
 
 
             const origem =
@@ -939,6 +1067,10 @@ app.put(
                     dados.informacoes
                 );
 
+
+            // =================================
+            // ATUALIZAR
+            // =================================
 
             const resultado =
                 await pool.query(
@@ -1029,8 +1161,19 @@ app.put(
         catch (erro) {
 
             console.error(
-                "Erro ao editar rota:",
+                "================================="
+            );
+
+            console.error(
+                "ERRO AO EDITAR ROTA:"
+            );
+
+            console.error(
                 erro
+            );
+
+            console.error(
+                "================================="
             );
 
 
@@ -1142,14 +1285,14 @@ app.post(
                 texto(
                     req.body.email
                 )
-                .toLowerCase();
+                    .toLowerCase();
 
 
             const codigo =
                 texto(
                     req.body.codigo
                 )
-                .toUpperCase();
+                    .toUpperCase();
 
 
             if (
@@ -1226,6 +1369,58 @@ app.post(
 
                 mensagem:
                     "Erro ao realizar o acesso.",
+
+                erro:
+                    erro.message
+
+            });
+
+        }
+
+    }
+);
+
+
+// =========================================
+// TESTAR CONEXÃO COM BANCO
+// =========================================
+
+app.get(
+    "/teste-banco",
+    async function (req, res) {
+
+        try {
+
+            const resultado =
+                await pool.query(
+                    "SELECT COUNT(*) AS total FROM rotas"
+                );
+
+
+            res.json({
+
+                mensagem:
+                    "Banco conectado corretamente.",
+
+                totalRotas:
+                    resultado.rows[0].total
+
+            });
+
+        }
+
+        catch (erro) {
+
+            console.error(
+                "Erro no teste do banco:",
+                erro
+            );
+
+
+            res.status(500).json({
+
+                mensagem:
+                    "Erro ao testar o banco.",
 
                 erro:
                     erro.message
