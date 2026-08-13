@@ -7,7 +7,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { Pool } = require("pg");
-const nodemailer = require("nodemailer");
 
 const app = express();
 
@@ -32,31 +31,13 @@ const pool = new Pool({
 
     ssl: {
         rejectUnauthorized: false
-    }
+    },
+
+    connectionTimeoutMillis: 10000,
+
+    idleTimeoutMillis: 30000
 
 });
-
-
-// =========================================
-// CONFIGURAÇÃO DO E-MAIL
-// =========================================
-
-const transporter =
-    nodemailer.createTransport({
-
-        service: "gmail",
-
-        auth: {
-
-            user:
-                process.env.EMAIL_REMETENTE,
-
-            pass:
-                process.env.EMAIL_SENHA_APP
-
-        }
-
-    });
 
 
 // =========================================
@@ -70,11 +51,7 @@ function gerarCodigoAcesso() {
 
     let codigo = "";
 
-    for (
-        let i = 0;
-        i < 6;
-        i++
-    ) {
+    for (let i = 0; i < 6; i++) {
 
         const indice =
             Math.floor(
@@ -88,7 +65,6 @@ function gerarCodigoAcesso() {
     }
 
     return codigo;
-
 }
 
 
@@ -108,29 +84,11 @@ function texto(valor) {
     }
 
     return String(valor).trim();
-
 }
 
 
 // =========================================
 // NORMALIZAR HORÁRIOS
-// =========================================
-//
-// Formato esperado:
-//
-// [
-//     {
-//         saida: "09:00",
-//         chegada: "12:00"
-//     },
-//     {
-//         saida: "14:00",
-//         chegada: "16:00"
-//     }
-// ]
-//
-// Pode ter 1, 2, 3 ou vários horários.
-// Não existe quantidade mínima obrigatória.
 // =========================================
 
 function normalizarHorarios(horarios) {
@@ -141,50 +99,37 @@ function normalizarHorarios(horarios) {
 
     }
 
+    return horarios
 
-    const horariosNormalizados =
-        horarios
-            .filter(function (horario) {
+        .filter(function (horario) {
 
-                return (
-                    horario &&
-                    texto(horario.saida) &&
+            return (
+                horario &&
+                texto(horario.saida) &&
+                texto(horario.chegada)
+            );
+
+        })
+
+        .map(function (horario) {
+
+            return {
+
+                saida:
+                    texto(horario.saida),
+
+                chegada:
                     texto(horario.chegada)
-                );
 
-            })
-            .map(function (horario) {
+            };
 
-                return {
-
-                    saida:
-                        texto(
-                            horario.saida
-                        ),
-
-                    chegada:
-                        texto(
-                            horario.chegada
-                        )
-
-                };
-
-            });
-
-
-    return horariosNormalizados;
+        });
 
 }
 
 
 // =========================================
 // VALIDAR HORÁRIOS
-// =========================================
-//
-// Horário NÃO é obrigatório.
-//
-// Porém, se o usuário informar horário,
-// saída e chegada precisam estar preenchidos.
 // =========================================
 
 function validarHorarios(horarios) {
@@ -198,10 +143,7 @@ function validarHorarios(horarios) {
 
     }
 
-
-    if (
-        !Array.isArray(horarios)
-    ) {
+    if (!Array.isArray(horarios)) {
 
         return [
             "Formato dos horários inválido."
@@ -209,9 +151,7 @@ function validarHorarios(horarios) {
 
     }
 
-
     const erros = [];
-
 
     horarios.forEach(
         function (horario, indice) {
@@ -222,21 +162,11 @@ function validarHorarios(horarios) {
 
             }
 
-
             const saida =
-                texto(
-                    horario.saida
-                );
-
+                texto(horario.saida);
 
             const chegada =
-                texto(
-                    horario.chegada
-                );
-
-
-            // Se começou a preencher,
-            // precisa completar.
+                texto(horario.chegada);
 
             if (
                 saida &&
@@ -248,7 +178,6 @@ function validarHorarios(horarios) {
                 );
 
             }
-
 
             if (
                 !saida &&
@@ -264,7 +193,6 @@ function validarHorarios(horarios) {
         }
     );
 
-
     return erros;
 
 }
@@ -278,40 +206,23 @@ function validarDadosRota(dados) {
 
     const erros = [];
 
-
     const empresa =
-        texto(
-            dados.empresa
-        );
-
+        texto(dados.empresa);
 
     const emailResponsavel =
-        texto(
-            dados.emailResponsavel
-        );
-
+        texto(dados.emailResponsavel);
 
     const origem =
-        texto(
-            dados.origem
-        );
-
+        texto(dados.origem);
 
     const destino =
-        texto(
-            dados.destino
-        );
-
+        texto(dados.destino);
 
     const tipo =
-        texto(
-            dados.tipo
-        );
-
+        texto(dados.tipo);
 
     const dias =
         dados.dias;
-
 
     const horarios =
         dados.horarios;
@@ -343,15 +254,10 @@ function validarDadosRota(dados) {
     }
 
 
-    // =====================================
-    // VALIDAR FORMATO DO E-MAIL
-    // =====================================
-
     if (emailResponsavel) {
 
         const emailValido =
             /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 
         if (
             !emailValido.test(
@@ -427,16 +333,9 @@ function validarDadosRota(dados) {
     // HORÁRIOS
     // =====================================
 
-    const errosHorarios =
-        validarHorarios(
-            horarios
-        );
-
-
     erros.push(
-        ...errosHorarios
+        ...validarHorarios(horarios)
     );
-
 
     return erros;
 
@@ -457,7 +356,6 @@ app.get(
                 await pool.query(
                     "SELECT NOW()"
                 );
-
 
             res.json({
 
@@ -480,7 +378,6 @@ app.get(
                 "Erro ao conectar ao PostgreSQL:",
                 erro
             );
-
 
             res.status(500).json({
 
@@ -538,20 +435,15 @@ app.post(
             // =================================
 
             const erros =
-                validarDadosRota(
-                    dados
-                );
+                validarDadosRota(dados);
 
 
-            if (
-                erros.length > 0
-            ) {
+            if (erros.length > 0) {
 
                 console.log(
                     "Campos com problema:",
                     erros
                 );
-
 
                 return res.status(400).json({
 
@@ -571,40 +463,29 @@ app.post(
             // =================================
 
             const empresa =
-                texto(
-                    dados.empresa
-                );
+                texto(dados.empresa);
 
 
             const emailResponsavel =
                 texto(
                     dados.emailResponsavel
-                )
-                    .toLowerCase();
+                ).toLowerCase();
 
 
             const origem =
-                texto(
-                    dados.origem
-                );
+                texto(dados.origem);
 
 
             const destino =
-                texto(
-                    dados.destino
-                );
+                texto(dados.destino);
 
 
             const via =
-                texto(
-                    dados.via
-                );
+                texto(dados.via);
 
 
             const tipo =
-                texto(
-                    dados.tipo
-                );
+                texto(dados.tipo);
 
 
             const dias =
@@ -612,9 +493,7 @@ app.post(
 
 
             const informacoes =
-                texto(
-                    dados.informacoes
-                );
+                texto(dados.informacoes);
 
 
             const horarios =
@@ -624,7 +503,7 @@ app.post(
 
 
             // =================================
-            // CÓDIGO DE ACESSO
+            // GERAR CÓDIGO
             // =================================
 
             const codigoAcesso =
@@ -632,7 +511,7 @@ app.post(
 
 
             // =================================
-            // SALVAR NO BANCO
+            // SALVAR NO POSTGRESQL
             // =================================
 
             const resultado =
@@ -699,82 +578,60 @@ app.post(
                 );
 
 
+            const rotaSalva =
+                resultado.rows[0];
+
+
             console.log(
-                "Rota salva no PostgreSQL:"
+                "================================="
             );
 
             console.log(
-                resultado.rows[0]
+                "ROTA SALVA COM SUCESSO!"
+            );
+
+            console.log(
+                "ID:",
+                rotaSalva.id
+            );
+
+            console.log(
+                "EMPRESA:",
+                rotaSalva.nome
+            );
+
+            console.log(
+                "E-MAIL:",
+                rotaSalva.email_responsavel
+            );
+
+            console.log(
+                "CÓDIGO DE ACESSO:",
+                rotaSalva.codigo_acesso
+            );
+
+            console.log(
+                "================================="
             );
 
 
             // =================================
-            // ENVIAR E-MAIL
+            // RESPONDER IMEDIATAMENTE
             // =================================
 
-            try {
+            return res.status(201).json({
 
-                await transporter.sendMail({
-
-                    from:
-                        `"Transporte Fácil" <${process.env.EMAIL_REMETENTE}>`,
-
-                    to:
-                        emailResponsavel,
-
-                    subject:
-                        "Código de acesso da sua rota - Transporte Fácil",
-
-                    text:
-                        `Olá!
-
-A rota foi cadastrada com sucesso no Transporte Fácil.
-
-Empresa/Agência: ${empresa}
-Origem: ${origem}
-Destino: ${destino}
-Via: ${via || "Não informada"}
-
-Seu código de acesso é:
-
-${codigoAcesso}
-
-Guarde este código para acessar e gerenciar sua rota posteriormente.
-
-Atenciosamente,
-Equipe Transporte Fácil`
-
-                });
-
-
-                console.log(
-                    "E-mail enviado para:",
-                    emailResponsavel
-                );
-
-            }
-
-            catch (erroEmail) {
-
-                console.error(
-                    "Erro ao enviar e-mail:",
-                    erroEmail
-                );
-
-            }
-
-
-            // =================================
-            // SUCESSO
-            // =================================
-
-            res.status(201).json({
+                sucesso:
+                    true,
 
                 mensagem:
                     "Rota cadastrada com sucesso!",
 
+                codigoAcesso:
+                    rotaSalva.codigo_acesso,
+
                 rota:
-                    resultado.rows[0]
+                    rotaSalva
 
             });
 
@@ -799,7 +656,10 @@ Equipe Transporte Fácil`
             );
 
 
-            res.status(500).json({
+            return res.status(500).json({
+
+                sucesso:
+                    false,
 
                 mensagem:
                     "Erro ao cadastrar rota.",
@@ -836,7 +696,6 @@ app.get(
 
                 );
 
-
             res.json({
 
                 rotas:
@@ -852,7 +711,6 @@ app.get(
                 "Erro ao buscar rotas:",
                 erro
             );
-
 
             res.status(500).json({
 
@@ -928,7 +786,6 @@ app.get(
                 erro
             );
 
-
             res.status(500).json({
 
                 mensagem:
@@ -948,6 +805,10 @@ app.get(
 // =========================================
 // EDITAR ROTA
 // =========================================
+//
+// IMPORTANTE:
+// O código de acesso NÃO é alterado.
+// =========================================
 
 app.put(
     "/rotas/:id",
@@ -957,7 +818,6 @@ app.put(
 
             const id =
                 req.params.id;
-
 
             const dados =
                 req.body || {};
@@ -984,19 +844,11 @@ app.put(
             );
 
 
-            // =================================
-            // VALIDAR
-            // =================================
-
             const erros =
-                validarDadosRota(
-                    dados
-                );
+                validarDadosRota(dados);
 
 
-            if (
-                erros.length > 0
-            ) {
+            if (erros.length > 0) {
 
                 return res.status(400).json({
 
@@ -1011,45 +863,30 @@ app.put(
             }
 
 
-            // =================================
-            // DADOS
-            // =================================
-
             const empresa =
-                texto(
-                    dados.empresa
-                );
+                texto(dados.empresa);
 
 
             const emailResponsavel =
                 texto(
                     dados.emailResponsavel
-                )
-                    .toLowerCase();
+                ).toLowerCase();
 
 
             const origem =
-                texto(
-                    dados.origem
-                );
+                texto(dados.origem);
 
 
             const destino =
-                texto(
-                    dados.destino
-                );
+                texto(dados.destino);
 
 
             const via =
-                texto(
-                    dados.via
-                );
+                texto(dados.via);
 
 
             const tipo =
-                texto(
-                    dados.tipo
-                );
+                texto(dados.tipo);
 
 
             const dias =
@@ -1063,14 +900,8 @@ app.put(
 
 
             const informacoes =
-                texto(
-                    dados.informacoes
-                );
+                texto(dados.informacoes);
 
-
-            // =================================
-            // ATUALIZAR
-            // =================================
 
             const resultado =
                 await pool.query(
@@ -1148,8 +979,14 @@ app.put(
 
             res.json({
 
+                sucesso:
+                    true,
+
                 mensagem:
                     "Rota atualizada com sucesso!",
+
+                codigoAcesso:
+                    resultado.rows[0].codigo_acesso,
 
                 rota:
                     resultado.rows[0]
@@ -1175,7 +1012,6 @@ app.put(
             console.error(
                 "================================="
             );
-
 
             res.status(500).json({
 
@@ -1254,7 +1090,6 @@ app.delete(
                 erro
             );
 
-
             res.status(500).json({
 
                 mensagem:
@@ -1284,15 +1119,13 @@ app.post(
             const email =
                 texto(
                     req.body.email
-                )
-                    .toLowerCase();
+                ).toLowerCase();
 
 
             const codigo =
                 texto(
                     req.body.codigo
-                )
-                    .toUpperCase();
+                ).toUpperCase();
 
 
             if (
@@ -1347,6 +1180,9 @@ app.post(
 
             res.json({
 
+                sucesso:
+                    true,
+
                 mensagem:
                     "Acesso autorizado!",
 
@@ -1363,7 +1199,6 @@ app.post(
                 "Erro no login do responsável:",
                 erro
             );
-
 
             res.status(500).json({
 
@@ -1415,7 +1250,6 @@ app.get(
                 "Erro no teste do banco:",
                 erro
             );
-
 
             res.status(500).json({
 
