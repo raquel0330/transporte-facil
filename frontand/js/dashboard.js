@@ -1,152 +1,67 @@
 // =========================================
-// DASHBOARD ADMINISTRATIVO
-// TRANSPORTE FÁCIL
+// BACKEND - TRANSPORTE FÁCIL
 // =========================================
 
+require("dotenv").config();
 
-// =========================================
-// PROTEÇÃO DO DASHBOARD
-// =========================================
+const express = require("express");
+const cors = require("cors");
+const { Pool } = require("pg");
 
-const adminLogado =
-    sessionStorage.getItem("adminLogado");
-
-if (adminLogado !== "true") {
-
-    window.location.href =
-        "login_admin.html";
-
-}
+const app = express();
 
 
 // =========================================
-// ENDEREÇO DA API
+// MIDDLEWARES
 // =========================================
 
-const API_URL =
-    "https://transporte-facil-api.onrender.com";
+app.use(cors());
 
-
-// =========================================
-// ELEMENTOS DA TELA
-// =========================================
-
-const btnSair =
-    document.getElementById("btnSair");
-
-const btnAdicionarRota =
-    document.getElementById("btnAdicionarRota");
-
-const cardsAcao =
-    document.querySelectorAll(".card-acao");
+app.use(express.json());
 
 
 // =========================================
-// BOTÃO SAIR
+// CONEXÃO COM POSTGRESQL
 // =========================================
 
-if (btnSair) {
+const pool = new Pool({
 
-    btnSair.addEventListener(
-        "click",
-        function () {
+    connectionString:
+        process.env.DATABASE_URL,
 
-            const confirmar =
-                confirm(
-                    "Deseja realmente sair do painel administrativo?"
-                );
+    ssl: {
+        rejectUnauthorized: false
+    },
 
+    connectionTimeoutMillis: 10000,
 
-            if (confirmar) {
+    idleTimeoutMillis: 30000
 
-                sessionStorage.removeItem(
-                    "adminLogado"
-                );
-
-
-                window.location.href =
-                    "tela_inicial.html";
-
-            }
-
-        }
-    );
-
-}
+});
 
 
 // =========================================
-// AÇÕES DE GERENCIAMENTO
+// MONITORAR ERROS DO POOL
 // =========================================
 
-cardsAcao.forEach(
-    function (card) {
+pool.on(
+    "error",
+    function (erro) {
 
-        card.addEventListener(
-            "click",
-            function () {
+        console.error(
+            "================================="
+        );
 
-                const acao =
-                    card.dataset.acao;
+        console.error(
+            "ERRO NO POOL DO POSTGRESQL:"
+        );
 
+        console.error(
+            erro
+        );
 
-                // =================================
-                // ROTAS
-                // =================================
-
-                if (acao === "rotas") {
-
-                    window.location.href =
-                        "criar_rota.html";
-
-                }
-
-
-                // =================================
-                // HORÁRIOS
-                // =================================
-
-                else if (
-                    acao === "horarios"
-                ) {
-
-                    alert(
-                        "Área de gerenciamento de horários em desenvolvimento."
-                    );
-
-                }
-
-
-                // =================================
-                // VEÍCULOS
-                // =================================
-
-                else if (
-                    acao === "veiculos"
-                ) {
-
-                    alert(
-                        "Área de gerenciamento de veículos em desenvolvimento."
-                    );
-
-                }
-
-
-                // =================================
-                // AGÊNCIAS
-                // =================================
-
-                else if (
-                    acao === "agencias"
-                ) {
-
-                    alert(
-                        "Área de gerenciamento de agências em desenvolvimento."
-                    );
-
-                }
-
-            }
+        console.error(
+            "================================="
         );
 
     }
@@ -154,750 +69,1300 @@ cardsAcao.forEach(
 
 
 // =========================================
-// BOTÃO ADICIONAR ROTA
+// GERAR CÓDIGO DE ACESSO
 // =========================================
 
-if (btnAdicionarRota) {
+function gerarCodigoAcesso() {
 
-    btnAdicionarRota.addEventListener(
-        "click",
-        function () {
+    const caracteres =
+        "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
-            window.location.href =
-                "criar_rota.html";
+    let codigo = "";
+
+    for (let i = 0; i < 6; i++) {
+
+        const indice =
+            Math.floor(
+                Math.random() *
+                caracteres.length
+            );
+
+        codigo +=
+            caracteres[indice];
+
+    }
+
+    return codigo;
+}
+
+
+// =========================================
+// NORMALIZAR TEXTO
+// =========================================
+
+function texto(valor) {
+
+    if (
+        valor === undefined ||
+        valor === null
+    ) {
+
+        return "";
+
+    }
+
+    return String(valor).trim();
+}
+
+
+// =========================================
+// NORMALIZAR HORÁRIOS
+// =========================================
+
+function normalizarHorarios(horarios) {
+
+    if (!Array.isArray(horarios)) {
+
+        return [];
+
+    }
+
+    return horarios
+
+        .filter(function (horario) {
+
+            return (
+                horario &&
+                texto(horario.saida) &&
+                texto(horario.chegada)
+            );
+
+        })
+
+        .map(function (horario) {
+
+            return {
+
+                saida:
+                    texto(horario.saida),
+
+                chegada:
+                    texto(horario.chegada)
+
+            };
+
+        });
+
+}
+
+
+// =========================================
+// VALIDAR HORÁRIOS
+// =========================================
+
+function validarHorarios(horarios) {
+
+    if (
+        horarios === undefined ||
+        horarios === null
+    ) {
+
+        return [];
+
+    }
+
+    if (!Array.isArray(horarios)) {
+
+        return [
+            "Formato dos horários inválido."
+        ];
+
+    }
+
+    const erros = [];
+
+    horarios.forEach(
+        function (horario, indice) {
+
+            if (!horario) {
+
+                return;
+
+            }
+
+            const saida =
+                texto(horario.saida);
+
+            const chegada =
+                texto(horario.chegada);
+
+            if (
+                saida &&
+                !chegada
+            ) {
+
+                erros.push(
+                    `Horário ${indice + 1}: informe a chegada.`
+                );
+
+            }
+
+            if (
+                !saida &&
+                chegada
+            ) {
+
+                erros.push(
+                    `Horário ${indice + 1}: informe a saída.`
+                );
+
+            }
 
         }
     );
 
+    return erros;
+
 }
 
 
 // =========================================
-// CONVERTER DIAS
+// VALIDAR DADOS DA ROTA
 // =========================================
 
-function formatarDias(dias) {
+function validarDadosRota(dados) {
 
-    if (!dias) {
+    const erros = [];
 
-        return "Não informado";
+    const empresa =
+        texto(dados.empresa);
+
+    const emailResponsavel =
+        texto(dados.emailResponsavel);
+
+    const origem =
+        texto(dados.origem);
+
+    const destino =
+        texto(dados.destino);
+
+    const tipo =
+        texto(dados.tipo);
+
+    const dias =
+        dados.dias;
+
+    const horarios =
+        dados.horarios;
+
+
+    // =====================================
+    // EMPRESA
+    // =====================================
+
+    if (!empresa) {
+
+        erros.push(
+            "Empresa / Agência"
+        );
 
     }
 
 
-    const nomesDias = {
+    // =====================================
+    // E-MAIL
+    // =====================================
 
-        segunda:
-            "Segunda",
+    if (!emailResponsavel) {
 
-        terca:
-            "Terça",
+        erros.push(
+            "E-mail do responsável"
+        );
 
-        quarta:
-            "Quarta",
-
-        quinta:
-            "Quinta",
-
-        sexta:
-            "Sexta",
-
-        sabado:
-            "Sábado",
-
-        domingo:
-            "Domingo"
-
-    };
+    }
 
 
-    const listaDias =
-        dias
-            .split(",")
-            .map(
-                function (dia) {
+    if (emailResponsavel) {
 
-                    return (
-                        nomesDias[
-                            dia.trim()
-                        ]
-                        ||
-                        dia.trim()
-                    );
+        const emailValido =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-                }
+        if (
+            !emailValido.test(
+                emailResponsavel
+            )
+        ) {
+
+            erros.push(
+                "E-mail do responsável inválido"
             );
 
-
-    return listaDias.join(", ");
-
-}
-
-
-// =========================================
-// FORMATAR TIPO DE TRANSPORTE
-// =========================================
-
-function formatarTipo(tipo) {
-
-    if (tipo === "van") {
-
-        return "🚐 Van";
+        }
 
     }
 
 
-    if (tipo === "onibus") {
+    // =====================================
+    // ORIGEM
+    // =====================================
 
-        return "🚌 Ônibus";
+    if (!origem) {
 
-    }
-
-
-    return "🚍 Transporte";
-
-}
-
-
-// =========================================
-// FORMATAR HORÁRIOS
-// =========================================
-
-function formatarHorarios(horarios) {
-
-    // =================================
-    // CASO NÃO TENHA HORÁRIOS
-    // =================================
-
-    if (!horarios) {
-
-        return `
-            <p>
-                🕐 Horários: Não informado
-            </p>
-        `;
+        erros.push(
+            "Origem"
+        );
 
     }
 
 
-    // =================================
-    // CASO O POSTGRESQL DEVOLVA
-    // O JSON COMO TEXTO
-    // =================================
+    // =====================================
+    // DESTINO
+    // =====================================
+
+    if (!destino) {
+
+        erros.push(
+            "Destino"
+        );
+
+    }
+
+
+    // =====================================
+    // TIPO
+    // =====================================
+
+    if (!tipo) {
+
+        erros.push(
+            "Tipo de transporte"
+        );
+
+    }
+
+
+    // =====================================
+    // DIAS
+    // =====================================
 
     if (
-        typeof horarios === "string"
+        !Array.isArray(dias) ||
+        dias.length === 0
     ) {
+
+        erros.push(
+            "Dias de funcionamento"
+        );
+
+    }
+
+
+    // =====================================
+    // HORÁRIOS
+    // =====================================
+
+    erros.push(
+        ...validarHorarios(horarios)
+    );
+
+    return erros;
+
+}
+
+
+// =========================================
+// ROTA INICIAL
+// =========================================
+
+app.get(
+    "/",
+    async function (req, res) {
 
         try {
 
-            horarios =
-                JSON.parse(horarios);
+            const resultado =
+                await pool.query(
+                    "SELECT NOW()"
+                );
+
+            res.json({
+
+                mensagem:
+                    "Backend do Transporte Fácil funcionando!",
+
+                banco:
+                    "PostgreSQL conectado!",
+
+                horario:
+                    resultado.rows[0].now
+
+            });
 
         }
 
         catch (erro) {
 
             console.error(
-                "Erro ao interpretar horários:",
+                "Erro ao conectar ao PostgreSQL:",
                 erro
             );
 
-            return `
-                <p>
-                    🕐 Horários: Não informado
-                </p>
-            `;
+            res.status(500).json({
+
+                mensagem:
+                    "Backend funcionando, mas houve erro no PostgreSQL.",
+
+                erro:
+                    erro.message
+
+            });
 
         }
 
     }
+);
 
 
-    // =================================
-    // FUNÇÃO PARA MONTAR UM PERÍODO
-    // =================================
+// =========================================
+// CADASTRAR ROTA
+// =========================================
 
-    function montarPeriodo(
-        titulo,
-        lista
-    ) {
+app.post(
+    "/rotas",
+    async function (req, res) {
 
-        if (
-            !Array.isArray(lista) ||
-            lista.length === 0
-        ) {
+        try {
 
-            return "";
+            console.log(
+                "================================="
+            );
 
-        }
+            console.log(
+                "DADOS RECEBIDOS EM POST /rotas:"
+            );
 
+            console.log(
+                JSON.stringify(
+                    req.body,
+                    null,
+                    2
+                )
+            );
 
-        let html = `
-
-            <div class="periodo-horarios">
-
-                <strong>
-                    ${titulo}
-                </strong>
-
-        `;
-
-
-        lista.forEach(
-            function (horario) {
-
-                const saida =
-                    horario.saida ||
-                    "--:--";
-
-                const chegada =
-                    horario.chegada ||
-                    "--:--";
+            console.log(
+                "================================="
+            );
 
 
-                html += `
+            const dados =
+                req.body || {};
 
-                    <div class="horario-item">
 
-                        <span>
-                            🕐 ${saida}
-                        </span>
+            // =================================
+            // VALIDAR
+            // =================================
 
-                        <span>
-                            →
-                        </span>
+            const erros =
+                validarDadosRota(dados);
 
-                        <span>
-                            ${chegada}
-                        </span>
 
-                    </div>
+            if (erros.length > 0) {
 
-                `;
+                console.log(
+                    "Campos com problema:",
+                    erros
+                );
+
+                return res.status(400).json({
+
+                    mensagem:
+                        "Não foi possível cadastrar a rota.",
+
+                    camposPendentes:
+                        erros
+
+                });
 
             }
-        );
 
 
-        html += `
+            // =================================
+            // DADOS
+            // =================================
 
-            </div>
+            const empresa =
+                texto(dados.empresa);
 
-        `;
+
+            const emailResponsavel =
+                texto(
+                    dados.emailResponsavel
+                ).toLowerCase();
 
 
-        return html;
+            const origem =
+                texto(dados.origem);
+
+
+            const destino =
+                texto(dados.destino);
+
+
+            const via =
+                texto(dados.via);
+
+
+            const tipo =
+                texto(dados.tipo);
+
+
+            const dias =
+                dados.dias;
+
+
+            const informacoes =
+                texto(dados.informacoes);
+
+
+            const horarios =
+                normalizarHorarios(
+                    dados.horarios
+                );
+
+
+            // =================================
+            // GERAR CÓDIGO
+            // =================================
+
+            const codigoAcesso =
+                gerarCodigoAcesso();
+
+
+            // =================================
+            // SALVAR NO POSTGRESQL
+            // =================================
+
+            const resultado =
+                await pool.query(
+
+                    `
+                    INSERT INTO rotas
+                    (
+                        nome,
+                        email_responsavel,
+                        codigo_acesso,
+                        origem,
+                        destino,
+                        via,
+                        tipo,
+                        dias,
+                        horarios,
+                        informacoes
+                    )
+
+                    VALUES
+                    (
+                        $1,
+                        $2,
+                        $3,
+                        $4,
+                        $5,
+                        $6,
+                        $7,
+                        $8,
+                        $9,
+                        $10
+                    )
+
+                    RETURNING *
+                    `,
+
+                    [
+
+                        empresa,
+
+                        emailResponsavel,
+
+                        codigoAcesso,
+
+                        origem,
+
+                        destino,
+
+                        via || null,
+
+                        tipo,
+
+                        dias.join(","),
+
+                        JSON.stringify(
+                            horarios
+                        ),
+
+                        informacoes || null
+
+                    ]
+
+                );
+
+
+            const rotaSalva =
+                resultado.rows[0];
+
+
+            console.log(
+                "================================="
+            );
+
+            console.log(
+                "ROTA SALVA COM SUCESSO!"
+            );
+
+            console.log(
+                "ID:",
+                rotaSalva.id
+            );
+
+            console.log(
+                "EMPRESA:",
+                rotaSalva.nome
+            );
+
+            console.log(
+                "E-MAIL:",
+                rotaSalva.email_responsavel
+            );
+
+            console.log(
+                "CÓDIGO DE ACESSO:",
+                rotaSalva.codigo_acesso
+            );
+
+            console.log(
+                "VIA:",
+                rotaSalva.via
+            );
+
+            console.log(
+                "================================="
+            );
+
+
+            // =================================
+            // RESPONDER AO FRONTEND
+            // =================================
+
+            return res.status(201).json({
+
+                sucesso:
+                    true,
+
+                mensagem:
+                    "Rota cadastrada com sucesso!",
+
+                codigoAcesso:
+                    rotaSalva.codigo_acesso,
+
+                rota:
+                    rotaSalva
+
+            });
+
+        }
+
+        catch (erro) {
+
+            console.error(
+                "================================="
+            );
+
+            console.error(
+                "ERRO AO CADASTRAR ROTA:"
+            );
+
+            console.error(
+                erro
+            );
+
+            console.error(
+                "================================="
+            );
+
+
+            return res.status(500).json({
+
+                sucesso:
+                    false,
+
+                mensagem:
+                    "Erro ao cadastrar rota.",
+
+                erro:
+                    erro.message
+
+            });
+
+        }
 
     }
+);
 
 
-    // =================================
-    // MONTAR TODOS OS PERÍODOS
-    // =================================
+// =========================================
+// LISTAR ROTAS
+// =========================================
 
-    let html = "";
+app.get(
+    "/rotas",
+    async function (req, res) {
 
+        try {
 
-    html +=
-        montarPeriodo(
-            "Segunda a sexta",
-            horarios.segunda_sexta
-        );
+            const resultado =
+                await pool.query(
 
+                    `
+                    SELECT *
+                    FROM rotas
+                    ORDER BY id DESC
+                    `
 
-    html +=
-        montarPeriodo(
-            "Sábado",
-            horarios.sabado
-        );
+                );
 
+            res.json({
 
-    html +=
-        montarPeriodo(
-            "Domingo",
-            horarios.domingo
-        );
+                rotas:
+                    resultado.rows
 
+            });
 
-    // =================================
-    // NENHUM HORÁRIO ENCONTRADO
-    // =================================
+        }
 
-    if (!html) {
+        catch (erro) {
 
-        return `
+            console.error(
+                "Erro ao buscar rotas:",
+                erro
+            );
 
-            <p>
-                🕐 Horários: Não informado
-            </p>
+            res.status(500).json({
 
-        `;
+                mensagem:
+                    "Erro ao buscar rotas.",
+
+                erro:
+                    erro.message
+
+            });
+
+        }
 
     }
+);
 
 
-    // =================================
-    // RETORNAR HTML
-    // =================================
+// =========================================
+// BUSCAR ROTA POR ID
+// =========================================
 
-    return `
+app.get(
+    "/rotas/:id",
+    async function (req, res) {
 
-        <div class="horarios-rota">
+        try {
 
-            <p>
-                🕐 <strong>Horários</strong>
-            </p>
+            const id =
+                req.params.id;
 
-            ${html}
 
-        </div>
+            console.log(
+                "[BUSCAR ROTA] ID:",
+                id
+            );
 
-    `;
 
-}
+            const resultado =
+                await pool.query(
+
+                    `
+                    SELECT *
+                    FROM rotas
+                    WHERE id = $1
+                    `,
+
+                    [id]
+
+                );
+
+
+            if (
+                resultado.rows.length === 0
+            ) {
+
+                return res.status(404).json({
+
+                    mensagem:
+                        "Rota não encontrada."
+
+                });
+
+            }
+
+
+            res.json({
+
+                rota:
+                    resultado.rows[0]
+
+            });
+
+        }
+
+        catch (erro) {
+
+            console.error(
+                "Erro ao buscar rota:",
+                erro
+            );
+
+            res.status(500).json({
+
+                mensagem:
+                    "Erro ao buscar rota.",
+
+                erro:
+                    erro.message
+
+            });
+
+        }
+
+    }
+);
 
 
 // =========================================
 // EDITAR ROTA
 // =========================================
+//
+// IMPORTANTE:
+// O código de acesso NÃO é alterado.
+// =========================================
 
-function editarRota(id) {
+app.put(
+    "/rotas/:id",
+    async function (req, res) {
 
-    if (!id) {
+        try {
 
-        alert(
-            "Não foi possível identificar esta rota."
-        );
+            const id =
+                req.params.id;
 
-        return;
+            const dados =
+                req.body || {};
+
+
+            console.log(
+                "================================="
+            );
+
+            console.log(
+                "DADOS RECEBIDOS EM PUT /rotas/:id:"
+            );
+
+            console.log(
+                JSON.stringify(
+                    dados,
+                    null,
+                    2
+                )
+            );
+
+            console.log(
+                "================================="
+            );
+
+
+            const erros =
+                validarDadosRota(dados);
+
+
+            if (erros.length > 0) {
+
+                return res.status(400).json({
+
+                    mensagem:
+                        "Não foi possível atualizar a rota.",
+
+                    camposPendentes:
+                        erros
+
+                });
+
+            }
+
+
+            const empresa =
+                texto(dados.empresa);
+
+
+            const emailResponsavel =
+                texto(
+                    dados.emailResponsavel
+                ).toLowerCase();
+
+
+            const origem =
+                texto(dados.origem);
+
+
+            const destino =
+                texto(dados.destino);
+
+
+            const via =
+                texto(dados.via);
+
+
+            const tipo =
+                texto(dados.tipo);
+
+
+            const dias =
+                dados.dias;
+
+
+            const horarios =
+                normalizarHorarios(
+                    dados.horarios
+                );
+
+
+            const informacoes =
+                texto(dados.informacoes);
+
+
+            const resultado =
+                await pool.query(
+
+                    `
+                    UPDATE rotas
+
+                    SET
+
+                        nome = $1,
+
+                        email_responsavel = $2,
+
+                        origem = $3,
+
+                        destino = $4,
+
+                        via = $5,
+
+                        tipo = $6,
+
+                        dias = $7,
+
+                        horarios = $8,
+
+                        informacoes = $9
+
+                    WHERE id = $10
+
+                    RETURNING *
+                    `,
+
+                    [
+
+                        empresa,
+
+                        emailResponsavel,
+
+                        origem,
+
+                        destino,
+
+                        via || null,
+
+                        tipo,
+
+                        dias.join(","),
+
+                        JSON.stringify(
+                            horarios
+                        ),
+
+                        informacoes || null,
+
+                        id
+
+                    ]
+
+                );
+
+
+            if (
+                resultado.rows.length === 0
+            ) {
+
+                return res.status(404).json({
+
+                    mensagem:
+                        "Rota não encontrada."
+
+                });
+
+            }
+
+
+            res.json({
+
+                sucesso:
+                    true,
+
+                mensagem:
+                    "Rota atualizada com sucesso!",
+
+                codigoAcesso:
+                    resultado.rows[0].codigo_acesso,
+
+                rota:
+                    resultado.rows[0]
+
+            });
+
+        }
+
+        catch (erro) {
+
+            console.error(
+                "================================="
+            );
+
+            console.error(
+                "ERRO AO EDITAR ROTA:"
+            );
+
+            console.error(
+                erro
+            );
+
+            console.error(
+                "================================="
+            );
+
+            res.status(500).json({
+
+                mensagem:
+                    "Erro ao editar rota.",
+
+                erro:
+                    erro.message
+
+            });
+
+        }
 
     }
-
-
-    window.location.href =
-        "criar_rota.html?id=" + id;
-
-}
+);
 
 
 // =========================================
 // EXCLUIR ROTA
 // =========================================
 
-async function excluirRota(
-    id,
-    nome
-) {
+app.delete(
+    "/rotas/:id",
+    async function (req, res) {
 
-    const confirmar =
-        confirm(
-            "Deseja realmente excluir esta rota?\n\n" +
-            nome +
-            "\n\n" +
-            "Essa ação não poderá ser desfeita."
-        );
+        try {
+
+            const id =
+                req.params.id;
 
 
-    if (!confirmar) {
+            const resultado =
+                await pool.query(
 
-        return;
+                    `
+                    DELETE FROM rotas
+                    WHERE id = $1
+                    RETURNING *
+                    `,
 
-    }
+                    [id]
 
-
-    try {
-
-        const resposta =
-            await fetch(
-                API_URL +
-                "/rotas/" +
-                id,
-                {
-                    method:
-                        "DELETE"
-                }
-            );
+                );
 
 
-        const dados =
-            await resposta.json();
+            if (
+                resultado.rows.length === 0
+            ) {
+
+                return res.status(404).json({
+
+                    mensagem:
+                        "Rota não encontrada."
+
+                });
+
+            }
 
 
-        if (!resposta.ok) {
+            res.json({
 
-            throw new Error(
-                dados.mensagem ||
-                "Erro ao excluir a rota."
-            );
+                mensagem:
+                    "Rota excluída com sucesso!",
+
+                rota:
+                    resultado.rows[0]
+
+            });
 
         }
 
-
-        alert(
-            "Rota excluída com sucesso!"
-        );
-
-
-        carregarRotas();
-
-    }
-
-    catch (erro) {
-
-        console.error(
-            "Erro ao excluir rota:",
-            erro
-        );
-
-
-        alert(
-            "Não foi possível excluir a rota."
-        );
-
-    }
-
-}
-
-
-// =========================================
-// MOSTRAR ROTAS NA TELA
-// =========================================
-
-function mostrarRotas(rotas) {
-
-    const listaRotas =
-        document.getElementById(
-            "listaRotas"
-        );
-
-
-    if (!listaRotas) {
-
-        console.error(
-            "Elemento #listaRotas não encontrado."
-        );
-
-        return;
-
-    }
-
-
-    listaRotas.innerHTML = "";
-
-
-    if (
-        !rotas ||
-        rotas.length === 0
-    ) {
-
-        listaRotas.innerHTML = `
-
-            <p>
-                Nenhuma rota cadastrada.
-            </p>
-
-        `;
-
-        return;
-
-    }
-
-
-    rotas.forEach(
-        function (rota) {
-
-            const card =
-                document.createElement(
-                    "article"
-                );
-
-
-            card.className =
-                "card-rota";
-
-
-            const icone =
-                rota.tipo === "van"
-                    ? "🚐"
-                    : "🚌";
-
-
-            const diasFormatados =
-                formatarDias(
-                    rota.dias
-                );
-
-
-            const tipoFormatado =
-                formatarTipo(
-                    rota.tipo
-                );
-
-
-            const informacoes =
-                rota.informacoes ||
-                "Nenhuma informação adicional.";
-
-
-            // =================================
-            // HORÁRIOS
-            // =================================
-
-            const horariosFormatados =
-                formatarHorarios(
-                    rota.horarios
-                );
-
-
-            // =================================
-            // CARD
-            // =================================
-
-            card.innerHTML = `
-
-                <div class="icone-rota">
-
-                    ${icone}
-
-                </div>
-
-
-                <div class="info-rota">
-
-                    <h3>
-                        ${rota.nome}
-                    </h3>
-
-
-                    <p>
-
-                        ${rota.origem}
-
-                        →
-
-                        ${rota.destino}
-
-                    </p>
-
-
-                    <p>
-
-                        ${tipoFormatado}
-
-                    </p>
-
-
-                    ${horariosFormatados}
-
-
-                    <p>
-
-                        📅 ${diasFormatados}
-
-                    </p>
-
-
-                    <p>
-
-                        📝 ${informacoes}
-
-                    </p>
-
-                </div>
-
-
-                <span class="status ativo">
-
-                    Ativa
-
-                </span>
-
-
-                <div class="acoes-rota">
-
-                    <button
-                        class="btn-editar"
-                        type="button"
-                    >
-
-                        Editar
-
-                    </button>
-
-
-                    <button
-                        class="btn-excluir"
-                        type="button"
-                    >
-
-                        Excluir
-
-                    </button>
-
-                </div>
-
-            `;
-
-
-            listaRotas.appendChild(
-                card
+        catch (erro) {
+
+            console.error(
+                "Erro ao excluir rota:",
+                erro
             );
 
+            res.status(500).json({
 
-            // =================================
-            // BOTÃO EDITAR
-            // =================================
+                mensagem:
+                    "Erro ao excluir rota.",
 
-            const botaoEditar =
-                card.querySelector(
-                    ".btn-editar"
-                );
+                erro:
+                    erro.message
 
-
-            botaoEditar.addEventListener(
-                "click",
-                function () {
-
-                    editarRota(
-                        rota.id
-                    );
-
-                }
-            );
-
-
-            // =================================
-            // BOTÃO EXCLUIR
-            // =================================
-
-            const botaoExcluir =
-                card.querySelector(
-                    ".btn-excluir"
-                );
-
-
-            botaoExcluir.addEventListener(
-                "click",
-                function () {
-
-                    excluirRota(
-                        rota.id,
-                        rota.nome
-                    );
-
-                }
-            );
-
-        }
-    );
-
-}
-
-
-// =========================================
-// BUSCAR ROTAS DO BANCO
-// =========================================
-
-async function carregarRotas() {
-
-    try {
-
-        const resposta =
-            await fetch(
-                API_URL +
-                "/rotas"
-            );
-
-
-        // =================================
-        // VERIFICAR RESPOSTA
-        // =================================
-
-        if (!resposta.ok) {
-
-            throw new Error(
-                "Erro ao buscar as rotas."
-            );
+            });
 
         }
 
+    }
+);
 
-        // =================================
-        // CONVERTER RESPOSTA
-        // =================================
 
-        const dados =
-            await resposta.json();
+// =========================================
+// LOGIN DO RESPONSÁVEL
+// =========================================
 
+app.post(
+    "/responsavel/login",
+    async function (req, res) {
+
+        try {
+
+            const email =
+                texto(
+                    req.body.email
+                ).toLowerCase();
+
+
+            const codigo =
+                texto(
+                    req.body.codigo
+                ).toUpperCase();
+
+
+            if (
+                !email ||
+                !codigo
+            ) {
+
+                return res.status(400).json({
+
+                    mensagem:
+                        "Informe o e-mail e o código de acesso."
+
+                });
+
+            }
+
+
+            const resultado =
+                await pool.query(
+
+                    `
+                    SELECT *
+                    FROM rotas
+                    WHERE email_responsavel = $1
+                    AND codigo_acesso = $2
+                    `,
+
+                    [
+
+                        email,
+
+                        codigo
+
+                    ]
+
+                );
+
+
+            if (
+                resultado.rows.length === 0
+            ) {
+
+                return res.status(401).json({
+
+                    mensagem:
+                        "E-mail ou código de acesso inválido."
+
+                });
+
+            }
+
+
+            res.json({
+
+                sucesso:
+                    true,
+
+                mensagem:
+                    "Acesso autorizado!",
+
+                rota:
+                    resultado.rows[0]
+
+            });
+
+        }
+
+        catch (erro) {
+
+            console.error(
+                "Erro no login do responsável:",
+                erro
+            );
+
+            res.status(500).json({
+
+                mensagem:
+                    "Erro ao realizar o acesso.",
+
+                erro:
+                    erro.message
+
+            });
+
+        }
+
+    }
+);
+
+
+// =========================================
+// TESTAR CONEXÃO COM BANCO
+// =========================================
+
+app.get(
+    "/teste-banco",
+    async function (req, res) {
+
+        try {
+
+            const resultado =
+                await pool.query(
+                    "SELECT COUNT(*) AS total FROM rotas"
+                );
+
+
+            res.json({
+
+                mensagem:
+                    "Banco conectado corretamente.",
+
+                totalRotas:
+                    resultado.rows[0].total
+
+            });
+
+        }
+
+        catch (erro) {
+
+            console.error(
+                "Erro no teste do banco:",
+                erro
+            );
+
+            res.status(500).json({
+
+                mensagem:
+                    "Erro ao testar o banco.",
+
+                erro:
+                    erro.message
+
+            });
+
+        }
+
+    }
+);
+
+
+// =========================================
+// TESTE DE SAÚDE DA API
+// =========================================
+
+app.get(
+    "/health",
+    function (req, res) {
+
+        res.status(200).json({
+
+            status:
+                "ok",
+
+            mensagem:
+                "API do Transporte Fácil funcionando.",
+
+            horario:
+                new Date().toISOString()
+
+        });
+
+    }
+);
+
+
+// =========================================
+// SERVIDOR
+// =========================================
+
+const PORT =
+    process.env.PORT || 3000;
+
+
+app.listen(
+    PORT,
+    function () {
 
         console.log(
-            "Rotas recebidas do banco:",
-            dados.rotas
+            "================================="
         );
 
-
-        // =================================
-        // MOSTRAR ROTAS
-        // =================================
-
-        mostrarRotas(
-            dados.rotas
+        console.log(
+            "SERVIDOR TRANSPORTE FÁCIL"
         );
 
+        console.log(
+            `Servidor rodando na porta ${PORT}`
+        );
 
-        // =================================
-        // ATUALIZAR TOTAL DE ROTAS
-        // =================================
+        console.log(
+            "Horário de inicialização:",
+            new Date().toISOString()
+        );
 
-        const totalRotas =
-            document.getElementById(
-                "totalRotas"
-            );
-
-
-        if (totalRotas) {
-
-            totalRotas.textContent =
-                dados.rotas.length;
-
-        }
+        console.log(
+            "================================="
+        );
 
     }
-
-    catch (erro) {
-
-        console.error(
-            "Erro ao carregar rotas:",
-            erro
-        );
-
-
-        const listaRotas =
-            document.getElementById(
-                "listaRotas"
-            );
-
-
-        if (listaRotas) {
-
-            listaRotas.innerHTML = `
-
-                <p>
-                    Não foi possível carregar as rotas.
-                </p>
-
-            `;
-
-        }
-
-    }
-
-}
-
-
-// =========================================
-// EXECUTAR AO ABRIR O DASHBOARD
-// =========================================
-
-carregarRotas();
+);

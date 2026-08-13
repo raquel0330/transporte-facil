@@ -992,3 +992,136 @@ BOTÃO EXCLUIR
     }
 
 }
+
+
+/* =========================================
+   HORÁRIOS DAS ROTAS
+========================================= */
+
+.horarios-rota {
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    background: #f7f9fc;
+    border: 1px solid #e4e9f0;
+}
+
+
+/* TÍTULO */
+
+.horarios-rota > p {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+    color: #374151;
+}
+
+
+/* ÍCONE + TÍTULO */
+
+.horarios-rota > p strong {
+    font-weight: 600;
+    color: #1f2937;
+}
+
+
+/* CADA HORÁRIO */
+
+.horario-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 9px 12px;
+
+    margin-top: 7px;
+
+    background: #ffffff;
+
+    border: 1px solid #e6eaf0;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    color: #4b5563;
+
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+
+/* PRIMEIRO ITEM DO HORÁRIO */
+
+.horario-item span:first-child {
+    font-weight: 600;
+    color: #374151;
+}
+
+
+/* HORÁRIO DE SAÍDA */
+
+.horario-item span:nth-child(2) {
+    font-weight: 700;
+    color: #1f2937;
+}
+
+
+/* SETA */
+
+.horario-item span:nth-child(3) {
+    color: #9ca3af;
+    font-weight: 600;
+}
+
+
+/* HORÁRIO DE CHEGADA */
+
+.horario-item span:nth-child(4) {
+    font-weight: 700;
+    color: #1f2937;
+}
+
+
+/* =========================================
+   PERÍODOS - COMPATIBILIDADE COM FORMATO ANTIGO
+========================================= */
+
+.periodo-horarios {
+    margin-top: 10px;
+}
+
+
+.periodo-horarios > strong {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 13px;
+
+    color: #6b7280;
+
+    font-weight: 600;
+}
+
+
+/* =========================================
+   RESPONSIVO
+========================================= */
+
+@media (max-width: 600px) {
+
+    .horarios-rota {
+        padding: 12px;
+    }
+
+
+    .horario-item {
+        gap: 7px;
+
+        padding: 8px 10px;
+
+        font-size: 12px;
+
+        flex-wrap: wrap;
+    }
+
+}
