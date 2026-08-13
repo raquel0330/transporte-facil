@@ -9,10 +9,7 @@
 // =========================================
 
 const adminLogado =
-sessionStorage.getItem(
-    "adminLogado"
-);
-
+    sessionStorage.getItem("adminLogado");
 
 if (adminLogado !== "true") {
 
@@ -22,14 +19,12 @@ if (adminLogado !== "true") {
 }
 
 
-
 // =========================================
 // ENDEREÇO DA API
 // =========================================
 
 const API_URL =
-"https://transporte-facil-api.onrender.com";
-
+    "https://transporte-facil-api.onrender.com";
 
 
 // =========================================
@@ -37,17 +32,13 @@ const API_URL =
 // =========================================
 
 const btnSair =
-document.getElementById("btnSair");
-
+    document.getElementById("btnSair");
 
 const btnAdicionarRota =
-document.getElementById("btnAdicionarRota");
-
+    document.getElementById("btnAdicionarRota");
 
 const cardsAcao =
-document.querySelectorAll(".card-acao");
-
-
+    document.querySelectorAll(".card-acao");
 
 
 // =========================================
@@ -60,35 +51,28 @@ if (btnSair) {
         "click",
         function () {
 
-
             const confirmar =
                 confirm(
                     "Deseja realmente sair do painel administrativo?"
                 );
 
 
-
             if (confirmar) {
-
 
                 sessionStorage.removeItem(
                     "adminLogado"
                 );
 
 
-
                 window.location.href =
                     "tela_inicial.html";
 
-
             }
-
 
         }
     );
 
 }
-
 
 
 // =========================================
@@ -98,15 +82,12 @@ if (btnSair) {
 cardsAcao.forEach(
     function (card) {
 
-
         card.addEventListener(
             "click",
             function () {
 
-
                 const acao =
                     card.dataset.acao;
-
 
 
                 // =================================
@@ -115,13 +96,10 @@ cardsAcao.forEach(
 
                 if (acao === "rotas") {
 
-
                     window.location.href =
                         "criar_rota.html";
 
-
                 }
-
 
 
                 // =================================
@@ -132,14 +110,11 @@ cardsAcao.forEach(
                     acao === "horarios"
                 ) {
 
-
                     alert(
                         "Área de gerenciamento de horários em desenvolvimento."
                     );
 
-
                 }
-
 
 
                 // =================================
@@ -150,14 +125,11 @@ cardsAcao.forEach(
                     acao === "veiculos"
                 ) {
 
-
                     alert(
                         "Área de gerenciamento de veículos em desenvolvimento."
                     );
 
-
                 }
-
 
 
                 // =================================
@@ -168,22 +140,17 @@ cardsAcao.forEach(
                     acao === "agencias"
                 ) {
 
-
                     alert(
                         "Área de gerenciamento de agências em desenvolvimento."
                     );
 
-
                 }
-
 
             }
         );
 
-
     }
 );
-
 
 
 // =========================================
@@ -192,22 +159,17 @@ cardsAcao.forEach(
 
 if (btnAdicionarRota) {
 
-
     btnAdicionarRota.addEventListener(
         "click",
         function () {
 
-
             window.location.href =
                 "criar_rota.html";
-
 
         }
     );
 
-
 }
-
 
 
 // =========================================
@@ -216,7 +178,6 @@ if (btnAdicionarRota) {
 
 function formatarDias(dias) {
 
-
     if (!dias) {
 
         return "Não informado";
@@ -224,68 +185,53 @@ function formatarDias(dias) {
     }
 
 
-
     const nomesDias = {
-
 
         segunda:
             "Segunda",
 
-
         terca:
             "Terça",
-
 
         quarta:
             "Quarta",
 
-
         quinta:
             "Quinta",
-
 
         sexta:
             "Sexta",
 
-
         sabado:
             "Sábado",
-
 
         domingo:
             "Domingo"
 
-
     };
-
 
 
     const listaDias =
         dias
-        .split(",")
-        .map(
-            function (dia) {
+            .split(",")
+            .map(
+                function (dia) {
 
-
-                return (
-                    nomesDias[
+                    return (
+                        nomesDias[
+                            dia.trim()
+                        ]
+                        ||
                         dia.trim()
-                    ]
-                    ||
-                    dia.trim()
-                );
+                    );
 
-
-            }
-        );
-
+                }
+            );
 
 
     return listaDias.join(", ");
 
-
 }
-
 
 
 // =========================================
@@ -294,31 +240,223 @@ function formatarDias(dias) {
 
 function formatarTipo(tipo) {
 
-
     if (tipo === "van") {
-
 
         return "🚐 Van";
 
-
     }
-
 
 
     if (tipo === "onibus") {
 
-
         return "🚌 Ônibus";
-
 
     }
 
 
-
     return "🚍 Transporte";
 
+}
+
+
+// =========================================
+// FORMATAR HORÁRIOS
+// =========================================
+
+function formatarHorarios(horarios) {
+
+    // =================================
+    // CASO NÃO TENHA HORÁRIOS
+    // =================================
+
+    if (!horarios) {
+
+        return `
+            <p>
+                🕐 Horários: Não informado
+            </p>
+        `;
+
+    }
+
+
+    // =================================
+    // CASO O POSTGRESQL DEVOLVA
+    // O JSON COMO TEXTO
+    // =================================
+
+    if (
+        typeof horarios === "string"
+    ) {
+
+        try {
+
+            horarios =
+                JSON.parse(horarios);
+
+        }
+
+        catch (erro) {
+
+            console.error(
+                "Erro ao interpretar horários:",
+                erro
+            );
+
+            return `
+                <p>
+                    🕐 Horários: Não informado
+                </p>
+            `;
+
+        }
+
+    }
+
+
+    // =================================
+    // FUNÇÃO PARA MONTAR UM PERÍODO
+    // =================================
+
+    function montarPeriodo(
+        titulo,
+        lista
+    ) {
+
+        if (
+            !Array.isArray(lista) ||
+            lista.length === 0
+        ) {
+
+            return "";
+
+        }
+
+
+        let html = `
+
+            <div class="periodo-horarios">
+
+                <strong>
+                    ${titulo}
+                </strong>
+
+        `;
+
+
+        lista.forEach(
+            function (horario) {
+
+                const saida =
+                    horario.saida ||
+                    "--:--";
+
+                const chegada =
+                    horario.chegada ||
+                    "--:--";
+
+
+                html += `
+
+                    <div class="horario-item">
+
+                        <span>
+                            🕐 ${saida}
+                        </span>
+
+                        <span>
+                            →
+                        </span>
+
+                        <span>
+                            ${chegada}
+                        </span>
+
+                    </div>
+
+                `;
+
+            }
+        );
+
+
+        html += `
+
+            </div>
+
+        `;
+
+
+        return html;
+
+    }
+
+
+    // =================================
+    // MONTAR TODOS OS PERÍODOS
+    // =================================
+
+    let html = "";
+
+
+    html +=
+        montarPeriodo(
+            "Segunda a sexta",
+            horarios.segunda_sexta
+        );
+
+
+    html +=
+        montarPeriodo(
+            "Sábado",
+            horarios.sabado
+        );
+
+
+    html +=
+        montarPeriodo(
+            "Domingo",
+            horarios.domingo
+        );
+
+
+    // =================================
+    // NENHUM HORÁRIO ENCONTRADO
+    // =================================
+
+    if (!html) {
+
+        return `
+
+            <p>
+                🕐 Horários: Não informado
+            </p>
+
+        `;
+
+    }
+
+
+    // =================================
+    // RETORNAR HTML
+    // =================================
+
+    return `
+
+        <div class="horarios-rota">
+
+            <p>
+                🕐 <strong>Horários</strong>
+            </p>
+
+            ${html}
+
+        </div>
+
+    `;
 
 }
+
 
 // =========================================
 // EDITAR ROTA
@@ -343,13 +481,14 @@ function editarRota(id) {
 }
 
 
-
 // =========================================
 // EXCLUIR ROTA
 // =========================================
 
-async function excluirRota(id, nome) {
-
+async function excluirRota(
+    id,
+    nome
+) {
 
     const confirmar =
         confirm(
@@ -367,13 +506,13 @@ async function excluirRota(id, nome) {
     }
 
 
-
     try {
-
 
         const resposta =
             await fetch(
-                API_URL + "/rotas/" + id,
+                API_URL +
+                "/rotas/" +
+                id,
                 {
                     method:
                         "DELETE"
@@ -381,23 +520,18 @@ async function excluirRota(id, nome) {
             );
 
 
-
         const dados =
             await resposta.json();
 
 
-
         if (!resposta.ok) {
-
 
             throw new Error(
                 dados.mensagem ||
                 "Erro ao excluir a rota."
             );
 
-
         }
-
 
 
         alert(
@@ -405,14 +539,11 @@ async function excluirRota(id, nome) {
         );
 
 
-
         carregarRotas();
-
 
     }
 
     catch (erro) {
-
 
         console.error(
             "Erro ao excluir rota:",
@@ -420,16 +551,13 @@ async function excluirRota(id, nome) {
         );
 
 
-
         alert(
             "Não foi possível excluir a rota."
         );
 
-
     }
 
 }
-
 
 
 // =========================================
@@ -438,12 +566,10 @@ async function excluirRota(id, nome) {
 
 function mostrarRotas(rotas) {
 
-
     const listaRotas =
         document.getElementById(
             "listaRotas"
         );
-
 
 
     if (!listaRotas) {
@@ -457,16 +583,13 @@ function mostrarRotas(rotas) {
     }
 
 
-
     listaRotas.innerHTML = "";
-
 
 
     if (
         !rotas ||
         rotas.length === 0
     ) {
-
 
         listaRotas.innerHTML = `
 
@@ -476,16 +599,13 @@ function mostrarRotas(rotas) {
 
         `;
 
-
         return;
 
     }
 
 
-
     rotas.forEach(
         function (rota) {
-
 
             const card =
                 document.createElement(
@@ -493,17 +613,14 @@ function mostrarRotas(rotas) {
                 );
 
 
-
             card.className =
                 "card-rota";
 
 
-
             const icone =
                 rota.tipo === "van"
-                ? "🚐"
-                : "🚌";
-
+                    ? "🚐"
+                    : "🚌";
 
 
             const diasFormatados =
@@ -512,12 +629,10 @@ function mostrarRotas(rotas) {
                 );
 
 
-
             const tipoFormatado =
                 formatarTipo(
                     rota.tipo
                 );
-
 
 
             const informacoes =
@@ -525,9 +640,21 @@ function mostrarRotas(rotas) {
                 "Nenhuma informação adicional.";
 
 
+            // =================================
+            // HORÁRIOS
+            // =================================
+
+            const horariosFormatados =
+                formatarHorarios(
+                    rota.horarios
+                );
+
+
+            // =================================
+            // CARD
+            // =================================
 
             card.innerHTML = `
-
 
                 <div class="icone-rota">
 
@@ -536,14 +663,11 @@ function mostrarRotas(rotas) {
                 </div>
 
 
-
                 <div class="info-rota">
-
 
                     <h3>
                         ${rota.nome}
                     </h3>
-
 
 
                     <p>
@@ -557,7 +681,6 @@ function mostrarRotas(rotas) {
                     </p>
 
 
-
                     <p>
 
                         ${tipoFormatado}
@@ -565,25 +688,7 @@ function mostrarRotas(rotas) {
                     </p>
 
 
-
-                    <p>
-
-                        🕐 Saída:
-
-                        ${rota.horario_saida || "Não informado"}
-
-                    </p>
-
-
-
-                    <p>
-
-                        🕐 Chegada:
-
-                        ${rota.horario_chegada || "Não informado"}
-
-                    </p>
-
+                    ${horariosFormatados}
 
 
                     <p>
@@ -593,16 +698,13 @@ function mostrarRotas(rotas) {
                     </p>
 
 
-
                     <p>
 
                         📝 ${informacoes}
 
                     </p>
 
-
                 </div>
-
 
 
                 <span class="status ativo">
@@ -612,9 +714,7 @@ function mostrarRotas(rotas) {
                 </span>
 
 
-
                 <div class="acoes-rota">
-
 
                     <button
                         class="btn-editar"
@@ -626,7 +726,6 @@ function mostrarRotas(rotas) {
                     </button>
 
 
-
                     <button
                         class="btn-excluir"
                         type="button"
@@ -636,12 +735,9 @@ function mostrarRotas(rotas) {
 
                     </button>
 
-
                 </div>
 
-
             `;
-
 
 
             listaRotas.appendChild(
@@ -649,6 +745,9 @@ function mostrarRotas(rotas) {
             );
 
 
+            // =================================
+            // BOTÃO EDITAR
+            // =================================
 
             const botaoEditar =
                 card.querySelector(
@@ -656,21 +755,21 @@ function mostrarRotas(rotas) {
                 );
 
 
-
             botaoEditar.addEventListener(
                 "click",
                 function () {
-
 
                     editarRota(
                         rota.id
                     );
 
-
                 }
             );
 
 
+            // =================================
+            // BOTÃO EXCLUIR
+            // =================================
 
             const botaoExcluir =
                 card.querySelector(
@@ -678,27 +777,23 @@ function mostrarRotas(rotas) {
                 );
 
 
-
             botaoExcluir.addEventListener(
                 "click",
                 function () {
-
 
                     excluirRota(
                         rota.id,
                         rota.nome
                     );
 
-
                 }
             );
-
 
         }
     );
 
-
 }
+
 
 // =========================================
 // BUSCAR ROTAS DO BANCO
@@ -706,15 +801,13 @@ function mostrarRotas(rotas) {
 
 async function carregarRotas() {
 
-
     try {
-
 
         const resposta =
             await fetch(
-                API_URL + "/rotas"
+                API_URL +
+                "/rotas"
             );
-
 
 
         // =================================
@@ -723,14 +816,11 @@ async function carregarRotas() {
 
         if (!resposta.ok) {
 
-
             throw new Error(
                 "Erro ao buscar as rotas."
             );
 
-
         }
-
 
 
         // =================================
@@ -741,12 +831,10 @@ async function carregarRotas() {
             await resposta.json();
 
 
-
         console.log(
             "Rotas recebidas do banco:",
             dados.rotas
         );
-
 
 
         // =================================
@@ -756,7 +844,6 @@ async function carregarRotas() {
         mostrarRotas(
             dados.rotas
         );
-
 
 
         // =================================
@@ -769,29 +856,21 @@ async function carregarRotas() {
             );
 
 
-
         if (totalRotas) {
-
 
             totalRotas.textContent =
                 dados.rotas.length;
 
-
         }
-
-
 
     }
 
-
     catch (erro) {
-
 
         console.error(
             "Erro ao carregar rotas:",
             erro
         );
-
 
 
         const listaRotas =
@@ -800,9 +879,7 @@ async function carregarRotas() {
             );
 
 
-
         if (listaRotas) {
-
 
             listaRotas.innerHTML = `
 
@@ -812,16 +889,11 @@ async function carregarRotas() {
 
             `;
 
-
         }
-
 
     }
 
-
 }
-
-
 
 
 // =========================================

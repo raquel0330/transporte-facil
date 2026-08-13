@@ -458,3 +458,76 @@ body {
     }
 
 }
+
+/* =========================================
+   ACESSO DO RESPONSÁVEL
+========================================= */
+
+.acesso-responsavel {
+
+    margin-top: 22px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid
+        #e5ebe7;
+
+    text-align: center;
+
+}
+
+
+.acesso-responsavel p {
+
+    margin: 0 0 7px 0;
+
+    color: #718078;
+
+    font-size: 12px;
+
+}
+
+
+.link-responsavel {
+
+    border: none;
+
+    padding: 0;
+
+    background: transparent;
+
+    color: #087c48;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.link-responsavel span {
+
+    margin-left: 4px;
+
+    transition: 0.2s;
+
+}
+
+
+.link-responsavel:hover {
+
+    color: #13a45b;
+
+}
+
+
+.link-responsavel:hover span {
+
+    margin-left: 8px;
+
+}

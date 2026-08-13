@@ -1,0 +1,1061 @@
+/* =========================================
+   ÁREA DO RESPONSÁVEL
+   TRANSPORTE FÁCIL
+========================================= */
+
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+html,
+body {
+
+    width: 100%;
+
+    min-height: 100%;
+
+}
+
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f7f5;
+
+    color: #173b2c;
+
+}
+
+
+/* =========================================
+   PÁGINA
+========================================= */
+
+.pagina {
+
+    min-height: 100vh;
+
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.cabecalho {
+
+    width: 100%;
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 14px 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087c48,
+            #13a45b
+        );
+
+    color: white;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.15);
+
+}
+
+
+/* =========================================
+   BOTÃO VOLTAR
+========================================= */
+
+.btn-voltar {
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(255, 255, 255, 0.14);
+
+    color: white;
+
+    font-size: 26px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.btn-voltar:hover {
+
+    background:
+        rgba(255, 255, 255, 0.25);
+
+    transform:
+        translateX(-2px);
+
+}
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.titulo-cabecalho {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin-left: 16px;
+
+}
+
+
+.icone {
+
+    font-size: 29px;
+
+}
+
+
+.titulo-cabecalho h1 {
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+}
+
+
+.titulo-cabecalho p {
+
+    margin-top: 3px;
+
+    font-size: 12px;
+
+    opacity: 0.85;
+
+}
+
+
+/* =========================================
+   BOTÃO SAIR
+========================================= */
+
+.btn-sair {
+
+    margin-left: auto;
+
+    min-height: 40px;
+
+    padding:
+        0 17px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.30);
+
+    border-radius: 9px;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.btn-sair:hover {
+
+    background:
+        rgba(255, 255, 255, 0.22);
+
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.conteudo {
+
+    width:
+        min(100%, 850px);
+
+    margin:
+        0 auto;
+
+    padding:
+        32px
+        24px
+        55px;
+
+}
+
+
+/* =========================================
+   INTRODUÇÃO
+========================================= */
+
+.introducao {
+
+    margin-bottom: 24px;
+
+}
+
+
+.introducao > span {
+
+    color: #13a45b;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.introducao h2 {
+
+    margin-top: 6px;
+
+    color: #173b2c;
+
+    font-size: 28px;
+
+}
+
+
+.introducao p {
+
+    margin-top: 7px;
+
+    color: #718078;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   CARD DA ROTA
+========================================= */
+
+.card-rota {
+
+    padding: 26px;
+
+    background: white;
+
+    border:
+        1px solid
+        #e2ebe5;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30, 80, 55, 0.07);
+
+}
+
+
+/* =========================================
+   CABEÇALHO DA ROTA
+========================================= */
+
+.cabecalho-rota {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 20px;
+
+    border-bottom:
+        1px solid
+        #edf2ee;
+
+}
+
+
+.etiqueta {
+
+    color: #13a45b;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.cabecalho-rota h2 {
+
+    margin-top: 5px;
+
+    color: #173b2c;
+
+    font-size: 23px;
+
+}
+
+
+.status-rota {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    padding:
+        7px 11px;
+
+    border-radius: 20px;
+
+    background: #e2f5ea;
+
+    color: #0d934d;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+}
+
+
+.bolinha {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #13a45b;
+
+}
+
+
+/* =========================================
+   INFORMAÇÕES DA ROTA
+========================================= */
+
+.informacoes-rota {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 14px;
+
+    padding:
+        22px 0;
+
+}
+
+
+.informacao {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+
+    padding: 15px;
+
+    background: #f8fbf9;
+
+    border:
+        1px solid
+        #e8f0eb;
+
+    border-radius: 12px;
+
+}
+
+
+.icone-info {
+
+    font-size: 21px;
+
+}
+
+
+.informacao small {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: #7a8981;
+
+    font-size: 11px;
+
+}
+
+
+.informacao strong {
+
+    display: block;
+
+    color: #244536;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+
+}
+
+
+/* =========================================
+   INFORMAÇÕES ADICIONAIS
+========================================= */
+
+.bloco-informacoes {
+
+    padding:
+        18px;
+
+    border-radius: 12px;
+
+    background: #f8fbf9;
+
+    border:
+        1px solid
+        #e8f0eb;
+
+}
+
+
+.bloco-informacoes h3 {
+
+    margin-bottom: 7px;
+
+    color: #315243;
+
+    font-size: 14px;
+
+}
+
+
+.bloco-informacoes p {
+
+    color: #718078;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   CÓDIGO
+========================================= */
+
+.codigo-rota {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-top: 5px;
+
+    padding:
+        18px;
+
+    border-radius: 12px;
+
+    background: #eaf7ef;
+
+    border:
+        1px solid
+        #ccebd8;
+
+}
+
+
+.codigo-rota small {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #5d7568;
+
+    font-size: 11px;
+
+}
+
+
+.codigo-rota strong {
+
+    color: #087c48;
+
+    font-size: 22px;
+
+    letter-spacing: 4px;
+
+}
+
+
+.codigo-rota p {
+
+    max-width: 280px;
+
+    color: #718078;
+
+    font-size: 11px;
+
+    line-height: 1.4;
+
+    text-align: right;
+
+}
+
+
+/* =========================================
+   AÇÕES
+========================================= */
+
+.acoes-rota {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 11px;
+
+    margin-top: 20px;
+
+}
+
+
+.btn-editar,
+.btn-excluir {
+
+    min-height: 44px;
+
+    padding:
+        0 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.btn-editar {
+
+    background: #e2f5ea;
+
+    color: #087c48;
+
+}
+
+
+.btn-editar:hover {
+
+    background: #d2efdd;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+.btn-excluir {
+
+    background: #fff0f0;
+
+    color: #c03939;
+
+}
+
+
+.btn-excluir:hover {
+
+    background: #ffe1e1;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* =========================================
+   MENSAGEM
+========================================= */
+
+.mensagem {
+
+    display: none;
+
+    margin-top: 18px;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+}
+
+
+.mensagem.sucesso {
+
+    display: block;
+
+    background: #eaf7ef;
+
+    border:
+        1px solid
+        #ccebd8;
+
+    color: #087c48;
+
+}
+
+
+.mensagem.erro {
+
+    display: block;
+
+    background: #fff0f0;
+
+    border:
+        1px solid
+        #f2cccc;
+
+    color: #b83232;
+
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 650px) {
+
+    .cabecalho {
+
+        padding:
+            12px 15px;
+
+    }
+
+
+    .titulo-cabecalho h1 {
+
+        font-size: 18px;
+
+    }
+
+
+    .btn-sair {
+
+        padding:
+            0 12px;
+
+    }
+
+
+    .conteudo {
+
+        padding:
+            24px 15px 40px;
+
+    }
+
+
+    .introducao h2 {
+
+        font-size: 24px;
+
+    }
+
+
+    .card-rota {
+
+        padding:
+            20px 16px;
+
+    }
+
+
+    .informacoes-rota {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .cabecalho-rota {
+
+        flex-direction: column;
+
+    }
+
+
+    .codigo-rota {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+    }
+
+
+    .codigo-rota p {
+
+        max-width: none;
+
+        text-align: left;
+
+    }
+
+
+    .acoes-rota {
+
+        flex-direction: column;
+
+    }
+
+
+    .btn-editar,
+    .btn-excluir {
+
+        width: 100%;
+
+    }
+
+}
+
+/* =========================================
+   FORMULÁRIO DE EDIÇÃO
+========================================= */
+
+.grupo-edicao {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 18px;
+
+}
+
+.grupo-edicao label {
+
+    color: #315243;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+.grupo-edicao input,
+.grupo-edicao select,
+.grupo-edicao textarea {
+
+    width: 100%;
+
+    border:
+        1px solid
+        #d8e4dc;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #fbfdfc;
+
+    color: #244536;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+.grupo-edicao input,
+.grupo-edicao select {
+
+    height: 46px;
+
+    padding: 0 13px;
+
+}
+
+.grupo-edicao textarea {
+
+    min-height: 100px;
+
+    padding: 12px 13px;
+
+    resize: vertical;
+
+}
+
+.grupo-edicao input:focus,
+.grupo-edicao select:focus,
+.grupo-edicao textarea:focus {
+
+    border-color: #13a45b;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(19, 164, 91, 0.10);
+
+    background: white;
+
+}
+
+
+/* =========================================
+   CAMPOS LADO A LADO
+========================================= */
+
+.linha-edicao {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 16px;
+
+}
+
+
+/* =========================================
+   DIAS DE EDIÇÃO
+========================================= */
+
+.dias-edicao {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+}
+
+.dia-edicao {
+
+    cursor: pointer;
+
+}
+
+.dia-edicao input {
+
+    position: absolute;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+}
+
+.dia-edicao span {
+
+    min-width: 72px;
+
+    height: 38px;
+
+    padding: 0 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border:
+        1px solid
+        #d8e4dc;
+
+    border-radius: 9px;
+
+    background: #f8fbf9;
+
+    color: #52665b;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    transition:
+        background 0.2s ease,
+        border 0.2s ease,
+        color 0.2s ease;
+
+}
+
+.dia-edicao input:checked + span {
+
+    background: #e2f5ea;
+
+    border-color: #13a45b;
+
+    color: #0d934d;
+
+}
+
+
+/* =========================================
+   BOTÃO CANCELAR EDIÇÃO
+========================================= */
+
+.btn-cancelar-edicao {
+
+    min-height: 44px;
+
+    padding: 0 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #eef3ef;
+
+    color: #52665b;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+.btn-cancelar-edicao:hover {
+
+    background: #e2e9e4;
+
+    transform:
+        translateY(-1px);
+
+}
+
+
+/* =========================================
+   RESPONSIVIDADE DO FORMULÁRIO
+========================================= */
+
+@media (max-width: 650px) {
+
+    .linha-edicao {
+
+        grid-template-columns: 1fr;
+
+        gap: 0;
+
+    }
+
+    .dias-edicao {
+
+        gap: 7px;
+
+    }
+
+    .dia-edicao span {
+
+        min-width: 65px;
+
+    }
+
+}

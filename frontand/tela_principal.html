@@ -13,219 +13,206 @@
 >
 
 
-<div class="dashboard">
+<!-- =====================================
+     CABEÇALHO
+====================================== -->
 
-    <!-- =====================================
-         CABEÇALHO
-    ====================================== -->
+<header class="cabecalho">
 
-    <header class="cabecalho">
+    <button
+        id="btnVoltar"
+        class="btn-voltar"
+        type="button"
+        aria-label="Voltar"
+    >
+        ←
+    </button>
+
+
+    <h1>
+        Transporte Fácil
+    </h1>
+
+
+    <button
+        id="btnMenu"
+        class="btn-menu"
+        type="button"
+        aria-label="Abrir menu"
+    >
+        ☰
+    </button>
+
+
+    <div
+        id="menuDropdown"
+        class="menu-dropdown"
+    >
 
         <button
-            id="btnVoltar"
-            class="btn-voltar"
+            class="item-menu"
+            data-acao="login"
             type="button"
-            aria-label="Voltar"
         >
-            ←
+            <span class="icone-menu">🔐</span>
+            Login
         </button>
 
 
-        <h1>
-            Transporte Fácil
-        </h1>
-
-
         <button
-            id="btnMenu"
-            class="btn-menu"
+            class="item-menu"
+            data-acao="favoritos"
             type="button"
-            aria-label="Abrir menu"
         >
-            ☰
+            <span class="icone-menu">♡</span>
+            Favoritos
         </button>
 
 
-        <!-- MENU -->
-
-        <div
-            id="menuDropdown"
-            class="menu-dropdown"
+        <button
+            class="item-menu"
+            data-acao="compartilhar"
+            type="button"
         >
-
-            <button
-                class="item-menu"
-                data-acao="login"
-                type="button"
-            >
-                <span class="icone-menu">🔐</span>
-                Login
-            </button>
+            <span class="icone-menu">↗</span>
+            Compartilhar
+        </button>
 
 
-            <button
-                class="item-menu"
-                data-acao="favoritos"
-                type="button"
-            >
-                <span class="icone-menu">♡</span>
-                Favoritos
-            </button>
-
-
-            <button
-                class="item-menu"
-                data-acao="compartilhar"
-                type="button"
-            >
-                <span class="icone-menu">↗</span>
-                Compartilhar
-            </button>
-
-
-            <button
-                class="item-menu"
-                data-acao="configuracoes"
-                type="button"
-            >
-                <span class="icone-menu">⚙</span>
-                Configurações
-            </button>
-
-
-            <button
-                class="item-menu sair"
-                data-acao="sair"
-                type="button"
-            >
-                <span class="icone-menu">↪</span>
-                Sair
-            </button>
-
-        </div>
-
-    </header>
-
-
-    <!-- =====================================
-         CONTEÚDO
-    ====================================== -->
-
-    <main class="conteudo">
-
-        <!-- TÍTULO -->
-
-        <section class="titulo-secao">
-
-            <h2>
-                Linhas disponíveis
-            </h2>
-
-            <p>
-                Encontre sua rota e consulte os horários.
-            </p>
-
-        </section>
-
-
-        <!-- =================================
-             BUSCA
-        ================================== -->
-
-        <div class="area-busca">
-
-            <span class="icone-busca">
-                🔎
-            </span>
-
-
-            <input
-                type="text"
-                id="campoBusca"
-                placeholder="Buscar linha ou destino..."
-                autocomplete="off"
-            >
-
-
-            <button
-                id="btnLimpar"
-                class="btn-limpar"
-                type="button"
-                aria-label="Limpar busca"
-            >
-                ×
-            </button>
-
-        </div>
-
-
-        <!-- =================================
-             LISTA DE ROTAS
-        ================================== -->
-
-        <section class="cabecalho-resultados">
-
-            <h3>
-                Rotas
-            </h3>
-
-
-            <span id="contadorLinhas">
-                Carregando...
-            </span>
-
-        </section>
-
-
-        <!-- =================================
-             ROTAS VINDAS DO POSTGRESQL
-        ================================== -->
-
-        <div
-            id="listaLinhas"
-            class="lista-linhas"
+        <button
+            class="item-menu"
+            data-acao="configuracoes"
+            type="button"
         >
-
-            <!--
-                As rotas cadastradas no PostgreSQL
-                serão inseridas aqui pelo JavaScript.
-            -->
-
-        </div>
+            <span class="icone-menu">⚙</span>
+            Configurações
+        </button>
 
 
-        <!-- =================================
-             SEM RESULTADOS
-        ================================== -->
-
-        <div
-            id="semResultados"
-            class="sem-resultados"
+        <button
+            class="item-menu sair"
+            data-acao="sair"
+            type="button"
         >
+            <span class="icone-menu">↪</span>
+            Sair
+        </button>
 
-            <span>
-                🔎
-            </span>
+    </div>
 
-
-            <h3>
-                Nenhuma rota encontrada
-            </h3>
-
-
-            <p>
-                Tente buscar por outro nome ou destino.
-            </p>
-
-        </div>
-
-    </main>
-
-</div>
+</header>
 
 
 <!-- =====================================
-     JAVASCRIPT
+     CONTEÚDO
 ====================================== -->
 
+<main class="conteudo">
+
+
+    <section class="titulo-secao">
+
+        <h2>
+            Linhas disponíveis
+        </h2>
+
+        <p>
+            Encontre sua rota e consulte as informações.
+        </p>
+
+    </section>
+
+
+    <!-- =================================
+         BUSCA
+    ================================== -->
+
+    <div class="area-busca">
+
+        <span class="icone-busca">
+            🔎
+        </span>
+
+
+        <input
+            type="text"
+            id="campoBusca"
+            placeholder="Buscar linha, destino ou via..."
+            autocomplete="off"
+        >
+
+
+        <button
+            id="btnLimpar"
+            class="btn-limpar"
+            type="button"
+            aria-label="Limpar busca"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <!-- =================================
+         CABEÇALHO DOS RESULTADOS
+    ================================== -->
+
+    <section class="cabecalho-resultados">
+
+        <h3>
+            Rotas
+        </h3>
+
+
+        <span id="contadorLinhas">
+            Carregando...
+        </span>
+
+    </section>
+
+
+    <!-- =================================
+         LISTA DE ROTAS
+    ================================== -->
+
+    <div
+        id="listaLinhas"
+        class="lista-linhas"
+    >
+    </div>
+
+
+    <!-- =================================
+         SEM RESULTADOS
+    ================================== -->
+
+    <div
+        id="semResultados"
+        class="sem-resultados"
+    >
+
+        <span>
+            🔎
+        </span>
+
+
+        <h3>
+            Nenhuma rota encontrada
+        </h3>
+
+
+        <p>
+            Tente buscar por outro nome, destino ou via.
+        </p>
+
+    </div>
+
+</main>
+
+
 <script src="js/tela_principal.js"></script>
+
+<footer class="rodape">
+    Criado e desenvolvido por <strong>Devs Tech</strong>
+</footer>

@@ -1,0 +1,647 @@
+
+/* =========================================
+   ACESSO DO RESPONSÁVEL
+   TRANSPORTE FÁCIL
+========================================= */
+
+/* =========================================
+   RESET
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    background: #f4f7f5;
+
+    color: #173b2c;
+
+}
+
+
+/* =========================================
+   PÁGINA
+========================================= */
+
+.pagina {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    background: #f4f7f5;
+
+}
+
+
+/* =========================================
+   CABEÇALHO
+========================================= */
+
+.cabecalho {
+
+    width: 100%;
+
+    min-height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 14px 22px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087c48,
+            #13a45b
+        );
+
+    color: white;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0, 0, 0, 0.15);
+
+}
+
+
+/* =========================================
+   BOTÃO VOLTAR
+========================================= */
+
+.btn-voltar {
+
+    width: 42px;
+
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        rgba(255, 255, 255, 0.14);
+
+    color: white;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+
+}
+
+.btn-voltar:hover {
+
+    background:
+        rgba(255, 255, 255, 0.25);
+
+    transform:
+        scale(1.05);
+
+}
+
+
+/* =========================================
+   TÍTULO
+========================================= */
+
+.titulo-cabecalho {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+}
+
+.icone {
+
+    font-size: 28px;
+
+}
+
+.titulo-cabecalho h1 {
+
+    font-size: 21px;
+
+    font-weight: 600;
+
+}
+
+.titulo-cabecalho p {
+
+    margin-top: 3px;
+
+    font-size: 12px;
+
+    opacity: 0.85;
+
+}
+
+
+/* =========================================
+   CONTEÚDO
+========================================= */
+
+.conteudo {
+
+    width:
+        min(100%, 700px);
+
+    margin:
+        0 auto;
+
+    padding:
+        30px
+        24px
+        50px;
+
+}
+
+
+/* =========================================
+   INTRODUÇÃO
+========================================= */
+
+.introducao {
+
+    margin-bottom: 25px;
+
+}
+
+.introducao > span {
+
+    color: #13a45b;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+
+}
+
+.introducao h2 {
+
+    margin-top: 6px;
+
+    color: #173b2c;
+
+    font-size: 27px;
+
+}
+
+.introducao p {
+
+    margin-top: 7px;
+
+    color: #718078;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   FORMULÁRIO
+========================================= */
+
+.formulario {
+
+    padding: 25px;
+
+    background: white;
+
+    border:
+        1px solid #e2ebe5;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30, 80, 55, 0.07);
+
+}
+
+
+/* =========================================
+   GRUPOS
+========================================= */
+
+.grupo {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 19px;
+
+}
+
+.grupo label {
+
+    color: #315243;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+
+/* =========================================
+   CAMPOS
+========================================= */
+
+.grupo input {
+
+    width: 100%;
+
+    height: 46px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid #d8e4dc;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    background: #fbfdfc;
+
+    color: #244536;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition:
+        border 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+.grupo input:focus {
+
+    border-color: #13a45b;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(19, 164, 91, 0.10);
+
+    background: white;
+
+}
+
+.grupo input::placeholder {
+
+    color: #9aa6a0;
+
+}
+
+
+/* =========================================
+   CÓDIGO DE ACESSO
+========================================= */
+
+#codigoAcesso {
+
+    text-transform: uppercase;
+
+    letter-spacing: 4px;
+
+    font-weight: bold;
+
+    text-align: center;
+
+    font-size: 18px;
+
+}
+
+
+/* =========================================
+   TEXTO AUXILIAR
+========================================= */
+
+.grupo small {
+
+    margin-top: 2px;
+
+    color: #718078;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+}
+
+
+/* =========================================
+   BOTÃO
+========================================= */
+
+.acoes-formulario {
+
+    margin-top: 8px;
+
+}
+
+.btn-acessar {
+
+    width: 100%;
+
+    min-height: 46px;
+
+    padding:
+        0 22px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #087c48,
+            #13a45b
+        );
+
+    color: white;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 4px 10px
+        rgba(19, 164, 91, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+.btn-acessar:hover {
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 6px 15px
+        rgba(19, 164, 91, 0.25);
+
+}
+
+.btn-acessar:active {
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* =========================================
+   MENSAGEM
+========================================= */
+
+.mensagem {
+
+    margin-top: 18px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    text-align: center;
+
+    display: none;
+
+}
+
+.mensagem.sucesso {
+
+    display: block;
+
+    background: #e2f5ea;
+
+    color: #0d934d;
+
+    border:
+        1px solid #b8e5c9;
+
+}
+
+.mensagem.erro {
+
+    display: block;
+
+    background: #fff0f0;
+
+    color: #b42318;
+
+    border:
+        1px solid #f1c2c2;
+
+}
+
+
+/* =========================================
+   RESULTADO DA ROTA
+========================================= */
+
+.resultado-rota {
+
+    margin-top: 25px;
+
+    padding: 25px;
+
+    background: white;
+
+    border:
+        1px solid #e2ebe5;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 20px
+        rgba(30, 80, 55, 0.07);
+
+}
+
+.resultado-rota h2 {
+
+    margin-bottom: 8px;
+
+    color: #173b2c;
+
+    font-size: 22px;
+
+}
+
+.resultado-rota > p {
+
+    margin-bottom: 20px;
+
+    color: #718078;
+
+    font-size: 14px;
+
+}
+
+.dados-rota {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+.dados-rota p {
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    background: #f8fbf9;
+
+    border:
+        1px solid #e8f0eb;
+
+    font-size: 14px;
+
+    color: #52665b;
+
+}
+
+.dados-rota strong {
+
+    color: #315243;
+
+}
+
+
+/* =========================================
+   RESPONSIVIDADE
+========================================= */
+
+@media (max-width: 600px) {
+
+    .cabecalho {
+
+        min-height: 68px;
+
+        padding:
+            12px
+            15px;
+
+    }
+
+
+    .btn-voltar {
+
+        width: 38px;
+
+        height: 38px;
+
+    }
+
+
+    .titulo-cabecalho h1 {
+
+        font-size: 18px;
+
+    }
+
+
+    .conteudo {
+
+        padding:
+            22px
+            15px
+            40px;
+
+    }
+
+
+    .introducao h2 {
+
+        font-size: 23px;
+
+    }
+
+
+    .formulario {
+
+        padding:
+            20px
+            16px;
+
+    }
+
+
+    .resultado-rota {
+
+        padding:
+            20px
+            16px;
+
+    }
+
+
+    .resultado-rota h2 {
+
+        font-size: 20px;
+
+    }
+
+}
+

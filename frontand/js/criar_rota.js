@@ -1,8 +1,8 @@
-
 // =========================================
 // CRIAR / EDITAR ROTA
 // TRANSPORTE FÁCIL
 // =========================================
+
 
 // =========================================
 // ENDEREÇO DA API
@@ -11,9 +11,13 @@
 const API_URL =
     "https://transporte-facil-api.onrender.com";
 
+
 // =========================================
 // ELEMENTOS
 // =========================================
+
+const formRota =
+    document.getElementById("formRota");
 
 const btnVoltar =
     document.getElementById("btnVoltar");
@@ -21,11 +25,24 @@ const btnVoltar =
 const btnCancelar =
     document.getElementById("btnCancelar");
 
-const formCriarRota =
-    document.getElementById("formCriarRota");
+const btnSalvar =
+    document.getElementById("btnSalvar");
+
+const btnAdicionarHorario =
+    document.getElementById("btnAdicionarHorario");
+
+const listaHorariosExtras =
+    document.getElementById("listaHorariosExtras");
+
+const mensagem =
+    document.getElementById("mensagem");
+
+const tituloFormulario =
+    document.getElementById("tituloFormulario");
+
 
 // =========================================
-// VERIFICAR SE ESTAMOS EDITANDO
+// IDENTIFICAR EDIÇÃO
 // =========================================
 
 const parametros =
@@ -36,63 +53,929 @@ const parametros =
 const idRota =
     parametros.get("id");
 
+
 // =========================================
-// BOTÃO VOLTAR
+// CONTADOR DE HORÁRIOS
 // =========================================
+
+let contadorHorarios = 2;
+
+
+// =========================================
+// VOLTAR
+// =========================================
+
+function voltarDashboard() {
+
+    window.location.href =
+        "dashboard.html";
+
+}
+
 
 if (btnVoltar) {
 
     btnVoltar.addEventListener(
         "click",
-        function () {
-
-            window.location.href =
-                "dashboard.html";
-
-        }
+        voltarDashboard
     );
 
 }
 
-// =========================================
-// BOTÃO CANCELAR
-// =========================================
 
 if (btnCancelar) {
 
     btnCancelar.addEventListener(
         "click",
-        function () {
+        voltarDashboard
+    );
 
-            const confirmar =
-                confirm(
-                    idRota
-                        ? "Deseja cancelar a edição da rota?"
-                        : "Deseja cancelar o cadastro da rota?"
+}
+
+
+// =========================================
+// MENSAGEM
+// =========================================
+
+function mostrarMensagem(
+    textoMensagem,
+    tipo = "erro"
+) {
+
+    if (!mensagem) {
+        return;
+    }
+
+    mensagem.textContent =
+        textoMensagem;
+
+    mensagem.className =
+        "mensagem mostrar " + tipo;
+
+}
+
+
+function limparMensagem() {
+
+    if (!mensagem) {
+        return;
+    }
+
+    mensagem.textContent =
+        "";
+
+    mensagem.className =
+        "mensagem";
+
+}
+
+
+// =========================================
+// ERROS VISUAIS
+// =========================================
+
+function limparErros() {
+
+    document
+        .querySelectorAll(".campo-erro")
+        .forEach(
+            function (campo) {
+
+                campo.classList.remove(
+                    "campo-erro"
                 );
 
+            }
+        );
 
-            if (confirmar) {
+}
 
-                window.location.href =
-                    "dashboard.html";
+
+function marcarErro(elemento) {
+
+    if (!elemento) {
+        return;
+    }
+
+    elemento.classList.add(
+        "campo-erro"
+    );
+
+}
+
+
+// =========================================
+// ADICIONAR HORÁRIO EXTRA
+// =========================================
+
+function adicionarHorarioExtra(
+    saida = "",
+    chegada = ""
+) {
+
+    if (!listaHorariosExtras) {
+        return;
+    }
+
+
+    contadorHorarios++;
+
+
+    const horario =
+        document.createElement("div");
+
+
+    horario.className =
+        "horario-item horario-extra";
+
+
+    horario.dataset.id =
+        contadorHorarios;
+
+
+    horario.innerHTML = `
+
+        <div class="numero-horario">
+            ${contadorHorarios}
+        </div>
+
+        <div class="campo-horario">
+
+            <label>
+                Saída
+            </label>
+
+            <input
+                type="time"
+                class="horario-saida"
+                value="${saida}"
+            >
+
+        </div>
+
+        <div class="campo-horario">
+
+            <label>
+                Chegada
+            </label>
+
+            <input
+                type="time"
+                class="horario-chegada"
+                value="${chegada}"
+            >
+
+        </div>
+
+        <button
+            type="button"
+            class="btn-remover-horario"
+        >
+            ×
+        </button>
+    `;
+
+
+    listaHorariosExtras.appendChild(
+        horario
+    );
+
+
+    const btnRemover =
+        horario.querySelector(
+            ".btn-remover-horario"
+        );
+
+
+    if (btnRemover) {
+
+        btnRemover.addEventListener(
+            "click",
+            function () {
+
+                horario.remove();
 
             }
+        );
+
+    }
+
+}
+
+
+// =========================================
+// BOTÃO ADICIONAR HORÁRIO
+// =========================================
+
+if (btnAdicionarHorario) {
+
+    btnAdicionarHorario.addEventListener(
+        "click",
+        function () {
+
+            adicionarHorarioExtra();
 
         }
     );
 
 }
 
+
+// =========================================
+// OBTER DIAS SELECIONADOS
+// =========================================
+
+function obterDiasSelecionados() {
+
+    const checkboxes =
+        document.querySelectorAll(
+            'input[name="dias"]:checked'
+        );
+
+
+    return Array.from(
+        checkboxes
+    ).map(
+        function (checkbox) {
+
+            return checkbox.value;
+
+        }
+    );
+
+}
+
+
+// =========================================
+// OBTER HORÁRIOS
+// =========================================
+//
+// Horários são opcionais.
+//
+// Se todos estiverem vazios:
+// retorna [].
+//
+// Se algum estiver preenchido:
+// precisa completar saída + chegada.
+// =========================================
+
+function obterHorarios() {
+
+    const horarios = [];
+
+
+    // =====================================
+    // HORÁRIO 1
+    // =====================================
+
+    const saida1 =
+        document.getElementById(
+            "saida1"
+        )?.value || "";
+
+
+    const chegada1 =
+        document.getElementById(
+            "chegada1"
+        )?.value || "";
+
+
+    if (
+        saida1 ||
+        chegada1
+    ) {
+
+        horarios.push({
+
+            saida:
+                saida1,
+
+            chegada:
+                chegada1
+
+        });
+
+    }
+
+
+    // =====================================
+    // HORÁRIO 2
+    // =====================================
+
+    const saida2 =
+        document.getElementById(
+            "saida2"
+        )?.value || "";
+
+
+    const chegada2 =
+        document.getElementById(
+            "chegada2"
+        )?.value || "";
+
+
+    if (
+        saida2 ||
+        chegada2
+    ) {
+
+        horarios.push({
+
+            saida:
+                saida2,
+
+            chegada:
+                chegada2
+
+        });
+
+    }
+
+
+    // =====================================
+    // HORÁRIOS EXTRAS
+    // =====================================
+
+    document
+        .querySelectorAll(
+            ".horario-extra"
+        )
+        .forEach(
+            function (item) {
+
+                const saida =
+                    item.querySelector(
+                        ".horario-saida"
+                    )?.value || "";
+
+
+                const chegada =
+                    item.querySelector(
+                        ".horario-chegada"
+                    )?.value || "";
+
+
+                if (
+                    saida ||
+                    chegada
+                ) {
+
+                    horarios.push({
+
+                        saida:
+                            saida,
+
+                        chegada:
+                            chegada
+
+                    });
+
+                }
+
+            }
+        );
+
+
+    return horarios;
+
+}
+
+
+// =========================================
+// PREENCHER DIAS
+// =========================================
+
+function preencherDias(dias) {
+
+    if (!dias) {
+        return;
+    }
+
+
+    let lista =
+        dias;
+
+
+    if (
+        typeof dias === "string"
+    ) {
+
+        lista =
+            dias.split(",");
+
+    }
+
+
+    lista =
+        lista.map(
+            function (dia) {
+
+                return String(dia)
+                    .trim()
+                    .toLowerCase();
+
+            }
+        );
+
+
+    document
+        .querySelectorAll(
+            'input[name="dias"]'
+        )
+        .forEach(
+            function (checkbox) {
+
+                checkbox.checked =
+                    lista.includes(
+                        checkbox.value
+                    );
+
+            }
+        );
+
+}
+
+
+// =========================================
+// PREENCHER HORÁRIOS
+// =========================================
+
+function preencherHorarios(horarios) {
+
+    if (!horarios) {
+        return;
+    }
+
+
+    let lista = [];
+
+
+    // =====================================
+    // FORMATO OBJETO
+    // =====================================
+
+    if (
+        typeof horarios === "object" &&
+        !Array.isArray(horarios)
+    ) {
+
+        if (
+            Array.isArray(
+                horarios.horarios
+            )
+        ) {
+
+            lista =
+                horarios.horarios;
+
+        }
+
+        else {
+
+            const dias =
+                Object.keys(
+                    horarios
+                );
+
+
+            for (
+                const dia of dias
+            ) {
+
+                if (
+                    Array.isArray(
+                        horarios[dia]
+                    )
+                ) {
+
+                    lista =
+                        horarios[dia];
+
+                    break;
+
+                }
+
+            }
+
+        }
+
+    }
+
+
+    // =====================================
+    // ARRAY DIRETO
+    // =====================================
+
+    else if (
+        Array.isArray(horarios)
+    ) {
+
+        lista =
+            horarios;
+
+    }
+
+
+    if (
+        !Array.isArray(lista)
+    ) {
+
+        return;
+
+    }
+
+
+    // =====================================
+    // HORÁRIO 1
+    // =====================================
+
+    if (lista[0]) {
+
+        const saida1 =
+            document.getElementById(
+                "saida1"
+            );
+
+
+        const chegada1 =
+            document.getElementById(
+                "chegada1"
+            );
+
+
+        if (saida1) {
+
+            saida1.value =
+                lista[0].saida || "";
+
+        }
+
+
+        if (chegada1) {
+
+            chegada1.value =
+                lista[0].chegada || "";
+
+        }
+
+    }
+
+
+    // =====================================
+    // HORÁRIO 2
+    // =====================================
+
+    if (lista[1]) {
+
+        const saida2 =
+            document.getElementById(
+                "saida2"
+            );
+
+
+        const chegada2 =
+            document.getElementById(
+                "chegada2"
+            );
+
+
+        if (saida2) {
+
+            saida2.value =
+                lista[1].saida || "";
+
+        }
+
+
+        if (chegada2) {
+
+            chegada2.value =
+                lista[1].chegada || "";
+
+        }
+
+    }
+
+
+    // =====================================
+    // HORÁRIOS EXTRAS
+    // =====================================
+
+    for (
+        let i = 2;
+        i < lista.length;
+        i++
+    ) {
+
+        adicionarHorarioExtra(
+
+            lista[i].saida || "",
+
+            lista[i].chegada || ""
+
+        );
+
+    }
+
+}
+
+
+// =========================================
+// VALIDAR FORMULÁRIO
+// =========================================
+
+function validarFormulario() {
+
+    limparErros();
+
+
+    // =====================================
+    // EMPRESA
+    // =====================================
+
+    const empresa =
+        document.getElementById(
+            "empresa"
+        );
+
+
+    if (
+        !empresa ||
+        !empresa.value.trim()
+    ) {
+
+        mostrarMensagem(
+            "Preencha o campo Empresa / Agência."
+        );
+
+        marcarErro(
+            empresa
+        );
+
+        empresa?.focus();
+
+        return false;
+
+    }
+
+
+    // =====================================
+    // E-MAIL
+    // =====================================
+
+    const email =
+        document.getElementById(
+            "emailResponsavel"
+        );
+
+
+    const emailTexto =
+        email?.value.trim() || "";
+
+
+    if (!emailTexto) {
+
+        mostrarMensagem(
+            "Preencha o campo E-mail do responsável."
+        );
+
+        marcarErro(
+            email
+        );
+
+        email?.focus();
+
+        return false;
+
+    }
+
+
+    const emailValido =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+
+    if (
+        !emailValido.test(
+            emailTexto
+        )
+    ) {
+
+        mostrarMensagem(
+            "Digite um e-mail válido."
+        );
+
+        marcarErro(
+            email
+        );
+
+        email?.focus();
+
+        return false;
+
+    }
+
+
+    // =====================================
+    // ORIGEM
+    // =====================================
+
+    const origem =
+        document.getElementById(
+            "origem"
+        );
+
+
+    if (
+        !origem ||
+        !origem.value.trim()
+    ) {
+
+        mostrarMensagem(
+            "Preencha o campo Origem."
+        );
+
+        marcarErro(
+            origem
+        );
+
+        origem?.focus();
+
+        return false;
+
+    }
+
+
+    // =====================================
+    // DESTINO
+    // =====================================
+
+    const destino =
+        document.getElementById(
+            "destino"
+        );
+
+
+    if (
+        !destino ||
+        !destino.value.trim()
+    ) {
+
+        mostrarMensagem(
+            "Preencha o campo Destino."
+        );
+
+        marcarErro(
+            destino
+        );
+
+        destino?.focus();
+
+        return false;
+
+    }
+
+
+    // =====================================
+    // TIPO
+    // =====================================
+
+    const tipo =
+        document.getElementById(
+            "tipo"
+        );
+
+
+    if (
+        !tipo ||
+        !tipo.value
+    ) {
+
+        mostrarMensagem(
+            "Selecione o Tipo de transporte."
+        );
+
+        marcarErro(
+            tipo
+        );
+
+        tipo?.focus();
+
+        return false;
+
+    }
+
+
+    // =====================================
+    // DIAS
+    // =====================================
+
+    const dias =
+        obterDiasSelecionados();
+
+
+    if (
+        dias.length === 0
+    ) {
+
+        mostrarMensagem(
+            "Selecione pelo menos um dia de funcionamento."
+        );
+
+        const primeiroDia =
+            document.querySelector(
+                'input[name="dias"]'
+            );
+
+
+        primeiroDia?.focus();
+
+        return false;
+
+    }
+
+
+    // =====================================
+    // HORÁRIOS
+    // =====================================
+
+    const horarios =
+        obterHorarios();
+
+
+    for (
+        let i = 0;
+        i < horarios.length;
+        i++
+    ) {
+
+        const horario =
+            horarios[i];
+
+
+        if (
+            horario.saida &&
+            !horario.chegada
+        ) {
+
+            mostrarMensagem(
+                `Complete o horário ${i + 1}: informe a chegada.`
+            );
+
+            return false;
+
+        }
+
+
+        if (
+            !horario.saida &&
+            horario.chegada
+        ) {
+
+            mostrarMensagem(
+                `Complete o horário ${i + 1}: informe a saída.`
+            );
+
+            return false;
+
+        }
+
+    }
+
+
+    return true;
+
+}
+
+
 // =========================================
 // CARREGAR ROTA PARA EDIÇÃO
 // =========================================
 
-async function carregarRotaParaEditar() {
+async function carregarRota() {
 
     if (!idRota) {
 
         return;
+
+    }
+
+
+    // =====================================
+    // MODO EDIÇÃO
+    // =====================================
+
+    if (tituloFormulario) {
+
+        tituloFormulario.textContent =
+            "Editar rota";
+
+    }
+
+
+    if (btnSalvar) {
+
+        btnSalvar.textContent =
+            "Salvar edição";
 
     }
 
@@ -103,7 +986,9 @@ async function carregarRotaParaEditar() {
             await fetch(
                 API_URL +
                 "/rotas/" +
-                idRota
+                encodeURIComponent(
+                    idRota
+                )
             );
 
 
@@ -115,7 +1000,7 @@ async function carregarRotaParaEditar() {
 
             throw new Error(
                 dados.mensagem ||
-                "Erro ao carregar a rota."
+                "Não foi possível carregar a rota."
             );
 
         }
@@ -125,136 +1010,155 @@ async function carregarRotaParaEditar() {
             dados.rota;
 
 
-        // =================================
-        // PREENCHER CAMPOS
-        // =================================
+        // =====================================
+        // EMPRESA
+        // =====================================
 
-        document.getElementById(
-            "nomeEmpresa"
-        ).value =
-            rota.nome || "";
-
-
-        document.getElementById(
-            "origem"
-        ).value =
-            rota.origem || "";
-
-
-        document.getElementById(
-            "destino"
-        ).value =
-            rota.destino || "";
-
-
-        document.getElementById(
-            "tipoTransporte"
-        ).value =
-            rota.tipo || "";
-
-
-        document.getElementById(
-            "horarioSaida"
-        ).value =
-            rota.horario_saida || "";
-
-
-        document.getElementById(
-            "horarioChegada"
-        ).value =
-            rota.horario_chegada || "";
-
-
-        document.getElementById(
-            "informacoes"
-        ).value =
-            rota.informacoes || "";
-
-
-        // =================================
-        // MARCAR DIAS
-        // =================================
-
-        const diasDaRota =
-            rota.dias
-                ? rota.dias.split(",")
-                : [];
-
-
-        const caixasDias =
-            document.querySelectorAll(
-                'input[name="dias"]'
+        const empresa =
+            document.getElementById(
+                "empresa"
             );
 
 
-        caixasDias.forEach(
-            function (caixa) {
+        if (empresa) {
 
-                caixa.checked =
-                    diasDaRota.includes(
-                        caixa.value
-                    );
+            empresa.value =
+                rota.nome ||
+                rota.empresa ||
+                "";
 
-            }
+        }
+
+
+        // =====================================
+        // E-MAIL
+        // =====================================
+
+        const email =
+            document.getElementById(
+                "emailResponsavel"
+            );
+
+
+        if (email) {
+
+            email.value =
+                rota.email_responsavel ||
+                rota.emailResponsavel ||
+                "";
+
+        }
+
+
+        // =====================================
+        // ORIGEM
+        // =====================================
+
+        const origem =
+            document.getElementById(
+                "origem"
+            );
+
+
+        if (origem) {
+
+            origem.value =
+                rota.origem ||
+                "";
+
+        }
+
+
+        // =====================================
+        // DESTINO
+        // =====================================
+
+        const destino =
+            document.getElementById(
+                "destino"
+            );
+
+
+        if (destino) {
+
+            destino.value =
+                rota.destino ||
+                "";
+
+        }
+
+
+        // =====================================
+        // VIA
+        // =====================================
+
+        const via =
+            document.getElementById(
+                "via"
+            );
+
+
+        if (via) {
+
+            via.value =
+                rota.via ||
+                "";
+
+        }
+
+
+        // =====================================
+        // TIPO
+        // =====================================
+
+        const tipo =
+            document.getElementById(
+                "tipo"
+            );
+
+
+        if (tipo) {
+
+            tipo.value =
+                rota.tipo ||
+                "";
+
+        }
+
+
+        // =====================================
+        // DIAS
+        // =====================================
+
+        preencherDias(
+            rota.dias
         );
 
 
-        // =================================
-        // ALTERAR TÍTULOS DA PÁGINA
-        // =================================
+        // =====================================
+        // HORÁRIOS
+        // =====================================
 
-        const titulo =
-            document.querySelector(
-                ".titulo-cabecalho h1"
+        preencherHorarios(
+            rota.horarios
+        );
+
+
+        // =====================================
+        // INFORMAÇÕES
+        // =====================================
+
+        const informacoes =
+            document.getElementById(
+                "informacoes"
             );
 
 
-        if (titulo) {
+        if (informacoes) {
 
-            titulo.textContent =
-                "Editar rota";
-
-        }
-
-
-        const subtitulo =
-            document.querySelector(
-                ".introducao h2"
-            );
-
-
-        if (subtitulo) {
-
-            subtitulo.textContent =
-                "Editar rota cadastrada";
-
-        }
-
-
-        const descricao =
-            document.querySelector(
-                ".introducao p"
-            );
-
-
-        if (descricao) {
-
-            descricao.textContent =
-                "Altere as informações da rota e salve as mudanças.";
-
-        }
-
-
-        const botaoCadastrar =
-            formCriarRota.querySelector(
-                'button[type="submit"]'
-            );
-
-
-        if (botaoCadastrar) {
-
-            botaoCadastrar.textContent =
-                "Salvar alterações";
+            informacoes.value =
+                rota.informacoes ||
+                "";
 
         }
 
@@ -268,122 +1172,123 @@ async function carregarRotaParaEditar() {
         );
 
 
-        alert(
+        mostrarMensagem(
+            erro.message ||
             "Não foi possível carregar os dados da rota."
         );
-
-
-        window.location.href =
-            "dashboard.html";
 
     }
 
 }
 
+
 // =========================================
-// ENVIAR FORMULÁRIO
+// SALVAR
 // =========================================
 
-if (formCriarRota) {
+if (formRota) {
 
-    formCriarRota.addEventListener(
+    formRota.addEventListener(
         "submit",
         async function (evento) {
 
             evento.preventDefault();
 
 
-            // =================================
-            // PEGAR DADOS
-            // =================================
-
-            const nomeEmpresa =
-                document.getElementById(
-                    "nomeEmpresa"
-                ).value.trim();
-
-
-            const origem =
-                document.getElementById(
-                    "origem"
-                ).value.trim();
-
-
-            const destino =
-                document.getElementById(
-                    "destino"
-                ).value.trim();
-
-
-            const tipoTransporte =
-                document.getElementById(
-                    "tipoTransporte"
-                ).value;
-
-
-            const horarioSaida =
-                document.getElementById(
-                    "horarioSaida"
-                ).value;
-
-
-            const horarioChegada =
-                document.getElementById(
-                    "horarioChegada"
-                ).value;
-
-
-            const informacoes =
-                document.getElementById(
-                    "informacoes"
-                ).value.trim();
+            limparMensagem();
 
 
             // =================================
-            // DIAS
+            // VALIDAR
             // =================================
-
-            const diasSelecionados =
-                document.querySelectorAll(
-                    'input[name="dias"]:checked'
-                );
-
 
             if (
-                diasSelecionados.length === 0
+                !validarFormulario()
             ) {
-
-                alert(
-                    "Selecione pelo menos um dia de funcionamento."
-                );
 
                 return;
 
             }
 
 
-            const dias = [];
+            // =================================
+            // CAMPOS
+            // =================================
+
+            const empresa =
+                document.getElementById(
+                    "empresa"
+                )
+                    .value
+                    .trim();
 
 
-            diasSelecionados.forEach(
-                function (dia) {
+            const emailResponsavel =
+                document.getElementById(
+                    "emailResponsavel"
+                )
+                    .value
+                    .trim();
 
-                    dias.push(
-                        dia.value
-                    );
 
-                }
-            );
+            const origem =
+                document.getElementById(
+                    "origem"
+                )
+                    .value
+                    .trim();
+
+
+            const destino =
+                document.getElementById(
+                    "destino"
+                )
+                    .value
+                    .trim();
+
+
+            const via =
+                document.getElementById(
+                    "via"
+                )
+                    .value
+                    .trim();
+
+
+            const tipo =
+                document.getElementById(
+                    "tipo"
+                )
+                    .value;
+
+
+            const informacoes =
+                document.getElementById(
+                    "informacoes"
+                )
+                    .value
+                    .trim();
+
+
+            const dias =
+                obterDiasSelecionados();
+
+
+            const horarios =
+                obterHorarios();
 
 
             // =================================
             // OBJETO
             // =================================
 
-            const dadosRota = {
+            const dados = {
 
                 empresa:
-                    nomeEmpresa,
+                    empresa,
+
+                emailResponsavel:
+                    emailResponsavel,
 
                 origem:
                     origem,
@@ -391,17 +1296,17 @@ if (formCriarRota) {
                 destino:
                     destino,
 
+                via:
+                    via,
+
                 tipo:
-                    tipoTransporte,
-
-                horarioSaida:
-                    horarioSaida,
-
-                horarioChegada:
-                    horarioChegada,
+                    tipo,
 
                 dias:
                     dias,
+
+                horarios:
+                    horarios,
 
                 informacoes:
                     informacoes
@@ -410,112 +1315,282 @@ if (formCriarRota) {
 
 
             console.log(
-                idRota
-                    ? "Atualizando rota:"
-                    : "Cadastrando rota:",
-                dadosRota
+                "================================="
+            );
+
+            console.log(
+                "DADOS ENVIADOS PARA API:"
+            );
+
+            console.log(
+                dados
+            );
+
+            console.log(
+                "================================="
             );
 
 
             // =================================
-            // ESCOLHER MÉTODO
+            // BOTÃO
             // =================================
 
-            const metodo =
-                idRota
-                    ? "PUT"
-                    : "POST";
+            if (btnSalvar) {
 
+                btnSalvar.disabled =
+                    true;
 
-            const endereco =
-                idRota
-                    ? API_URL +
-                    "/rotas/" +
+                btnSalvar.textContent =
                     idRota
-                    : API_URL +
-                    "/rotas";
+                        ? "Salvando..."
+                        : "Cadastrando...";
 
+            }
 
-            // =================================
-            // ENVIAR PARA O BACKEND
-            // =================================
 
             try {
 
+                // =================================
+                // DEFINIR URL
+                // =================================
+
+                const url =
+                    idRota
+                        ? API_URL +
+                          "/rotas/" +
+                          encodeURIComponent(
+                              idRota
+                          )
+                        : API_URL +
+                          "/rotas";
+
+
+                // =================================
+                // ENVIAR PARA API
+                // =================================
+
                 const resposta =
                     await fetch(
-                        endereco,
+                        url,
                         {
+
                             method:
-                                metodo,
+                                idRota
+                                    ? "PUT"
+                                    : "POST",
 
                             headers: {
+
                                 "Content-Type":
                                     "application/json"
+
                             },
 
                             body:
                                 JSON.stringify(
-                                    dadosRota
+                                    dados
                                 )
 
                         }
                     );
 
 
-                const resultado =
-                    await resposta.json();
-
-
                 // =================================
-                // VERIFICAR RESPOSTA
+                // LER RESPOSTA
                 // =================================
 
-                if (!resposta.ok) {
+                let resultado = {};
 
-                    throw new Error(
-                        resultado.mensagem ||
-                        "Erro ao salvar a rota."
+
+                try {
+
+                    resultado =
+                        await resposta.json();
+
+                }
+
+                catch (erroJson) {
+
+                    console.error(
+                        "Resposta não é JSON:",
+                        erroJson
                     );
 
                 }
 
 
+                // =================================
+                // ERRO DA API
+                // =================================
+
+                if (!resposta.ok) {
+
+                    let mensagemErro =
+                        resultado.mensagem ||
+                        resultado.erro ||
+                        "A API não conseguiu salvar a rota.";
+
+
+                    if (
+                        Array.isArray(
+                            resultado.camposPendentes
+                        )
+                    ) {
+
+                        mensagemErro +=
+                            " Campos: " +
+                            resultado.camposPendentes.join(
+                                ", "
+                            );
+
+                    }
+
+
+                    throw new Error(
+                        mensagemErro
+                    );
+
+                }
+
+
+                // =================================
+                // PEGAR ROTA SALVA
+                // =================================
+
+                const rotaSalva =
+                    resultado.rota || {};
+
+
+                // =================================
+                // PEGAR CÓDIGO DE ACESSO
+                // =================================
+
+                const codigoAcesso =
+                    rotaSalva.codigo_acesso ||
+                    rotaSalva.codigoAcesso ||
+                    "";
+
+
                 console.log(
-                    "Rota salva:",
-                    resultado.rota
+                    "================================="
+                );
+
+                console.log(
+                    "ROTA SALVA:"
+                );
+
+                console.log(
+                    rotaSalva
+                );
+
+                console.log(
+                    "CÓDIGO DE ACESSO:"
+                );
+
+                console.log(
+                    codigoAcesso
+                );
+
+                console.log(
+                    "================================="
                 );
 
 
-                alert(
+                // =================================
+                // SUCESSO
+                // =================================
+
+                mostrarMensagem(
+
                     idRota
                         ? "Rota atualizada com sucesso!"
-                        : "Rota cadastrada com sucesso!"
+                        : "Rota cadastrada com sucesso!",
+
+                    "sucesso"
+
                 );
 
 
                 // =================================
-                // VOLTAR AO DASHBOARD
+                // CADASTRO NOVO
                 // =================================
 
-                window.location.href =
-                    "dashboard.html";
+                if (!idRota) {
+
+                    // =================================
+                    // MOSTRAR CÓDIGO
+                    // =================================
+
+                    if (codigoAcesso) {
+
+                        alert(
+                            "ROTA CADASTRADA COM SUCESSO!\n\n" +
+                            "Empresa: " +
+                            empresa +
+                            "\n\n" +
+                            "Código de acesso:\n" +
+                            codigoAcesso +
+                            "\n\n" +
+                            "Guarde este código para fornecer à empresa."
+                        );
+
+                    }
+
+                    else {
+
+                        alert(
+                            "Rota cadastrada com sucesso!\n\n" +
+                            "Porém, a API não retornou o código de acesso."
+                        );
+
+                    }
+
+                }
+
+
+                // =================================
+                // VOLTAR PARA O DASHBOARD
+                // =================================
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "dashboard.html";
+
+                    },
+                    800
+                );
 
             }
 
             catch (erro) {
 
                 console.error(
-                    "Erro:",
+                    "Erro ao salvar rota:",
                     erro
                 );
 
 
-                alert(
-                    idRota
-                        ? "Não foi possível atualizar a rota."
-                        : "Não foi possível cadastrar a rota."
+                mostrarMensagem(
+
+                    erro.message ||
+                    "Não foi possível salvar a rota."
+
                 );
+
+
+                if (btnSalvar) {
+
+                    btnSalvar.disabled =
+                        false;
+
+                    btnSalvar.textContent =
+                        idRota
+                            ? "Salvar edição"
+                            : "Salvar rota";
+
+                }
 
             }
 
@@ -524,9 +1599,9 @@ if (formCriarRota) {
 
 }
 
+
 // =========================================
-// EXECUTAR
+// INICIAR
 // =========================================
 
-carregarRotaParaEditar();
-
+carregarRota();

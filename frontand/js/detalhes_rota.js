@@ -2,12 +2,14 @@
 // DETALHES DA ROTA - TRANSPORTE FÁCIL
 // =========================================
 
+
 // =========================================
 // ENDEREÇO DA API
 // =========================================
 
 const API_URL =
     "https://transporte-facil-api.onrender.com";
+
 
 // =========================================
 // ELEMENTOS DA TELA
@@ -16,50 +18,66 @@ const API_URL =
 const btnVoltar =
     document.getElementById("btnVoltar");
 
+
 const btnVoltarErro =
     document.getElementById("btnVoltarErro");
+
 
 const btnVoltarPrincipal =
     document.getElementById("btnVoltarPrincipal");
 
+
 const carregando =
     document.getElementById("carregando");
+
 
 const erro =
     document.getElementById("erro");
 
+
 const mensagemErro =
     document.getElementById("mensagemErro");
+
 
 const conteudoRota =
     document.getElementById("conteudoRota");
 
+
 const iconeTransporte =
     document.getElementById("iconeTransporte");
+
 
 const nomeRota =
     document.getElementById("nomeRota");
 
+
 const origem =
     document.getElementById("origem");
+
 
 const destino =
     document.getElementById("destino");
 
-const horarioSaida =
-    document.getElementById("horarioSaida");
 
-const horarioChegada =
-    document.getElementById("horarioChegada");
+const via =
+    document.getElementById("via");
+
+
+const listaHorarios =
+    document.getElementById("listaHorarios");
+
 
 const dias =
     document.getElementById("dias");
 
+
 const tipoTransporte =
     document.getElementById("tipoTransporte");
 
+
 const informacoes =
     document.getElementById("informacoes");
+
 
 // =========================================
 // VOLTAR PARA A TELA PRINCIPAL
@@ -72,6 +90,7 @@ function voltarParaRotas() {
 
 }
 
+
 if (btnVoltar) {
 
     btnVoltar.addEventListener(
@@ -80,6 +99,7 @@ if (btnVoltar) {
     );
 
 }
+
 
 if (btnVoltarErro) {
 
@@ -90,6 +110,7 @@ if (btnVoltarErro) {
 
 }
 
+
 if (btnVoltarPrincipal) {
 
     btnVoltarPrincipal.addEventListener(
@@ -98,6 +119,7 @@ if (btnVoltarPrincipal) {
     );
 
 }
+
 
 // =========================================
 // FORMATAR DIAS
@@ -113,21 +135,41 @@ function formatarDias(
 
     }
 
+
     const nomesDias = {
 
-        segunda: "Segunda",
-        terca: "Terça",
-        terça: "Terça",
-        quarta: "Quarta",
-        quinta: "Quinta",
-        sexta: "Sexta",
-        sabado: "Sábado",
-        sábado: "Sábado",
-        domingo: "Domingo"
+        segunda:
+            "Segunda",
+
+        terca:
+            "Terça",
+
+        terça:
+            "Terça",
+
+        quarta:
+            "Quarta",
+
+        quinta:
+            "Quinta",
+
+        sexta:
+            "Sexta",
+
+        sabado:
+            "Sábado",
+
+        sábado:
+            "Sábado",
+
+        domingo:
+            "Domingo"
 
     };
 
+
     let lista;
+
 
     if (Array.isArray(diasRecebidos)) {
 
@@ -145,7 +187,9 @@ function formatarDias(
 
     }
 
+
     return lista
+
         .map(
             function (dia) {
 
@@ -154,6 +198,7 @@ function formatarDias(
                         .trim()
                         .toLowerCase();
 
+
                 return (
                     nomesDias[valor] ||
                     String(dia).trim()
@@ -161,9 +206,11 @@ function formatarDias(
 
             }
         )
+
         .join(", ");
 
 }
+
 
 // =========================================
 // FORMATAR TIPO DE TRANSPORTE
@@ -177,15 +224,18 @@ function formatarTipo(tipo) {
 
     }
 
+
     if (tipo === "onibus") {
 
         return "🚌 Ônibus";
 
     }
 
+
     return "🚍 Transporte";
 
 }
+
 
 // =========================================
 // MOSTRAR ERRO
@@ -202,6 +252,7 @@ function mostrarErro(
 
     }
 
+
     if (conteudoRota) {
 
         conteudoRota.style.display =
@@ -209,12 +260,14 @@ function mostrarErro(
 
     }
 
+
     if (mensagemErro) {
 
         mensagemErro.textContent =
             mensagem;
 
     }
+
 
     if (erro) {
 
@@ -224,6 +277,213 @@ function mostrarErro(
     }
 
 }
+
+
+// =========================================
+// MOSTRAR HORÁRIOS
+// =========================================
+
+function mostrarHorarios(
+    horarios
+) {
+
+    if (!listaHorarios) {
+
+        return;
+
+    }
+
+
+    // =====================================
+    // LIMPAR LISTA
+    // =====================================
+
+    listaHorarios.innerHTML =
+        "";
+
+
+    // =====================================
+    // VERIFICAR HORÁRIOS
+    // =====================================
+
+    if (
+        !Array.isArray(horarios) ||
+        horarios.length === 0
+    ) {
+
+        const mensagem =
+            document.createElement(
+                "p"
+            );
+
+
+        mensagem.textContent =
+            "Nenhum horário informado.";
+
+
+        mensagem.className =
+            "sem-horarios";
+
+
+        listaHorarios.appendChild(
+            mensagem
+        );
+
+
+        return;
+
+    }
+
+
+    // =====================================
+    // CRIAR CADA HORÁRIO
+    // =====================================
+
+    horarios.forEach(
+        function (
+            horario,
+            indice
+        ) {
+
+            // =================================
+            // ITEM
+            // =================================
+
+            const item =
+                document.createElement(
+                    "div"
+                );
+
+
+            item.className =
+                "item-horario";
+
+
+            // =================================
+            // TÍTULO
+            // =================================
+
+            const titulo =
+                document.createElement(
+                    "strong"
+                );
+
+
+            titulo.textContent =
+                "Horário " +
+                (indice + 1);
+
+
+            // =================================
+            // VALORES
+            // =================================
+
+            const valores =
+                document.createElement(
+                    "div"
+                );
+
+
+            valores.className =
+                "valores-horario";
+
+
+            // =================================
+            // SAÍDA
+            // =================================
+
+            const saida =
+                document.createElement(
+                    "span"
+                );
+
+
+            saida.textContent =
+                "🚌 " +
+                (
+                    horario?.saida ||
+                    "-"
+                );
+
+
+            // =================================
+            // SETA
+            // =================================
+
+            const seta =
+                document.createElement(
+                    "span"
+                );
+
+
+            seta.textContent =
+                "→";
+
+
+            // =================================
+            // CHEGADA
+            // =================================
+
+            const chegada =
+                document.createElement(
+                    "span"
+                );
+
+
+            chegada.textContent =
+                "🏁 " +
+                (
+                    horario?.chegada ||
+                    "-"
+                );
+
+
+            // =================================
+            // MONTAR VALORES
+            // =================================
+
+            valores.appendChild(
+                saida
+            );
+
+
+            valores.appendChild(
+                seta
+            );
+
+
+            valores.appendChild(
+                chegada
+            );
+
+
+            // =================================
+            // MONTAR ITEM
+            // =================================
+
+            item.appendChild(
+                titulo
+            );
+
+
+            item.appendChild(
+                valores
+            );
+
+
+            // =================================
+            // ADICIONAR À LISTA
+            // =================================
+
+            listaHorarios.appendChild(
+                item
+            );
+
+        }
+    );
+
+}
+
 
 // =========================================
 // MOSTRAR ROTA
@@ -240,6 +500,7 @@ function mostrarRota(
 
     }
 
+
     if (erro) {
 
         erro.style.display =
@@ -247,12 +508,14 @@ function mostrarRota(
 
     }
 
+
     if (conteudoRota) {
 
         conteudoRota.style.display =
             "block";
 
     }
+
 
     // =================================
     // NOME
@@ -267,6 +530,7 @@ function mostrarRota(
 
     }
 
+
     // =================================
     // ORIGEM
     // =================================
@@ -278,6 +542,7 @@ function mostrarRota(
             "Não informado";
 
     }
+
 
     // =================================
     // DESTINO
@@ -291,29 +556,28 @@ function mostrarRota(
 
     }
 
+
     // =================================
-    // HORÁRIO DE SAÍDA
+    // VIA
     // =================================
 
-    if (horarioSaida) {
+    if (via) {
 
-        horarioSaida.textContent =
-            rota.horario_saida ||
+        via.textContent =
+            rota.via ||
             "Não informado";
 
     }
 
+
     // =================================
-    // HORÁRIO DE CHEGADA
+    // HORÁRIOS
     // =================================
 
-    if (horarioChegada) {
+    mostrarHorarios(
+        rota.horarios
+    );
 
-        horarioChegada.textContent =
-            rota.horario_chegada ||
-            "Não informado";
-
-    }
 
     // =================================
     // DIAS
@@ -328,6 +592,7 @@ function mostrarRota(
 
     }
 
+
     // =================================
     // TIPO
     // =================================
@@ -337,12 +602,14 @@ function mostrarRota(
             rota.tipo
         );
 
+
     if (tipoTransporte) {
 
         tipoTransporte.textContent =
             tipo;
 
     }
+
 
     // =================================
     // ÍCONE
@@ -356,6 +623,7 @@ function mostrarRota(
                 : "🚌";
 
     }
+
 
     // =================================
     // INFORMAÇÕES ADICIONAIS
@@ -371,6 +639,7 @@ function mostrarRota(
 
 }
 
+
 // =========================================
 // PEGAR ID DA ROTA NA URL
 // =========================================
@@ -382,11 +651,13 @@ function obterIdDaRota() {
             window.location.search
         );
 
+
     return parametros.get(
         "id"
     );
 
 }
+
 
 // =========================================
 // BUSCAR ROTA NA API
@@ -397,10 +668,12 @@ async function carregarRota() {
     const id =
         obterIdDaRota();
 
+
     console.log(
         "ID da rota recebido:",
         id
     );
+
 
     // =================================
     // VERIFICAR ID
@@ -416,16 +689,28 @@ async function carregarRota() {
 
     }
 
+
     try {
+
+        // =================================
+        // BUSCAR ROTA
+        // =================================
 
         const resposta =
             await fetch(
+
                 API_URL +
                 "/rotas/" +
                 encodeURIComponent(
                     id
                 )
+
             );
+
+
+        // =================================
+        // VERIFICAR RESPOSTA
+        // =================================
 
         if (!resposta.ok) {
 
@@ -435,13 +720,20 @@ async function carregarRota() {
 
         }
 
+
+        // =================================
+        // CONVERTER RESPOSTA
+        // =================================
+
         const dados =
             await resposta.json();
+
 
         console.log(
             "Rota recebida da API:",
             dados
         );
+
 
         // =================================
         // ACEITAR DIFERENTES FORMATOS
@@ -451,6 +743,7 @@ async function carregarRota() {
             dados.rota ||
             dados;
 
+
         if (!rota) {
 
             throw new Error(
@@ -459,11 +752,17 @@ async function carregarRota() {
 
         }
 
+
+        // =================================
+        // MOSTRAR ROTA
+        // =================================
+
         mostrarRota(
             rota
         );
 
     }
+
 
     catch (erroApi) {
 
@@ -472,6 +771,7 @@ async function carregarRota() {
             erroApi
         );
 
+
         mostrarErro(
             "Não foi possível carregar as informações desta rota."
         );
@@ -479,6 +779,7 @@ async function carregarRota() {
     }
 
 }
+
 
 // =========================================
 // INICIAR

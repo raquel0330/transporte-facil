@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Acesso do Responsável - Transporte Fácil</title>
+
+    <link
+        rel="stylesheet"
+        href="css/acesso_responsavel.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="pagina">
+
+        <!-- =====================================
+             CABEÇALHO
+        ====================================== -->
+
+        <header class="cabecalho">
+
+            <button
+                id="btnVoltar"
+                class="btn-voltar"
+                type="button"
+            >
+                ←
+            </button>
+
+
+            <div class="titulo-cabecalho">
+
+                <span class="icone">
+                    🔐
+                </span>
+
+                <div>
+
+                    <h1>
+                        Acesso do responsável
+                    </h1>
+
+                    <p>
+                        Transporte Fácil
+                    </p>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================
+             CONTEÚDO
+        ====================================== -->
+
+        <main class="conteudo">
+
+
+            <section class="introducao">
+
+                <span>
+                    Área do responsável
+                </span>
+
+                <h2>
+                    Acesse sua rota
+                </h2>
+
+                <p>
+                    Informe o e-mail cadastrado e
+                    o código de acesso recebido.
+                </p>
+
+            </section>
+
+
+            <!-- =================================
+                 FORMULÁRIO
+            ================================== -->
+
+            <form
+                id="formAcessoResponsavel"
+                class="formulario"
+            >
+
+
+                <!-- E-MAIL -->
+
+                <div class="grupo">
+
+                    <label for="emailResponsavel">
+                        E-mail
+                    </label>
+
+                    <input
+                        type="email"
+                        id="emailResponsavel"
+                        name="emailResponsavel"
+                        placeholder="Ex.: responsavel@empresa.com"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CÓDIGO -->
+
+                <div class="grupo">
+
+                    <label for="codigoAcesso">
+                        Código de acesso
+                    </label>
+
+                    <input
+                        type="text"
+                        id="codigoAcesso"
+                        name="codigoAcesso"
+                        placeholder="Ex.: HLVJSC"
+                        maxlength="6"
+                        autocomplete="off"
+                        required
+                    >
+
+                    <small>
+                        Digite o código de 6 caracteres
+                        recebido por e-mail.
+                    </small>
+
+                </div>
+
+
+                <!-- BOTÃO -->
+
+                <div class="acoes-formulario">
+
+                    <button
+                        class="btn-acessar"
+                        type="submit"
+                    >
+                        Acessar minha rota
+                    </button>
+
+                </div>
+
+
+                <!-- MENSAGEM -->
+
+                <div
+                    id="mensagem"
+                    class="mensagem"
+                ></div>
+
+            </form>
+
+
+            <!-- =================================
+                 RESULTADO
+            ================================== -->
+
+            <section
+                id="resultadoRota"
+                class="resultado-rota"
+                hidden
+            >
+
+                <h2>
+                    Rota encontrada
+                </h2>
+
+                <p>
+                    Você tem acesso a esta rota.
+                </p>
+
+
+                <div class="dados-rota">
+
+                    <p>
+                        <strong>
+                            Empresa:
+                        </strong>
+
+                        <span id="rotaEmpresa"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            Origem:
+                        </strong>
+
+                        <span id="rotaOrigem"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            Destino:
+                        </strong>
+
+                        <span id="rotaDestino"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            Tipo:
+                        </strong>
+
+                        <span id="rotaTipo"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            Horário de saída:
+                        </strong>
+
+                        <span id="rotaSaida"></span>
+                    </p>
+
+
+                    <p>
+                        <strong>
+                            Horário de chegada:
+                        </strong>
+
+                        <span id="rotaChegada"></span>
+                    </p>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
+
+    <script src="js/acesso_responsavel.js"></script>
+
+</body>
+
+</html>
+

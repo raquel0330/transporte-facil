@@ -1,5 +1,5 @@
-```html
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 
 <head>
@@ -24,6 +24,7 @@
 <body>
 
     <div class="pagina">
+
 
         <!-- =====================================
              CABEÇALHO
@@ -54,7 +55,10 @@
 
         <main class="conteudo">
 
-            <!-- CARREGANDO -->
+
+            <!-- =================================
+                 CARREGANDO
+            ================================== -->
 
             <section
                 id="carregando"
@@ -65,9 +69,11 @@
                     🔄
                 </div>
 
+
                 <h2>
                     Carregando rota...
                 </h2>
+
 
                 <p>
                     Buscando as informações da rota.
@@ -76,7 +82,9 @@
             </section>
 
 
-            <!-- ERRO -->
+            <!-- =================================
+                 ERRO
+            ================================== -->
 
             <section
                 id="erro"
@@ -88,9 +96,11 @@
                     ⚠️
                 </div>
 
+
                 <h2>
                     Não foi possível carregar a rota
                 </h2>
+
 
                 <p id="mensagemErro">
                     Verifique sua conexão e tente novamente.
@@ -117,7 +127,13 @@
                 style="display: none;"
             >
 
+
+                <!-- =================================
+                     TÍTULO DA ROTA
+                ================================== -->
+
                 <div class="titulo-rota">
+
 
                     <div
                         id="iconeTransporte"
@@ -133,6 +149,7 @@
                             Informações da rota
                         </span>
 
+
                         <h2 id="nomeRota">
                             -
                         </h2>
@@ -142,7 +159,9 @@
                 </div>
 
 
-                <!-- TRAJETO -->
+                <!-- =================================
+                     TRAJETO
+                ================================== -->
 
                 <div class="card">
 
@@ -153,11 +172,13 @@
 
                     <div class="trajeto">
 
+
                         <div class="local">
 
                             <span>
                                 Origem
                             </span>
+
 
                             <strong id="origem">
                                 -
@@ -177,6 +198,7 @@
                                 Destino
                             </span>
 
+
                             <strong id="destino">
                                 -
                             </strong>
@@ -188,37 +210,28 @@
                 </div>
 
 
-                <!-- HORÁRIOS -->
+                <!-- =================================
+                     VIA
+                ================================== -->
 
                 <div class="card">
 
                     <h3>
-                        🕐 Horários
+                        🛣️ Via
                     </h3>
 
 
                     <div class="grade-informacoes">
 
-                        <div class="informacao">
-
-                            <span>
-                                Saída
-                            </span>
-
-                            <strong id="horarioSaida">
-                                -
-                            </strong>
-
-                        </div>
-
 
                         <div class="informacao">
 
                             <span>
-                                Chegada
+                                Via utilizada
                             </span>
 
-                            <strong id="horarioChegada">
+
+                            <strong id="via">
                                 -
                             </strong>
 
@@ -229,7 +242,29 @@
                 </div>
 
 
-                <!-- DIAS E TRANSPORTE -->
+                <!-- =================================
+                     HORÁRIOS
+                ================================== -->
+
+                <div class="card">
+
+                    <h3>
+                        🕐 Horários
+                    </h3>
+
+
+                    <div
+                        id="listaHorarios"
+                        class="lista-horarios"
+                    >
+                    </div>
+
+                </div>
+
+
+                <!-- =================================
+                     DIAS E TRANSPORTE
+                ================================== -->
 
                 <div class="card">
 
@@ -240,11 +275,13 @@
 
                     <div class="grade-informacoes">
 
+
                         <div class="informacao">
 
                             <span>
                                 Dias
                             </span>
+
 
                             <strong id="dias">
                                 -
@@ -259,6 +296,7 @@
                                 Transporte
                             </span>
 
+
                             <strong id="tipoTransporte">
                                 -
                             </strong>
@@ -270,7 +308,9 @@
                 </div>
 
 
-                <!-- INFORMAÇÕES ADICIONAIS -->
+                <!-- =================================
+                     INFORMAÇÕES ADICIONAIS
+                ================================== -->
 
                 <div class="card">
 
@@ -289,6 +329,10 @@
                 </div>
 
 
+                <!-- =================================
+                     BOTÃO VOLTAR
+                ================================== -->
+
                 <button
                     id="btnVoltarPrincipal"
                     class="btn-principal"
@@ -296,6 +340,7 @@
                 >
                     ← Voltar para as rotas
                 </button>
+
 
             </section>
 
@@ -306,7 +351,11 @@
 
     <script src="js/detalhes_rota.js"></script>
 
+<footer class="rodape">
+    Criado e desenvolvido por <strong>Devs Tech</strong>
+</footer>
+
+
 </body>
 
 </html>
-```

@@ -19,6 +19,7 @@ body {
     min-height: 100%;
 }
 
+
 body {
     font-family:
         Arial,
@@ -282,7 +283,7 @@ body {
 
 
 /* =========================================
-   CAMPO DE BUSCA
+   BUSCA
 ========================================= */
 
 .area-busca {
@@ -483,6 +484,8 @@ body {
 
 .informacoes {
     flex: 1;
+
+    min-width: 0;
 }
 
 
@@ -509,6 +512,8 @@ body {
 .btn-favorito {
     width: 38px;
     height: 38px;
+
+    flex-shrink: 0;
 
     border: none;
 
@@ -546,7 +551,7 @@ body {
 
 
 /* =========================================
-   DETALHES DA ROTA
+   DETALHES
 ========================================= */
 
 .detalhes {
@@ -557,9 +562,12 @@ body {
     border-top:
         1px solid #edf1ee;
 
-    display: flex;
+    display: grid;
 
-    gap: 50px;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px 35px;
 }
 
 
@@ -569,6 +577,8 @@ body {
     flex-direction: column;
 
     gap: 4px;
+
+    min-width: 0;
 }
 
 
@@ -576,6 +586,10 @@ body {
     color: #8a9891;
 
     font-size: 11px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.3px;
 }
 
 
@@ -583,11 +597,21 @@ body {
     color: #315243;
 
     font-size: 14px;
+
+    line-height: 1.4;
+
+    word-break: break-word;
+}
+
+
+.campo-dias {
+    grid-column:
+        1 / -1;
 }
 
 
 /* =========================================
-   BOTÃO VER PARADAS E HORÁRIOS
+   BOTÃO DETALHES
 ========================================= */
 
 .btn-horarios {
@@ -681,6 +705,57 @@ body {
 
 
 /* =========================================
+   CARREGAMENTO
+========================================= */
+
+.carregando-rotas {
+    padding: 45px 20px;
+
+    text-align: center;
+
+    color: #718078;
+}
+
+
+.carregando-rotas span {
+    display: block;
+
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+
+.carregando-rotas p {
+    font-size: 14px;
+}
+
+
+.carregando-rotas button {
+    margin-top: 15px;
+
+    padding: 10px 18px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #e8f7ef;
+
+    color: #0d934d;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.carregando-rotas button:hover {
+    background: #d9f1e3;
+}
+
+
+/* =========================================
    RESPONSIVIDADE
 ========================================= */
 
@@ -726,7 +801,14 @@ body {
 
 
     .detalhes {
-        gap: 30px;
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+
+    .campo-dias {
+        grid-column: auto;
     }
 
 }
@@ -757,77 +839,28 @@ body {
         font-size: 11px;
     }
 
-
-    .detalhes {
-        gap: 20px;
-    }
-
 }
 
 
+
 /* =========================================
-   CARREGAMENTO DAS ROTAS
+   RODAPÉ - DEVS TECH
 ========================================= */
 
-.carregando-rotas {
-    padding: 45px 20px;
-
+.rodape {
+    width: 100%;
     text-align: center;
+    padding: 18px 20px;
+    margin-top: 30px;
 
-    color: #718078;
+    font-size: 13px;
+    color: lab(54.31% -27.29 12.18 / 0.75);
+
+    box-sizing: border-box;
 }
 
-.carregando-rotas span {
-    display: block;
-
-    font-size: 32px;
-
-    margin-bottom: 10px;
+.rodape strong {
+    font-weight: 600;
+    color: lab(54.31% -27.29 12.18 / 0.75)
+;
 }
-
-.carregando-rotas p {
-    font-size: 14px;
-}
-
-
-/* =========================================
-   BOTÃO TENTAR NOVAMENTE
-========================================= */
-
-.carregando-rotas button {
-    margin-top: 15px;
-
-    padding: 10px 18px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    background: #e8f7ef;
-
-    color: #0d934d;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-.carregando-rotas button:hover {
-    background: #d9f1e3;
-}
-
-
-/* =========================================
-   RESPONSIVIDADE DOS DETALHES
-========================================= */
-
-@media (max-width: 600px) {
-
-    .detalhes {
-        gap: 25px;
-
-        flex-wrap: wrap;
-    }
-
-}
-

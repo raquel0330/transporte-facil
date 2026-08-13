@@ -1,22 +1,12 @@
 /* =========================================
-   RESET
+   CRIAR / EDITAR ROTA
+   TRANSPORTE FÁCIL
 ========================================= */
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
-
-
-/* =========================================
-   BODY
-========================================= */
-
-html,
-body {
-    width: 100%;
-    min-height: 100%;
 }
 
 
@@ -27,9 +17,31 @@ body {
         Helvetica,
         sans-serif;
 
-    background: #f4f7f5;
+    background:
+        #f4f8f6;
 
-    color: #173b2c;
+    color:
+        #173f35;
+
+}
+
+
+button,
+input,
+select,
+textarea {
+
+    font-family:
+        inherit;
+
+}
+
+
+button {
+
+    cursor:
+        pointer;
+
 }
 
 
@@ -39,11 +51,9 @@ body {
 
 .pagina {
 
-    width: 100%;
+    min-height:
+        100vh;
 
-    min-height: 100vh;
-
-    background: #f4f7f5;
 }
 
 
@@ -53,112 +63,132 @@ body {
 
 .cabecalho {
 
-    width: 100%;
-
-    min-height: 76px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
-    padding: 14px 22px;
+    height:
+        82px;
 
     background:
-        linear-gradient(
-            135deg,
-            #087c48,
-            #13a45b
-        );
+        #ffffff;
 
-    color: white;
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    padding:
+        0 32px;
+
+    border-bottom:
+        1px solid #e2ebe7;
 
     box-shadow:
-        0 3px 12px
-        rgba(0, 0, 0, 0.15);
+        0 2px 10px rgba(0, 0, 0, 0.04);
+
 }
 
 
-/* =========================================
-   BOTÃO VOLTAR
-========================================= */
-
 .btn-voltar {
 
-    width: 42px;
+    width:
+        42px;
 
-    height: 42px;
+    height:
+        42px;
 
-    border: none;
+    border:
+        none;
 
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
+    border-radius:
+        10px;
 
     background:
-        rgba(255, 255, 255, 0.14);
+        #edf4f1;
 
-    color: white;
+    color:
+        #174d40;
 
-    font-size: 27px;
+    font-size:
+        24px;
 
-    cursor: pointer;
+    margin-right:
+        18px;
 
-    transition:
-        background 0.2s ease,
-        transform 0.2s ease;
 }
 
 
 .btn-voltar:hover {
 
     background:
-        rgba(255, 255, 255, 0.25);
+        #dcebe5;
 
-    transform: scale(1.05);
 }
 
-
-/* =========================================
-   TÍTULO
-========================================= */
 
 .titulo-cabecalho {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 12px;
+    gap:
+        14px;
+
 }
 
 
-.icone {
+.icone-cabecalho {
 
-    font-size: 28px;
+    width:
+        48px;
+
+    height:
+        48px;
+
+    border-radius:
+        12px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        #e7f5ee;
+
+    font-size:
+        25px;
+
 }
 
 
 .titulo-cabecalho h1 {
 
-    font-size: 21px;
+    font-size:
+        21px;
 
-    font-weight: 600;
+    color:
+        #164d3f;
+
 }
 
 
 .titulo-cabecalho p {
 
-    margin-top: 3px;
+    margin-top:
+        4px;
 
-    font-size: 12px;
+    color:
+        #789088;
 
-    opacity: 0.85;
+    font-size:
+        13px;
+
 }
 
 
@@ -168,60 +198,65 @@ body {
 
 .conteudo {
 
-    width: min(100%, 850px);
+    width:
+        min(900px, calc(100% - 32px));
 
-    margin: 0 auto;
+    margin:
+        35px auto 50px;
 
-    padding:
-        30px
-        24px
-        50px;
 }
 
 
-/* =========================================
-   INTRODUÇÃO
-========================================= */
+.titulo-pagina {
 
-.introducao {
+    margin-bottom:
+        25px;
 
-    margin-bottom: 25px;
 }
 
 
-.introducao > span {
+.titulo-pagina > span {
 
-    color: #13a45b;
+    display:
+        inline-block;
 
-    font-size: 12px;
+    color:
+        #0b9b63;
 
-    font-weight: bold;
+    font-size:
+        13px;
 
-    text-transform: uppercase;
+    font-weight:
+        700;
 
-    letter-spacing: 0.5px;
+    margin-bottom:
+        7px;
+
 }
 
 
-.introducao h2 {
+.titulo-pagina h2 {
 
-    margin-top: 6px;
+    font-size:
+        29px;
 
-    color: #173b2c;
+    color:
+        #173f35;
 
-    font-size: 27px;
+    margin-bottom:
+        7px;
+
 }
 
 
-.introducao p {
+.titulo-pagina p {
 
-    margin-top: 7px;
+    color:
+        #72847d;
 
-    color: #718078;
+    font-size:
+        14px;
 
-    font-size: 14px;
-
-    line-height: 1.5;
 }
 
 
@@ -231,115 +266,169 @@ body {
 
 .formulario {
 
-    padding: 25px;
-
-    background: white;
+    background:
+        #ffffff;
 
     border:
-        1px solid #e2ebe5;
+        1px solid #e2ebe7;
 
-    border-radius: 18px;
+    border-radius:
+        18px;
+
+    padding:
+        30px;
 
     box-shadow:
-        0 5px 20px
-        rgba(30, 80, 55, 0.07);
+        0 8px 30px rgba(30, 70, 55, 0.06);
+
 }
 
 
-/* =========================================
-   GRUPOS
-========================================= */
+.grupo-campo {
 
-.grupo {
+    margin-bottom:
+        24px;
 
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 7px;
-
-    margin-bottom: 19px;
 }
 
 
-.grupo label {
+.grupo-campo label {
 
-    color: #315243;
+    display:
+        block;
 
-    font-size: 13px;
+    font-size:
+        14px;
 
-    font-weight: bold;
+    font-weight:
+        700;
+
+    color:
+        #254e44;
+
+    margin-bottom:
+        8px;
+
 }
 
 
-/* =========================================
-   CAMPOS
-========================================= */
+.obrigatorio {
 
-.grupo input,
-.grupo select,
-.grupo textarea {
+    color:
+        #e53935;
 
-    width: 100%;
+    margin-left:
+        3px;
+
+}
+
+
+.opcional {
+
+    color:
+        #84958f;
+
+    font-size:
+        12px;
+
+    font-weight:
+        500;
+
+    margin-left:
+        5px;
+
+}
+
+
+.grupo-campo small {
+
+    display:
+        block;
+
+    margin-top:
+        6px;
+
+    color:
+        #87968f;
+
+    font-size:
+        12px;
+
+}
+
+
+input,
+select,
+textarea {
+
+    width:
+        100%;
 
     border:
-        1px solid #d8e4dc;
+        1px solid #d7e4de;
 
-    border-radius: 10px;
+    border-radius:
+        10px;
 
-    outline: none;
+    background:
+        #fbfdfc;
 
-    background: #fbfdfc;
+    color:
+        #193f36;
 
-    color: #244536;
+    font-size:
+        14px;
 
-    font-family: inherit;
-
-    font-size: 14px;
+    outline:
+        none;
 
     transition:
-        border 0.2s ease,
-        box-shadow 0.2s ease;
+        border-color .2s,
+        box-shadow .2s,
+        background .2s;
+
 }
 
 
-.grupo input,
-.grupo select {
+input,
+select {
 
-    height: 46px;
+    height:
+        48px;
 
-    padding: 0 13px;
+    padding:
+        0 14px;
+
 }
 
 
-.grupo textarea {
+textarea {
 
-    padding: 12px 13px;
+    padding:
+        13px 14px;
 
-    resize: vertical;
+    resize:
+        vertical;
 
-    min-height: 100px;
+    min-height:
+        110px;
+
 }
 
 
-.grupo input:focus,
-.grupo select:focus,
-.grupo textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
 
-    border-color: #13a45b;
+    border-color:
+        #0c9f65;
+
+    background:
+        #ffffff;
 
     box-shadow:
-        0 0 0 3px
-        rgba(19, 164, 91, 0.10);
+        0 0 0 3px rgba(12, 159, 101, 0.10);
 
-    background: white;
-}
-
-
-.grupo input::placeholder,
-.grupo textarea::placeholder {
-
-    color: #9aa6a0;
 }
 
 
@@ -349,12 +438,15 @@ body {
 
 .linha-campos {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-        repeat(2, 1fr);
+        1fr 1fr;
 
-    gap: 16px;
+    gap:
+        16px;
+
 }
 
 
@@ -364,71 +456,329 @@ body {
 
 .dias {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-wrap: wrap;
+    flex-wrap:
+        wrap;
 
-    gap: 8px;
+    gap:
+        8px;
+
+    margin-top:
+        10px;
+
 }
 
 
-.dia {
+.check-dia {
 
-    cursor: pointer;
+    margin:
+        0 !important;
+
+    cursor:
+        pointer;
+
 }
 
 
-.dia input {
+.check-dia input {
 
-    position: absolute;
+    display:
+        none;
 
-    opacity: 0;
-
-    pointer-events: none;
 }
 
 
-.dia span {
+.check-dia span {
 
-    min-width: 55px;
+    display:
+        block;
 
-    height: 38px;
-
-    padding: 0 10px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
+    padding:
+        10px 14px;
 
     border:
-        1px solid #d8e4dc;
+        1px solid #d7e4de;
 
-    border-radius: 9px;
+    border-radius:
+        9px;
 
-    background: #f8fbf9;
+    background:
+        #fbfdfc;
 
-    color: #52665b;
+    color:
+        #36584f;
 
-    font-size: 12px;
-
-    font-weight: bold;
+    font-size:
+        13px;
 
     transition:
-        background 0.2s ease,
-        border 0.2s ease,
-        color 0.2s ease;
+        .2s;
+
 }
 
 
-.dia input:checked + span {
+.check-dia span:hover {
 
-    background: #e2f5ea;
+    border-color:
+        #0c9f65;
 
-    border-color: #13a45b;
+}
 
-    color: #0d934d;
+
+.check-dia input:checked + span {
+
+    background:
+        #0c9f65;
+
+    color:
+        #ffffff;
+
+    border-color:
+        #0c9f65;
+
+}
+
+
+/* =========================================
+   HORÁRIOS
+========================================= */
+
+.titulo-horarios {
+
+    margin-bottom:
+        12px;
+
+}
+
+
+.horario-item {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        45px 1fr 1fr;
+
+    gap:
+        14px;
+
+    align-items:
+        end;
+
+    padding:
+        16px;
+
+    border:
+        1px solid #e1ebe6;
+
+    border-radius:
+        12px;
+
+    background:
+        #fbfdfc;
+
+    margin-bottom:
+        12px;
+
+}
+
+
+.numero-horario {
+
+    width:
+        36px;
+
+    height:
+        36px;
+
+    border-radius:
+        50%;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    background:
+        #e5f5ee;
+
+    color:
+        #087f55;
+
+    font-weight:
+        700;
+
+    margin-bottom:
+        5px;
+
+}
+
+
+.campo-horario label {
+
+    margin-bottom:
+        7px;
+
+}
+
+
+.btn-remover-horario {
+
+    width:
+        36px;
+
+    height:
+        36px;
+
+    border:
+        none;
+
+    border-radius:
+        8px;
+
+    background:
+        #fff0ef;
+
+    color:
+        #d63b34;
+
+    font-size:
+        22px;
+
+}
+
+
+.btn-remover-horario:hover {
+
+    background:
+        #ffdeda;
+
+}
+
+
+.horario-extra {
+
+    grid-template-columns:
+        45px 1fr 1fr 42px;
+
+}
+
+
+.btn-adicionar-horario {
+
+    border:
+        1px dashed #9bbdb0;
+
+    background:
+        #f4faf7;
+
+    color:
+        #087f55;
+
+    border-radius:
+        10px;
+
+    padding:
+        12px 16px;
+
+    font-size:
+        13px;
+
+    font-weight:
+        700;
+
+}
+
+
+.btn-adicionar-horario:hover {
+
+    background:
+        #e8f5ef;
+
+}
+
+
+/* =========================================
+   MENSAGEM
+========================================= */
+
+.mensagem {
+
+    display:
+        none;
+
+    padding:
+        13px 15px;
+
+    border-radius:
+        10px;
+
+    margin:
+        10px 0 20px;
+
+    font-size:
+        14px;
+
+    line-height:
+        1.4;
+
+}
+
+
+.mensagem.mostrar {
+
+    display:
+        block;
+
+}
+
+
+.mensagem.erro {
+
+    background:
+        #fff1f0;
+
+    border:
+        1px solid #ffc8c4;
+
+    color:
+        #b52d25;
+
+}
+
+
+.mensagem.sucesso {
+
+    background:
+        #eaf8f0;
+
+    border:
+        1px solid #b8e5ca;
+
+    color:
+        #087747;
+
+}
+
+
+/* =========================================
+   CAMPO COM ERRO
+========================================= */
+
+.campo-erro {
+
+    border-color:
+        #e33c32 !important;
+
+    box-shadow:
+        0 0 0 3px rgba(227, 60, 50, 0.08) !important;
+
 }
 
 
@@ -438,162 +788,180 @@ body {
 
 .acoes-formulario {
 
-    display: flex;
+    display:
+        flex;
 
-    justify-content: flex-end;
+    justify-content:
+        flex-end;
 
-    gap: 12px;
+    gap:
+        12px;
 
-    padding-top: 5px;
+    margin-top:
+        28px;
+
+    padding-top:
+        22px;
+
+    border-top:
+        1px solid #edf2ef;
+
 }
 
 
 .btn-cancelar,
-.btn-cadastrar {
+.btn-salvar {
 
-    min-height: 45px;
+    min-width:
+        130px;
 
-    padding:
-        0 22px;
+    height:
+        46px;
 
-    border: none;
+    border:
+        none;
 
-    border-radius: 10px;
+    border-radius:
+        10px;
 
-    font-size: 13px;
+    font-weight:
+        700;
 
-    font-weight: bold;
+    font-size:
+        14px;
 
-    cursor: pointer;
-
-    transition:
-        transform 0.2s ease,
-        background 0.2s ease;
 }
 
 
 .btn-cancelar {
 
-    background: #eef3ef;
+    background:
+        #edf2f0;
 
-    color: #52665b;
+    color:
+        #536860;
+
 }
 
 
 .btn-cancelar:hover {
 
-    background: #e2e9e4;
+    background:
+        #e1e9e6;
 
-    transform:
-        translateY(-1px);
 }
 
 
-.btn-cadastrar {
+.btn-salvar {
 
     background:
-        linear-gradient(
-            135deg,
-            #087c48,
-            #13a45b
-        );
+        #07965e;
 
-    color: white;
+    color:
+        #ffffff;
 
     box-shadow:
-        0 4px 10px
-        rgba(19, 164, 91, 0.20);
+        0 5px 14px rgba(7, 150, 94, 0.18);
+
 }
 
 
-.btn-cadastrar:hover {
+.btn-salvar:hover {
 
-    transform:
-        translateY(-1px);
+    background:
+        #067f50;
 
-    box-shadow:
-        0 6px 15px
-        rgba(19, 164, 91, 0.25);
+}
+
+
+.btn-salvar:disabled {
+
+    opacity:
+        .65;
+
+    cursor:
+        wait;
+
 }
 
 
 /* =========================================
-   RESPONSIVIDADE
+   RESPONSIVO
 ========================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
 
     .cabecalho {
 
-        min-height: 68px;
-
         padding:
-            12px
-            15px;
-
-    }
-
-
-    .btn-voltar {
-
-        width: 38px;
-
-        height: 38px;
-
-    }
-
-
-    .titulo-cabecalho h1 {
-
-        font-size: 18px;
+            0 18px;
 
     }
 
 
     .conteudo {
 
-        padding:
-            22px
-            15px
-            40px;
+        width:
+            calc(100% - 20px);
 
-    }
-
-
-    .introducao h2 {
-
-        font-size: 23px;
+        margin-top:
+            20px;
 
     }
 
 
     .formulario {
 
-        padding: 20px 16px;
+        padding:
+            20px;
 
     }
 
 
     .linha-campos {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+            1fr;
 
-        gap: 0;
+        gap:
+            0;
+
+    }
+
+
+    .horario-item,
+    .horario-extra {
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            10px;
+
+    }
+
+
+    .numero-horario {
+
+        margin-bottom:
+            0;
 
     }
 
 
     .acoes-formulario {
 
-        flex-direction: column-reverse;
+        flex-direction:
+            column-reverse;
 
     }
 
 
     .btn-cancelar,
-    .btn-cadastrar {
+    .btn-salvar {
 
-        width: 100%;
+        width:
+            100%;
 
     }
 

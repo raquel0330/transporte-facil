@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Minha Rota - Transporte Fácil</title>
+
+    <link
+        rel="stylesheet"
+        href="css/area_responsavel.css"
+    >
+
+</head>
+
+
+<body>
+
+    <div class="pagina">
+
+
+        <!-- =====================================
+             CABEÇALHO
+        ====================================== -->
+
+        <header class="cabecalho">
+
+            <button
+                id="btnVoltar"
+                class="btn-voltar"
+                type="button"
+            >
+                ←
+            </button>
+
+
+            <div class="titulo-cabecalho">
+
+                <span class="icone">
+                    🚌
+                </span>
+
+                <div>
+
+                    <h1>
+                        Minha rota
+                    </h1>
+
+                    <p>
+                        Transporte Fácil
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                id="btnSair"
+                class="btn-sair"
+                type="button"
+            >
+                Sair
+            </button>
+
+        </header>
+
+
+
+        <!-- =====================================
+             CONTEÚDO
+        ====================================== -->
+
+        <main class="conteudo">
+
+
+            <section class="introducao">
+
+                <span>
+                    Área do responsável
+                </span>
+
+                <h2>
+                    Gerencie sua rota
+                </h2>
+
+                <p>
+                    Consulte e atualize as informações
+                    cadastradas no Transporte Fácil.
+                </p>
+
+            </section>
+
+
+
+            <!-- =================================
+                 VISUALIZAÇÃO DA ROTA
+            ================================== -->
+
+            <section
+                id="visualizacaoRota"
+                class="card-rota"
+            >
+
+
+                <div class="cabecalho-rota">
+
+                    <div>
+
+                        <span class="etiqueta">
+                            Rota cadastrada
+                        </span>
+
+                        <h2 id="rotaEmpresa">
+                            -
+                        </h2>
+
+                    </div>
+
+
+                    <div class="status-rota">
+
+                        <span class="bolinha"></span>
+
+                        Ativa
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="informacoes-rota">
+
+
+                    <!-- ORIGEM -->
+
+                    <div class="informacao">
+
+                        <span class="icone-info">
+                            📍
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Origem
+                            </small>
+
+                            <strong id="rotaOrigem">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- DESTINO -->
+
+                    <div class="informacao">
+
+                        <span class="icone-info">
+                            🏁
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Destino
+                            </small>
+
+                            <strong id="rotaDestino">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- VIA -->
+
+                    <div class="informacao">
+
+                        <span class="icone-info">
+                            🛣️
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Via
+                            </small>
+
+                            <strong id="rotaVia">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TIPO -->
+
+                    <div class="informacao">
+
+                        <span class="icone-info">
+                            🚍
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Tipo de transporte
+                            </small>
+
+                            <strong id="rotaTipo">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- HORÁRIO DE SAÍDA -->
+
+                    <div class="informacao">
+
+                        <span class="icone-info">
+                            🕐
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Horário de saída
+                            </small>
+
+                            <strong id="rotaSaida">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- HORÁRIO DE CHEGADA -->
+
+                    <div class="informacao">
+
+                        <span class="icone-info">
+                            🕐
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Horário de chegada
+                            </small>
+
+                            <strong id="rotaChegada">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- DIAS -->
+
+                    <div class="informacao">
+
+                        <span class="icone-info">
+                            📅
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Dias de funcionamento
+                            </small>
+
+                            <strong id="rotaDias">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================
+                     OUTROS HORÁRIOS
+                ================================== -->
+
+                <div
+                    id="blocoHorariosExtras"
+                    class="bloco-informacoes"
+                    hidden
+                >
+
+                    <h3>
+                        Horários
+                    </h3>
+
+                    <div id="listaHorariosExibicao">
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================
+                     INFORMAÇÕES ADICIONAIS
+                ================================== -->
+
+                <div
+                    id="blocoInformacoes"
+                    class="bloco-informacoes"
+                    hidden
+                >
+
+                    <h3>
+                        Informações adicionais
+                    </h3>
+
+                    <p id="rotaInformacoes">
+                        -
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================
+                     CÓDIGO DE ACESSO
+                ================================== -->
+
+                <div class="codigo-rota">
+
+                    <div>
+
+                        <small>
+                            Código de acesso
+                        </small>
+
+                        <strong id="codigoRota">
+                            -
+                        </strong>
+
+                    </div>
+
+
+                    <p>
+                        Guarde este código para acessar
+                        sua rota novamente.
+                    </p>
+
+                </div>
+
+
+
+                <!-- =================================
+                     AÇÕES
+                ================================== -->
+
+                <div class="acoes-rota">
+
+                    <button
+                        id="btnEditar"
+                        class="btn-editar"
+                        type="button"
+                    >
+                        ✏️ Editar rota
+                    </button>
+
+
+                    <button
+                        id="btnExcluir"
+                        class="btn-excluir"
+                        type="button"
+                    >
+                        🗑️ Excluir rota
+                    </button>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- =================================
+                 FORMULÁRIO DE EDIÇÃO
+            ================================== -->
+
+            <section
+                id="formularioEdicao"
+                class="card-rota"
+                hidden
+            >
+
+
+                <div class="cabecalho-rota">
+
+                    <div>
+
+                        <span class="etiqueta">
+                            Editando rota
+                        </span>
+
+                        <h2>
+                            Atualizar informações
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+
+                <form id="formEditarRota">
+
+
+                    <!-- EMPRESA -->
+
+                    <div class="grupo-edicao">
+
+                        <label for="editarEmpresa">
+                            Empresa / Agência
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editarEmpresa"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- E-MAIL -->
+
+                    <div class="grupo-edicao">
+
+                        <label for="editarEmail">
+                            E-mail do responsável
+                        </label>
+
+                        <input
+                            type="email"
+                            id="editarEmail"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- ORIGEM -->
+
+                    <div class="grupo-edicao">
+
+                        <label for="editarOrigem">
+                            Origem
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editarOrigem"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- DESTINO -->
+
+                    <div class="grupo-edicao">
+
+                        <label for="editarDestino">
+                            Destino
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editarDestino"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- VIA -->
+
+                    <div class="grupo-edicao">
+
+                        <label for="editarVia">
+                            Via
+                        </label>
+
+                        <input
+                            type="text"
+                            id="editarVia"
+                        >
+
+                    </div>
+
+
+
+                    <!-- TIPO -->
+
+                    <div class="grupo-edicao">
+
+                        <label for="editarTipo">
+                            Tipo de transporte
+                        </label>
+
+                        <select
+                            id="editarTipo"
+                            required
+                        >
+
+                            <option value="">
+                                Selecione
+                            </option>
+
+                            <option value="onibus">
+                                🚌 Ônibus
+                            </option>
+
+                            <option value="van">
+                                🚐 Van
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+
+                    <!-- =================================
+                         HORÁRIOS
+                    ================================== -->
+
+                    <div class="grupo-edicao">
+
+                        <label>
+                            Horários
+                        </label>
+
+
+                        <div id="listaHorariosEdicao">
+                        </div>
+
+
+                        <button
+                            id="btnAdicionarHorario"
+                            type="button"
+                            class="btn-adicionar-horario"
+                        >
+                            ➕ Adicionar horário
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- =================================
+                         DIAS
+                    ================================== -->
+
+                    <div class="grupo-edicao">
+
+                        <label>
+                            Dias de funcionamento
+                        </label>
+
+
+                        <div class="dias-edicao">
+
+
+                            <label class="dia-edicao">
+
+                                <input
+                                    type="checkbox"
+                                    name="dias"
+                                    value="segunda"
+                                >
+
+                                <span>
+                                    Segunda
+                                </span>
+
+                            </label>
+
+
+                            <label class="dia-edicao">
+
+                                <input
+                                    type="checkbox"
+                                    name="dias"
+                                    value="terca"
+                                >
+
+                                <span>
+                                    Terça
+                                </span>
+
+                            </label>
+
+
+                            <label class="dia-edicao">
+
+                                <input
+                                    type="checkbox"
+                                    name="dias"
+                                    value="quarta"
+                                >
+
+                                <span>
+                                    Quarta
+                                </span>
+
+                            </label>
+
+
+                            <label class="dia-edicao">
+
+                                <input
+                                    type="checkbox"
+                                    name="dias"
+                                    value="quinta"
+                                >
+
+                                <span>
+                                    Quinta
+                                </span>
+
+                            </label>
+
+
+                            <label class="dia-edicao">
+
+                                <input
+                                    type="checkbox"
+                                    name="dias"
+                                    value="sexta"
+                                >
+
+                                <span>
+                                    Sexta
+                                </span>
+
+                            </label>
+
+
+                            <label class="dia-edicao">
+
+                                <input
+                                    type="checkbox"
+                                    name="dias"
+                                    value="sabado"
+                                >
+
+                                <span>
+                                    Sábado
+                                </span>
+
+                            </label>
+
+
+                            <label class="dia-edicao">
+
+                                <input
+                                    type="checkbox"
+                                    name="dias"
+                                    value="domingo"
+                                >
+
+                                <span>
+                                    Domingo
+                                </span>
+
+                            </label>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =================================
+                         INFORMAÇÕES
+                    ================================== -->
+
+                    <div class="grupo-edicao">
+
+                        <label for="editarInformacoes">
+                            Informações adicionais
+                        </label>
+
+                        <textarea
+                            id="editarInformacoes"
+                            rows="4"
+                        ></textarea>
+
+                    </div>
+
+
+
+                    <!-- =================================
+                         AÇÕES
+                    ================================== -->
+
+                    <div class="acoes-rota">
+
+                        <button
+                            id="btnCancelarEdicao"
+                            class="btn-cancelar-edicao"
+                            type="button"
+                        >
+                            Cancelar
+                        </button>
+
+
+                        <button
+                            id="btnSalvarEdicao"
+                            class="btn-editar"
+                            type="submit"
+                        >
+                            💾 Salvar alterações
+                        </button>
+
+                    </div>
+
+
+                </form>
+
+            </section>
+
+
+
+            <!-- =================================
+                 MENSAGEM
+            ================================== -->
+
+            <div
+                id="mensagem"
+                class="mensagem"
+            ></div>
+
+
+        </main>
+
+    </div>
+
+
+
+    <script src="js/area_responsavel.js"></script>
+
+</body>
+
+</html>

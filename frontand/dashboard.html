@@ -1,19 +1,28 @@
-<meta charset="UTF-8">
+<!DOCTYPE html>
+<html lang="pt-BR">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<head>
 
-<title>Dashboard - Transporte Fácil</title>
+    <meta charset="UTF-8">
 
-<link
-    rel="stylesheet"
-    href="css/dashboard.css"
->
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Dashboard Administrativo - Transporte Fácil
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/dashboard.css"
+    >
+
+</head>
 
 
-<div class="dashboard">
+<body>
 
 
     <!-- =====================================
@@ -48,11 +57,14 @@
             class="btn-sair"
             type="button"
         >
+
             ↪
             Sair
+
         </button>
 
     </header>
+
 
 
     <!-- =====================================
@@ -89,11 +101,15 @@
         </section>
 
 
+
         <!-- =================================
              RESUMO
         ================================== -->
 
         <section class="resumo">
+
+
+            <!-- ROTAS -->
 
             <div class="card-resumo">
 
@@ -116,6 +132,9 @@
             </div>
 
 
+
+            <!-- VEÍCULOS -->
+
             <div class="card-resumo">
 
                 <div class="icone-resumo">
@@ -137,6 +156,9 @@
             </div>
 
 
+
+            <!-- HORÁRIOS -->
+
             <div class="card-resumo">
 
                 <div class="icone-resumo">
@@ -149,14 +171,17 @@
                         Horários
                     </span>
 
-                    <strong>
-                        12
+                    <strong id="totalHorarios">
+                        0
                     </strong>
 
                 </div>
 
             </div>
 
+
+
+            <!-- AGÊNCIAS -->
 
             <div class="card-resumo">
 
@@ -181,11 +206,13 @@
         </section>
 
 
+
         <!-- =================================
              AÇÕES RÁPIDAS
         ================================== -->
 
         <section class="secao">
+
 
             <div class="titulo-secao">
 
@@ -205,8 +232,11 @@
             </div>
 
 
+
             <div class="acoes">
 
+
+                <!-- ROTAS -->
 
                 <button
                     class="card-acao"
@@ -237,6 +267,9 @@
                 </button>
 
 
+
+                <!-- HORÁRIOS -->
+
                 <button
                     class="card-acao"
                     data-acao="horarios"
@@ -266,6 +299,9 @@
                 </button>
 
 
+
+                <!-- VEÍCULOS -->
+
                 <button
                     class="card-acao"
                     data-acao="veiculos"
@@ -294,6 +330,9 @@
 
                 </button>
 
+
+
+                <!-- AGÊNCIAS -->
 
                 <button
                     class="card-acao"
@@ -329,11 +368,15 @@
         </section>
 
 
+
         <!-- =================================
              ROTAS CADASTRADAS
         ================================== -->
 
         <section class="secao">
+
+
+            <!-- TÍTULO DA LISTA -->
 
             <div class="titulo-lista">
 
@@ -356,14 +399,17 @@
                     class="btn-adicionar"
                     type="button"
                 >
+
                     + Adicionar rota
+
                 </button>
 
             </div>
 
 
+
             <!-- =================================
-                 LISTA DINÂMICA DE ROTAS
+                 LISTA DINÂMICA
             ================================== -->
 
             <div
@@ -383,11 +429,15 @@
 
     </main>
 
-</div>
 
 
-<!-- =====================================
-     JAVASCRIPT
-====================================== -->
+    <!-- =====================================
+         JAVASCRIPT
+    ====================================== -->
 
-<script src="js/dashboard.js"></script>
+    <script src="js/dashboard.js"></script>
+
+
+</body>
+
+</html>

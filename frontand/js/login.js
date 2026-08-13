@@ -10,23 +10,40 @@
 const formLogin =
     document.getElementById("formLogin");
 
+
 const btnUsuario =
     document.getElementById("btnUsuario");
+
 
 const btnAdministrador =
     document.getElementById("btnAdministrador");
 
+
+const btnAcessoResponsavel =
+    document.getElementById(
+        "btnAcessoResponsavel"
+    );
+
+
 const email =
     document.getElementById("email");
+
 
 const senha =
     document.getElementById("senha");
 
+
 const btnMostrarSenha =
-    document.getElementById("btnMostrarSenha");
+    document.getElementById(
+        "btnMostrarSenha"
+    );
+
 
 const mensagemErro =
-    document.getElementById("mensagemErro");
+    document.getElementById(
+        "mensagemErro"
+    );
+
 
 const btnVoltar =
     document.getElementById("btnVoltar");
@@ -36,163 +53,289 @@ const btnVoltar =
 // TIPO DE USUÁRIO
 // =========================================
 
-let tipoUsuario = "usuario";
+let tipoUsuario =
+    "usuario";
+
+
+// =========================================
+// LIMPAR MENSAGEM
+// =========================================
+
+function limparMensagem() {
+
+    if (!mensagemErro) {
+
+        return;
+
+    }
+
+
+    mensagemErro.textContent =
+        "";
+
+}
 
 
 // =========================================
 // SELECIONAR USUÁRIO
 // =========================================
 
-btnUsuario.addEventListener(
-    "click",
-    function () {
+if (btnUsuario) {
 
-        tipoUsuario = "usuario";
+    btnUsuario.addEventListener(
+        "click",
+        function () {
 
-        btnUsuario.classList.add("ativo");
+            tipoUsuario =
+                "usuario";
 
-        btnAdministrador.classList.remove("ativo");
 
-        mensagemErro.textContent = "";
+            btnUsuario.classList.add(
+                "ativo"
+            );
 
-    }
-);
+
+            if (btnAdministrador) {
+
+                btnAdministrador.classList.remove(
+                    "ativo"
+                );
+
+            }
+
+
+            limparMensagem();
+
+        }
+    );
+
+}
 
 
 // =========================================
 // SELECIONAR ADMINISTRADOR
 // =========================================
 
-btnAdministrador.addEventListener(
-    "click",
-    function () {
+if (btnAdministrador) {
 
-        tipoUsuario = "administrador";
+    btnAdministrador.addEventListener(
+        "click",
+        function () {
 
-        btnAdministrador.classList.add("ativo");
+            tipoUsuario =
+                "administrador";
 
-        btnUsuario.classList.remove("ativo");
 
-        mensagemErro.textContent = "";
+            btnAdministrador.classList.add(
+                "ativo"
+            );
 
-    }
-);
+
+            if (btnUsuario) {
+
+                btnUsuario.classList.remove(
+                    "ativo"
+                );
+
+            }
+
+
+            limparMensagem();
+
+        }
+    );
+
+}
+
+
+// =========================================
+// ACESSO DO RESPONSÁVEL
+// =========================================
+
+if (btnAcessoResponsavel) {
+
+    btnAcessoResponsavel.addEventListener(
+        "click",
+        function () {
+
+            window.location.href =
+                "acesso_responsavel.html";
+
+        }
+    );
+
+}
 
 
 // =========================================
 // MOSTRAR / ESCONDER SENHA
 // =========================================
 
-btnMostrarSenha.addEventListener(
-    "click",
-    function () {
+if (btnMostrarSenha) {
 
-        if (senha.type === "password") {
+    btnMostrarSenha.addEventListener(
+        "click",
+        function () {
 
-            senha.type = "text";
+            if (
+                senha.type ===
+                "password"
+            ) {
 
-            btnMostrarSenha.textContent = "🙈";
+                senha.type =
+                    "text";
+
+
+                btnMostrarSenha.textContent =
+                    "🙈";
+
+            }
+
+            else {
+
+                senha.type =
+                    "password";
+
+
+                btnMostrarSenha.textContent =
+                    "👁";
+
+            }
 
         }
+    );
 
-        else {
-
-            senha.type = "password";
-
-            btnMostrarSenha.textContent = "👁";
-
-        }
-
-    }
-);
+}
 
 
 // =========================================
 // LOGIN
 // =========================================
 
-formLogin.addEventListener(
-    "submit",
-    function (evento) {
+if (formLogin) {
 
-        evento.preventDefault();
+    formLogin.addEventListener(
+        "submit",
+        function (evento) {
 
-
-        const emailDigitado =
-            email.value.trim();
-
-        const senhaDigitada =
-            senha.value.trim();
+            evento.preventDefault();
 
 
-        mensagemErro.textContent = "";
+            // =================================
+            // PEGAR DADOS
+            // =================================
+
+            const emailDigitado =
+                email.value
+                    .trim()
+                    .toLowerCase();
 
 
-        // =================================
-        // USUÁRIO DE TESTE
-        // =================================
+            const senhaDigitada =
+                senha.value
+                    .trim();
 
-        if (tipoUsuario === "usuario") {
+
+            limparMensagem();
+
+
+            // =================================
+            // LOGIN DO USUÁRIO
+            // =================================
 
             if (
-                emailDigitado === "usuario@teste.com" &&
-                senhaDigitada === "123456"
+                tipoUsuario ===
+                "usuario"
             ) {
 
-                window.location.href =
-                    "tela_principal.html";
+                if (
+                    emailDigitado ===
+                        "usuario@teste.com"
+                    &&
+                    senhaDigitada ===
+                        "123456"
+                ) {
+
+                    window.location.href =
+                        "tela_principal.html";
+
+                }
+
+                else {
+
+                    if (mensagemErro) {
+
+                        mensagemErro.textContent =
+                            "E-mail ou senha incorretos.";
+
+                    }
+
+                }
+
+
+                return;
 
             }
 
-            else {
 
-                mensagemErro.textContent =
-                    "E-mail ou senha incorretos.";
+            // =================================
+            // LOGIN DO ADMINISTRADOR
+            // =================================
+
+            if (
+                tipoUsuario ===
+                "administrador"
+            ) {
+
+                if (
+                    emailDigitado ===
+                        "admin@teste.com"
+                    &&
+                    senhaDigitada ===
+                        "admin123"
+                ) {
+
+                    window.location.href =
+                        "dashboard.html";
+
+                }
+
+                else {
+
+                    if (mensagemErro) {
+
+                        mensagemErro.textContent =
+                            "E-mail ou senha de administrador incorretos.";
+
+                    }
+
+                }
+
+
+                return;
 
             }
 
         }
+    );
 
-
-        // =================================
-        // ADMINISTRADOR DE TESTE
-        // =================================
-
-        else if (tipoUsuario === "administrador") {
-
-            if (
-                emailDigitado === "admin@teste.com" &&
-                senhaDigitada === "admin123"
-            ) {
-
-                window.location.href =
-                    "dashboard.html";
-
-            }
-
-            else {
-
-                mensagemErro.textContent =
-                    "E-mail ou senha de administrador incorretos.";
-
-            }
-
-        }
-
-    }
-);
+}
 
 
 // =========================================
 // BOTÃO VOLTAR
 // =========================================
 
-btnVoltar.addEventListener(
-    "click",
-    function () {
+if (btnVoltar) {
 
-        window.location.href =
-            "tela_principal.html";
+    btnVoltar.addEventListener(
+        "click",
+        function () {
 
-    }
-);
+            window.location.href =
+                "tela_principal.html";
+
+        }
+    );
+
+}
