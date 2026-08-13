@@ -3,32 +3,49 @@
 // TRANSPORTE FÁCIL
 // =========================================
 
+
+// =========================================
 // URL DA API
-const API_URL = "https://transporte-facil-api.onrender.com";
+// =========================================
+
+const API_URL =
+    "https://transporte-facil-api.onrender.com";
 
 
 // =========================================
 // ELEMENTOS
 // =========================================
 
-const listaRotas = document.getElementById("listaRotas");
-const totalRotas = document.getElementById("totalRotas");
-const totalHorarios = document.getElementById("totalHorarios");
-const btnAdicionarRota = document.getElementById("btnAdicionarRota");
-const btnSair = document.getElementById("btnSair");
+const listaRotas =
+    document.getElementById("listaRotas");
+
+const totalRotas =
+    document.getElementById("totalRotas");
+
+const totalHorarios =
+    document.getElementById("totalHorarios");
+
+const btnAdicionarRota =
+    document.getElementById("btnAdicionarRota");
+
+const btnSair =
+    document.getElementById("btnSair");
 
 
 // =========================================
 // INICIALIZAÇÃO
 // =========================================
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
 
-    carregarRotas();
+        configurarBotoes();
 
-    configurarBotoes();
+        carregarRotas();
 
-});
+    }
+);
 
 
 // =========================================
@@ -37,9 +54,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function configurarBotoes() {
 
-    // -----------------------------------------
+    // =====================================
     // SAIR
-    // -----------------------------------------
+    // =====================================
 
     if (btnSair) {
 
@@ -65,9 +82,9 @@ function configurarBotoes() {
     }
 
 
-    // -----------------------------------------
+    // =====================================
     // ADICIONAR ROTA
-    // -----------------------------------------
+    // =====================================
 
     if (btnAdicionarRota) {
 
@@ -83,9 +100,9 @@ function configurarBotoes() {
     }
 
 
-    // -----------------------------------------
+    // =====================================
     // CARDS DE GERENCIAMENTO
-    // -----------------------------------------
+    // =====================================
 
     const botoesAcao =
         document.querySelectorAll(
@@ -104,6 +121,10 @@ function configurarBotoes() {
                         botao.dataset.acao;
 
 
+                    // ---------------------------------
+                    // ROTAS
+                    // ---------------------------------
+
                     if (acao === "rotas") {
 
                         document
@@ -111,13 +132,18 @@ function configurarBotoes() {
                                 ".lista-rotas"
                             )
                             ?.scrollIntoView({
-                                behavior: "smooth"
+                                behavior: "smooth",
+                                block: "start"
                             });
 
                         return;
 
                     }
 
+
+                    // ---------------------------------
+                    // HORÁRIOS
+                    // ---------------------------------
 
                     if (acao === "horarios") {
 
@@ -128,10 +154,14 @@ function configurarBotoes() {
                     }
 
 
+                    // ---------------------------------
+                    // VEÍCULOS
+                    // ---------------------------------
+
                     if (acao === "veiculos") {
 
                         alert(
-                            "A área de gerenciamento de veículos será disponibilizada em breve."
+                            "O gerenciamento de veículos ainda não está conectado à API."
                         );
 
                         return;
@@ -139,10 +169,14 @@ function configurarBotoes() {
                     }
 
 
+                    // ---------------------------------
+                    // AGÊNCIAS
+                    // ---------------------------------
+
                     if (acao === "agencias") {
 
                         alert(
-                            "A área de gerenciamento de agências será disponibilizada em breve."
+                            "O gerenciamento de agências ainda não está conectado à API."
                         );
 
                         return;
@@ -170,9 +204,9 @@ async function carregarRotas() {
 
 
     listaRotas.innerHTML = `
-        <p>
-            Carregando rotas...
-        </p>
+        <div class="estado-carregamento">
+            <p>🚌 Carregando rotas...</p>
+        </div>
     `;
 
 
@@ -207,7 +241,6 @@ async function carregarRotas() {
 
         renderizarRotas(rotas);
 
-
     }
 
     catch (erro) {
@@ -218,7 +251,18 @@ async function carregarRotas() {
         );
 
 
+        if (totalRotas) {
+            totalRotas.textContent = "—";
+        }
+
+
+        if (totalHorarios) {
+            totalHorarios.textContent = "—";
+        }
+
+
         listaRotas.innerHTML = `
+
             <div class="erro-dashboard">
 
                 <strong>
@@ -226,18 +270,36 @@ async function carregarRotas() {
                 </strong>
 
                 <p>
-                    Verifique sua conexão com a API.
+                    Verifique sua conexão com a API
+                    ou tente novamente.
                 </p>
 
                 <button
                     type="button"
-                    onclick="carregarRotas()"
+                    id="btnTentarNovamente"
                 >
                     Tentar novamente
                 </button>
 
             </div>
+
         `;
+
+
+        const btnTentarNovamente =
+            document.getElementById(
+                "btnTentarNovamente"
+            );
+
+
+        if (btnTentarNovamente) {
+
+            btnTentarNovamente.addEventListener(
+                "click",
+                carregarRotas
+            );
+
+        }
 
     }
 
@@ -301,7 +363,7 @@ function renderizarRotas(rotas) {
 
             <div class="rota-vazia">
 
-                <div>
+                <div class="icone-rota-vazia">
                     🚌
                 </div>
 
@@ -347,7 +409,7 @@ function renderizarRotas(rotas) {
 function criarCardRota(rota) {
 
     const card =
-        document.createElement("div");
+        document.createElement("article");
 
 
     card.className =
@@ -362,88 +424,156 @@ function criarCardRota(rota) {
         obterDias(rota);
 
 
-    const horariosHTML =
-        horarios.length > 0
+    // =====================================
+    // HORÁRIOS
+    // =====================================
 
-            ? horarios
+    let horariosHTML = "";
+
+
+    if (horarios.length > 0) {
+
+        horariosHTML =
+            horarios
                 .map(
                     function (horario) {
 
                         return `
-                            <span class="horario-item">
-                                🕐
-                                <strong>
+
+                            <div class="horario-item">
+
+                                <span class="icone-horario">
+                                    🕐
+                                </span>
+
+                                <span>
                                     ${escaparHTML(
                                         horario.saida
                                     )}
-                                </strong>
+                                </span>
 
-                                →
+                                <span>
+                                    →
+                                </span>
 
-                                <strong>
+                                <span>
                                     ${escaparHTML(
                                         horario.chegada
                                     )}
-                                </strong>
-                            </span>
+                                </span>
+
+                            </div>
+
                         `;
 
                     }
                 )
-                .join("")
+                .join("");
 
-            : `
-                <span class="horario-item">
+    }
+
+    else {
+
+        horariosHTML = `
+
+            <div class="horario-item">
+
+                <span class="icone-horario">
+                    🕐
+                </span>
+
+                <span>
                     Não informado
                 </span>
-            `;
+
+            </div>
+
+        `;
+
+    }
 
 
-    const diasHTML =
-        dias.length > 0
-            ? dias
+    // =====================================
+    // DIAS
+    // =====================================
+
+    let diasHTML = "";
+
+
+    if (dias.length > 0) {
+
+        diasHTML =
+            dias
                 .map(
                     function (dia) {
 
                         return `
+
                             <span class="dia-item">
                                 ${escaparHTML(dia)}
                             </span>
+
                         `;
 
                     }
                 )
-                .join("")
-            : "Não informado";
+                .join("");
 
+    }
+
+    else {
+
+        diasHTML = `
+
+            <span class="dia-item">
+                Não informado
+            </span>
+
+        `;
+
+    }
+
+
+    // =====================================
+    // CARD
+    // =====================================
 
     card.innerHTML = `
 
         <div class="rota-cabecalho">
 
-            <div>
+    <div>
 
-                <span class="rota-tipo">
-                    ${escaparHTML(
-                        rota.tipo || "Transporte"
-                    )}
-                </span>
+        <span class="rota-tipo">
+            ${escaparHTML(
+                rota.tipo ||
+                "Transporte"
+            )}
+        </span>
 
-                <h3>
-                    ${escaparHTML(
-                        rota.nome || "Rota sem nome"
-                    )}
-                </h3>
+        <h3>
+            ${escaparHTML(
+                rota.nome ||
+                "Rota sem nome"
+            )}
+        </h3>
 
-            </div>
+        <span class="rota-status ativo">
+            ● Ativo
+        </span>
 
-            <span class="rota-id">
-                #${escaparHTML(
-                    String(rota.id)
-                )}
-            </span>
+    </div>
 
-        </div>
+    <span class="rota-id">
+        #${escaparHTML(
+            String(
+                rota.id ?? ""
+            )
+        )}
+    </span>
+
+</div>
+
 
 
         <div class="rota-caminho">
@@ -462,7 +592,8 @@ function criarCardRota(rota) {
 
                     <strong>
                         ${escaparHTML(
-                            rota.origem || "Não informado"
+                            rota.origem ||
+                            "Não informado"
                         )}
                     </strong>
 
@@ -490,7 +621,8 @@ function criarCardRota(rota) {
 
                     <strong>
                         ${escaparHTML(
-                            rota.destino || "Não informado"
+                            rota.destino ||
+                            "Não informado"
                         )}
                     </strong>
 
@@ -504,6 +636,7 @@ function criarCardRota(rota) {
         ${
             rota.via
                 ? `
+
                     <div class="informacao-rota">
 
                         <strong>
@@ -515,6 +648,7 @@ function criarCardRota(rota) {
                         )}
 
                     </div>
+
                 `
                 : ""
         }
@@ -522,14 +656,17 @@ function criarCardRota(rota) {
 
         <div class="informacoes-rota">
 
+
             <div class="info-rota">
 
                 <small>
-                    Dias
+                    Dias de funcionamento
                 </small>
 
                 <div class="lista-dias">
+
                     ${diasHTML}
+
                 </div>
 
             </div>
@@ -549,16 +686,18 @@ function criarCardRota(rota) {
 
             </div>
 
+
         </div>
 
 
         ${
             rota.informacoes
                 ? `
+
                     <div class="observacao-rota">
 
                         <small>
-                            Informações
+                            Informações adicionais
                         </small>
 
                         <p>
@@ -568,6 +707,68 @@ function criarCardRota(rota) {
                         </p>
 
                     </div>
+
+                `
+                : ""
+        }
+
+
+        ${
+            rota.email_responsavel
+                ? `
+
+                    <div class="responsavel-rota">
+
+                        <small>
+                            Responsável
+                        </small>
+
+                        <span>
+                            ${escaparHTML(
+                                rota.email_responsavel
+                            )}
+                        </span>
+
+                    </div>
+
+                `
+                : ""
+        }
+
+
+        ${
+            rota.codigo_acesso
+                ? `
+
+                    <div class="codigo-acesso-rota">
+
+                        <div>
+
+                            <small>
+                                Código de acesso
+                            </small>
+
+                            <strong>
+                                ${escaparHTML(
+                                    rota.codigo_acesso
+                                )}
+                            </strong>
+
+                        </div>
+
+
+                        <button
+                            type="button"
+                            class="btn-copiar-codigo"
+                            data-codigo="${escaparAtributo(
+                                rota.codigo_acesso
+                            )}"
+                        >
+                            Copiar
+                        </button>
+
+                    </div>
+
                 `
                 : ""
         }
@@ -578,7 +779,9 @@ function criarCardRota(rota) {
             <button
                 type="button"
                 class="btn-editar-rota"
-                data-id="${rota.id}"
+                data-id="${escaparAtributo(
+                    rota.id
+                )}"
             >
                 ✏️
                 Editar
@@ -588,7 +791,9 @@ function criarCardRota(rota) {
             <button
                 type="button"
                 class="btn-excluir-rota"
-                data-id="${rota.id}"
+                data-id="${escaparAtributo(
+                    rota.id
+                )}"
             >
                 🗑️
                 Excluir
@@ -599,11 +804,36 @@ function criarCardRota(rota) {
     `;
 
 
+    // =====================================
+    // EDITAR
+    // =====================================
+
     const btnEditar =
         card.querySelector(
             ".btn-editar-rota"
         );
 
+
+    if (btnEditar) {
+
+        btnEditar.addEventListener(
+            "click",
+            function () {
+
+                const id =
+                    btnEditar.dataset.id;
+
+                editarRota(id);
+
+            }
+        );
+
+    }
+
+
+    // =====================================
+    // EXCLUIR
+    // =====================================
 
     const btnExcluir =
         card.querySelector(
@@ -611,28 +841,48 @@ function criarCardRota(rota) {
         );
 
 
-    btnEditar.addEventListener(
-        "click",
-        function () {
+    if (btnExcluir) {
 
-            editarRota(
-                rota.id
-            );
+        btnExcluir.addEventListener(
+            "click",
+            function () {
 
-        }
-    );
+                const id =
+                    btnExcluir.dataset.id;
+
+                excluirRota(id);
+
+            }
+        );
+
+    }
 
 
-    btnExcluir.addEventListener(
-        "click",
-        function () {
+    // =====================================
+    // COPIAR CÓDIGO
+    // =====================================
 
-            excluirRota(
-                rota.id
-            );
+    const btnCopiar =
+        card.querySelector(
+            ".btn-copiar-codigo"
+        );
 
-        }
-    );
+
+    if (btnCopiar) {
+
+        btnCopiar.addEventListener(
+            "click",
+            function () {
+
+                copiarCodigoAcesso(
+                    btnCopiar.dataset.codigo,
+                    btnCopiar
+                );
+
+            }
+        );
+
+    }
 
 
     return card;
@@ -647,18 +897,15 @@ function criarCardRota(rota) {
 function obterHorarios(rota) {
 
     let horarios =
-        rota.horarios;
+        rota?.horarios;
 
 
-    // PostgreSQL pode devolver JSON como string
     if (typeof horarios === "string") {
 
         try {
 
             horarios =
-                JSON.parse(
-                    horarios
-                );
+                JSON.parse(horarios);
 
         }
 
@@ -708,19 +955,31 @@ function obterHorarios(rota) {
 
 function obterDias(rota) {
 
-    if (Array.isArray(rota.dias)) {
+    let dias =
+        rota?.dias;
 
-        return rota.dias;
+
+    if (Array.isArray(dias)) {
+
+        return dias
+            .map(
+                function (dia) {
+
+                    return texto(dia);
+
+                }
+            )
+            .filter(Boolean);
 
     }
 
 
     if (
-        typeof rota.dias === "string" &&
-        rota.dias.trim()
+        typeof dias === "string" &&
+        dias.trim()
     ) {
 
-        return rota.dias
+        return dias
             .split(",")
             .map(
                 function (dia) {
@@ -743,7 +1002,9 @@ function obterDias(rota) {
 // ABRIR FORMULÁRIO
 // =========================================
 
-function abrirFormularioRota(rota = null) {
+function abrirFormularioRota(
+    rota = null
+) {
 
     fecharModal();
 
@@ -752,16 +1013,22 @@ function abrirFormularioRota(rota = null) {
         rota !== null;
 
 
-    const modal =
+    /*
+     * Em vez de criar um pequeno formulário
+     * sobre o dashboard, criamos uma tela
+     * completa de gerenciamento.
+     */
+
+    const tela =
         document.createElement("div");
 
 
-    modal.id =
+    tela.id =
         "modalRota";
 
 
-    modal.className =
-        "modal-dashboard";
+    tela.className =
+        "modal-dashboard tela-formulario-rota";
 
 
     const horarios =
@@ -781,13 +1048,25 @@ function abrirFormularioRota(rota = null) {
             : [];
 
 
-    modal.innerHTML = `
+    tela.innerHTML = `
 
-        <div class="modal-conteudo">
+        <div class="modal-conteudo formulario-tela">
+
+
+            <!-- =================================
+                 CABEÇALHO
+            ================================== -->
 
             <div class="modal-cabecalho">
 
                 <div>
+
+                    <span class="subtitulo-formulario">
+                        ${editando
+                            ? "GERENCIAMENTO DE ROTAS"
+                            : "NOVA ROTA"
+                        }
+                    </span>
 
                     <h2>
                         ${
@@ -798,7 +1077,11 @@ function abrirFormularioRota(rota = null) {
                     </h2>
 
                     <p>
-                        Preencha as informações da rota.
+                        ${
+                            editando
+                                ? "Atualize os dados da rota abaixo."
+                                : "Cadastre uma nova rota no Transporte Fácil."
+                        }
                     </p>
 
                 </div>
@@ -808,6 +1091,8 @@ function abrirFormularioRota(rota = null) {
                     type="button"
                     class="btn-fechar-modal"
                     id="btnFecharModal"
+                    aria-label="Voltar"
+                    title="Voltar para o dashboard"
                 >
                     ×
                 </button>
@@ -815,14 +1100,23 @@ function abrirFormularioRota(rota = null) {
             </div>
 
 
+            <!-- =================================
+                 FORMULÁRIO
+            ================================== -->
+
             <form
                 id="formRota"
                 class="form-rota"
             >
 
+
+                <!-- =========================
+                     EMPRESA
+                ========================== -->
+
                 <div class="grupo-formulario">
 
-                    <label>
+                    <label for="empresa">
                         Empresa / Agência *
                     </label>
 
@@ -842,9 +1136,13 @@ function abrirFormularioRota(rota = null) {
                 </div>
 
 
+                <!-- =========================
+                     E-MAIL
+                ========================== -->
+
                 <div class="grupo-formulario">
 
-                    <label>
+                    <label for="emailResponsavel">
                         E-mail do responsável *
                     </label>
 
@@ -861,14 +1159,24 @@ function abrirFormularioRota(rota = null) {
                         placeholder="responsavel@email.com"
                     >
 
+                    <small>
+                        Esse e-mail será utilizado junto
+                        ao código de acesso da rota.
+                    </small>
+
                 </div>
 
 
+                <!-- =========================
+                     ORIGEM / DESTINO
+                ========================== -->
+
                 <div class="linha-formulario">
+
 
                     <div class="grupo-formulario">
 
-                        <label>
+                        <label for="origem">
                             Origem *
                         </label>
 
@@ -890,7 +1198,7 @@ function abrirFormularioRota(rota = null) {
 
                     <div class="grupo-formulario">
 
-                        <label>
+                        <label for="destino">
                             Destino *
                         </label>
 
@@ -909,12 +1217,17 @@ function abrirFormularioRota(rota = null) {
 
                     </div>
 
+
                 </div>
 
 
+                <!-- =========================
+                     VIA
+                ========================== -->
+
                 <div class="grupo-formulario">
 
-                    <label>
+                    <label for="via">
                         Via / Paradas
                     </label>
 
@@ -933,9 +1246,13 @@ function abrirFormularioRota(rota = null) {
                 </div>
 
 
+                <!-- =========================
+                     TIPO
+                ========================== -->
+
                 <div class="grupo-formulario">
 
-                    <label>
+                    <label for="tipo">
                         Tipo de transporte *
                     </label>
 
@@ -949,6 +1266,7 @@ function abrirFormularioRota(rota = null) {
                             Selecione
                         </option>
 
+
                         <option
                             value="Ônibus"
                             ${
@@ -961,6 +1279,7 @@ function abrirFormularioRota(rota = null) {
                             Ônibus
                         </option>
 
+
                         <option
                             value="Van"
                             ${
@@ -972,6 +1291,7 @@ function abrirFormularioRota(rota = null) {
                         >
                             Van
                         </option>
+
 
                         <option
                             value="Micro-ônibus"
@@ -990,15 +1310,16 @@ function abrirFormularioRota(rota = null) {
                 </div>
 
 
-                <!-- ==============================
+                <!-- =========================
                      DIAS
-                =============================== -->
+                ========================== -->
 
                 <div class="grupo-formulario">
 
                     <label>
                         Dias de funcionamento *
                     </label>
+
 
                     <div class="dias-checkbox">
 
@@ -1042,11 +1363,12 @@ function abrirFormularioRota(rota = null) {
                 </div>
 
 
-                <!-- ==============================
+                <!-- =========================
                      HORÁRIOS
-                =============================== -->
+                ========================== -->
 
                 <div class="grupo-formulario">
+
 
                     <div class="titulo-horarios">
 
@@ -1079,19 +1401,19 @@ function abrirFormularioRota(rota = null) {
                         id="listaHorariosFormulario"
                         class="lista-horarios-formulario"
                     >
-
                     </div>
+
 
                 </div>
 
 
-                <!-- ==============================
+                <!-- =========================
                      INFORMAÇÕES
-                =============================== -->
+                ========================== -->
 
                 <div class="grupo-formulario">
 
-                    <label>
+                    <label for="informacoes">
                         Informações adicionais
                     </label>
 
@@ -1109,12 +1431,21 @@ function abrirFormularioRota(rota = null) {
                 </div>
 
 
+                <!-- =========================
+                     MENSAGEM
+                ========================== -->
+
                 <div
                     id="mensagemFormulario"
                     class="mensagem-formulario"
+                    role="alert"
                 >
                 </div>
 
+
+                <!-- =========================
+                     AÇÕES
+                ========================== -->
 
                 <div class="acoes-formulario">
 
@@ -1123,7 +1454,7 @@ function abrirFormularioRota(rota = null) {
                         id="btnCancelarFormulario"
                         class="btn-cancelar"
                     >
-                        Cancelar
+                        Voltar
                     </button>
 
 
@@ -1140,6 +1471,7 @@ function abrirFormularioRota(rota = null) {
 
                 </div>
 
+
             </form>
 
         </div>
@@ -1148,19 +1480,23 @@ function abrirFormularioRota(rota = null) {
 
 
     document.body.appendChild(
-        modal
+        tela
     );
 
 
-    // -----------------------------------------
+    /*
+     * Impede o dashboard de continuar
+     * rolando atrás da tela do formulário.
+     */
+
+    document.body.classList.add(
+        "formulario-aberto"
+    );
+
+
+    // =====================================
     // CRIAR HORÁRIOS
-    // -----------------------------------------
-
-    const listaHorariosFormulario =
-        document.getElementById(
-            "listaHorariosFormulario"
-        );
-
+    // =====================================
 
     horarios.forEach(
         function (horario) {
@@ -1174,15 +1510,19 @@ function abrirFormularioRota(rota = null) {
     );
 
 
-    // -----------------------------------------
-    // BOTÃO ADICIONAR HORÁRIO
-    // -----------------------------------------
+    // =====================================
+    // ADICIONAR HORÁRIO
+    // =====================================
 
-    document
-        .getElementById(
+    const btnAdicionarHorario =
+        document.getElementById(
             "btnAdicionarHorario"
-        )
-        .addEventListener(
+        );
+
+
+    if (btnAdicionarHorario) {
+
+        btnAdicionarHorario.addEventListener(
             "click",
             function () {
 
@@ -1194,40 +1534,88 @@ function abrirFormularioRota(rota = null) {
             }
         );
 
+    }
 
-    // -----------------------------------------
+
+    // =====================================
     // FECHAR
-    // -----------------------------------------
+    // =====================================
 
-    document
-        .getElementById(
+    const btnFecharModal =
+        document.getElementById(
             "btnFecharModal"
-        )
-        .addEventListener(
+        );
+
+
+    if (btnFecharModal) {
+
+        btnFecharModal.addEventListener(
             "click",
             fecharModal
         );
 
+    }
 
-    document
-        .getElementById(
+
+    const btnCancelarFormulario =
+        document.getElementById(
             "btnCancelarFormulario"
-        )
-        .addEventListener(
+        );
+
+
+    if (btnCancelarFormulario) {
+
+        btnCancelarFormulario.addEventListener(
             "click",
             fecharModal
         );
 
+    }
 
-    // -----------------------------------------
+
+    // =====================================
+    // CLICAR FORA
+    // =====================================
+
+    tela.addEventListener(
+        "click",
+        function (evento) {
+
+            if (
+                evento.target === tela
+            ) {
+
+                fecharModal();
+
+            }
+
+        }
+    );
+
+
+    // =====================================
+    // ESC
+    // =====================================
+
+    document.addEventListener(
+        "keydown",
+        tratarTeclaEscape
+    );
+
+
+    // =====================================
     // FORMULÁRIO
-    // -----------------------------------------
+    // =====================================
 
-    document
-        .getElementById(
+    const form =
+        document.getElementById(
             "formRota"
-        )
-        .addEventListener(
+        );
+
+
+    if (form) {
+
+        form.addEventListener(
             "submit",
             function (evento) {
 
@@ -1250,6 +1638,35 @@ function abrirFormularioRota(rota = null) {
 
             }
         );
+
+    }
+
+
+    // =====================================
+    // IR PARA O TOPO DA TELA
+    // =====================================
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+// =========================================
+// TECLA ESC
+// =========================================
+
+function tratarTeclaEscape(evento) {
+
+    if (
+        evento.key === "Escape"
+    ) {
+
+        fecharModal();
+
+    }
 
 }
 
@@ -1330,7 +1747,9 @@ function adicionarCampoHorario(
             <input
                 type="time"
                 class="input-saida"
-                value="${escaparAtributo(saida)}"
+                value="${escaparAtributo(
+                    saida
+                )}"
             >
 
         </div>
@@ -1345,7 +1764,9 @@ function adicionarCampoHorario(
             <input
                 type="time"
                 class="input-chegada"
-                value="${escaparAtributo(chegada)}"
+                value="${escaparAtributo(
+                    chegada
+                )}"
             >
 
         </div>
@@ -1355,6 +1776,7 @@ function adicionarCampoHorario(
             type="button"
             class="btn-remover-horario"
             title="Remover horário"
+            aria-label="Remover horário"
         >
             ×
         </button>
@@ -1362,18 +1784,49 @@ function adicionarCampoHorario(
     `;
 
 
-    linha
-        .querySelector(
+    const btnRemover =
+        linha.querySelector(
             ".btn-remover-horario"
-        )
-        .addEventListener(
+        );
+
+
+    if (btnRemover) {
+
+        btnRemover.addEventListener(
             "click",
             function () {
+
+                const quantidade =
+                    lista.querySelectorAll(
+                        ".linha-horario"
+                    ).length;
+
+
+                if (quantidade <= 1) {
+
+                    linha
+                        .querySelector(
+                            ".input-saida"
+                        )
+                        .value = "";
+
+                    linha
+                        .querySelector(
+                            ".input-chegada"
+                        )
+                        .value = "";
+
+                    return;
+
+                }
+
 
                 linha.remove();
 
             }
         );
+
+    }
 
 
     lista.appendChild(
@@ -1384,7 +1837,7 @@ function adicionarCampoHorario(
 
 
 // =========================================
-// COLETAR HORÁRIOS DO FORMULÁRIO
+// COLETAR HORÁRIOS
 // =========================================
 
 function coletarHorarios() {
@@ -1407,7 +1860,7 @@ function coletarHorarios() {
                         ".input-saida"
                     )
                     ?.value
-                    .trim();
+                    .trim() || "";
 
 
             const chegada =
@@ -1416,10 +1869,9 @@ function coletarHorarios() {
                         ".input-chegada"
                     )
                     ?.value
-                    .trim();
+                    .trim() || "";
 
 
-            // Ignora linha completamente vazia
             if (
                 !saida &&
                 !chegada
@@ -1450,7 +1902,7 @@ function coletarHorarios() {
 
 
 // =========================================
-// COLETAR DADOS DO FORMULÁRIO
+// COLETAR DADOS
 // =========================================
 
 function coletarDadosFormulario() {
@@ -1478,51 +1930,39 @@ function coletarDadosFormulario() {
 
         empresa:
             document
-                .getElementById(
-                    "empresa"
-                )
-                .value
-                .trim(),
+                .getElementById("empresa")
+                ?.value
+                .trim() || "",
 
         emailResponsavel:
             document
-                .getElementById(
-                    "emailResponsavel"
-                )
-                .value
-                .trim(),
+                .getElementById("emailResponsavel")
+                ?.value
+                .trim() || "",
 
         origem:
             document
-                .getElementById(
-                    "origem"
-                )
-                .value
-                .trim(),
+                .getElementById("origem")
+                ?.value
+                .trim() || "",
 
         destino:
             document
-                .getElementById(
-                    "destino"
-                )
-                .value
-                .trim(),
+                .getElementById("destino")
+                ?.value
+                .trim() || "",
 
         via:
             document
-                .getElementById(
-                    "via"
-                )
-                .value
-                .trim(),
+                .getElementById("via")
+                ?.value
+                .trim() || "",
 
         tipo:
             document
-                .getElementById(
-                    "tipo"
-                )
-                .value
-                .trim(),
+                .getElementById("tipo")
+                ?.value
+                .trim() || "",
 
         dias:
             dias,
@@ -1532,11 +1972,9 @@ function coletarDadosFormulario() {
 
         informacoes:
             document
-                .getElementById(
-                    "informacoes"
-                )
-                .value
-                .trim()
+                .getElementById("informacoes")
+                ?.value
+                .trim() || ""
 
     };
 
@@ -1572,10 +2010,9 @@ function validarFormulario(dados) {
 
     if (
         dados.emailResponsavel &&
-        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
-            .test(
-                dados.emailResponsavel
-            )
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+            dados.emailResponsavel
+        )
     ) {
 
         erros.push(
@@ -1738,11 +2175,20 @@ async function cadastrarRota() {
 
             const mensagem =
                 resultado.camposPendentes
-                    ? resultado.camposPendentes.join(
-                        "<br>"
-                    )
+                    ? resultado.camposPendentes
+                        .map(
+                            function (campo) {
+
+                                return escaparHTML(
+                                    campo
+                                );
+
+                            }
+                        )
+                        .join("<br>")
                     : resultado.mensagem ||
                       "Erro ao cadastrar rota.";
+
 
             throw new Error(
                 mensagem
@@ -1751,21 +2197,58 @@ async function cadastrarRota() {
         }
 
 
-        mostrarMensagemFormulario(
-            `
-                ${escaparHTML(
-                    resultado.mensagem ||
-                    "Rota cadastrada com sucesso!"
-                )}
+        let mensagemSucesso = `
 
-                ${
-                    resultado.codigoAcesso
-                        ? `<br><strong>Código de acesso:</strong> ${escaparHTML(resultado.codigoAcesso)}`
-                        : ""
-                }
-            `,
+            <strong>
+                Rota cadastrada com sucesso!
+            </strong>
+
+        `;
+
+
+        if (
+            resultado.codigoAcesso
+        ) {
+
+            mensagemSucesso += `
+
+                <div class="codigo-acesso-sucesso">
+
+                    <span>
+                        Código de acesso:
+                    </span>
+
+                    <strong>
+                        ${escaparHTML(
+                            resultado.codigoAcesso
+                        )}
+                    </strong>
+
+                </div>
+
+                <small>
+                    Guarde esse código.
+                    Ele será usado pelo responsável
+                    junto com o e-mail cadastrado.
+                </small>
+
+            `;
+
+        }
+
+
+        mostrarMensagemFormulario(
+            mensagemSucesso,
             "sucesso"
         );
+
+
+        if (botao) {
+
+            botao.textContent =
+                "Cadastrado!";
+
+        }
 
 
         setTimeout(
@@ -1776,9 +2259,8 @@ async function cadastrarRota() {
                 carregarRotas();
 
             },
-            1800
+            2200
         );
-
 
     }
 
@@ -1791,8 +2273,10 @@ async function cadastrarRota() {
 
 
         mostrarMensagemFormulario(
-            erro.message ||
-            "Erro ao cadastrar rota.",
+            escaparHTML(
+                erro.message ||
+                "Erro ao cadastrar rota."
+            ),
             "erro"
         );
 
@@ -1818,11 +2302,22 @@ async function cadastrarRota() {
 
 async function editarRota(id) {
 
+    if (!id) {
+
+        alert(
+            "ID da rota não informado."
+        );
+
+        return;
+
+    }
+
+
     try {
 
         const resposta =
             await fetch(
-                `${API_URL}/rotas/${id}`
+                `${API_URL}/rotas/${encodeURIComponent(id)}`
             );
 
 
@@ -1835,6 +2330,15 @@ async function editarRota(id) {
             throw new Error(
                 dados.mensagem ||
                 "Não foi possível buscar a rota."
+            );
+
+        }
+
+
+        if (!dados.rota) {
+
+            throw new Error(
+                "A API não retornou os dados da rota."
             );
 
         }
@@ -1913,7 +2417,7 @@ async function salvarEdicao(id) {
 
         const resposta =
             await fetch(
-                `${API_URL}/rotas/${id}`,
+                `${API_URL}/rotas/${encodeURIComponent(id)}`,
                 {
 
                     method:
@@ -1943,11 +2447,20 @@ async function salvarEdicao(id) {
 
             const mensagem =
                 resultado.camposPendentes
-                    ? resultado.camposPendentes.join(
-                        "<br>"
-                    )
+                    ? resultado.camposPendentes
+                        .map(
+                            function (campo) {
+
+                                return escaparHTML(
+                                    campo
+                                );
+
+                            }
+                        )
+                        .join("<br>")
                     : resultado.mensagem ||
                       "Erro ao atualizar rota.";
+
 
             throw new Error(
                 mensagem
@@ -1957,10 +2470,20 @@ async function salvarEdicao(id) {
 
 
         mostrarMensagemFormulario(
-            resultado.mensagem ||
-            "Rota atualizada com sucesso!",
+            escaparHTML(
+                resultado.mensagem ||
+                "Rota atualizada com sucesso!"
+            ),
             "sucesso"
         );
+
+
+        if (botao) {
+
+            botao.textContent =
+                "Salvo!";
+
+        }
 
 
         setTimeout(
@@ -1971,7 +2494,7 @@ async function salvarEdicao(id) {
                 carregarRotas();
 
             },
-            1200
+            1400
         );
 
     }
@@ -1985,8 +2508,10 @@ async function salvarEdicao(id) {
 
 
         mostrarMensagemFormulario(
-            erro.message ||
-            "Erro ao atualizar rota.",
+            escaparHTML(
+                erro.message ||
+                "Erro ao atualizar rota."
+            ),
             "erro"
         );
 
@@ -2012,6 +2537,17 @@ async function salvarEdicao(id) {
 
 async function excluirRota(id) {
 
+    if (!id) {
+
+        alert(
+            "ID da rota não informado."
+        );
+
+        return;
+
+    }
+
+
     const confirmar =
         confirm(
             "Tem certeza que deseja excluir esta rota?\n\nEssa ação não poderá ser desfeita."
@@ -2027,7 +2563,7 @@ async function excluirRota(id) {
 
         const resposta =
             await fetch(
-                `${API_URL}/rotas/${id}`,
+                `${API_URL}/rotas/${encodeURIComponent(id)}`,
                 {
 
                     method:
@@ -2085,18 +2621,129 @@ async function excluirRota(id) {
 
 function abrirGerenciamentoHorarios() {
 
-    document
-        .querySelector(
+    const lista =
+        document.querySelector(
             ".lista-rotas"
-        )
-        ?.scrollIntoView({
-            behavior: "smooth"
+        );
+
+
+    if (lista) {
+
+        lista.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
         });
+
+    }
 
 
     alert(
-        "Os horários são gerenciados dentro de cada rota. Clique em \"Editar\" em uma rota para adicionar, alterar ou remover horários."
+        "Os horários são gerenciados dentro de cada rota.\n\nClique em \"Editar\" em uma rota para adicionar, alterar ou remover horários."
     );
+
+}
+
+
+// =========================================
+// COPIAR CÓDIGO DE ACESSO
+// =========================================
+
+async function copiarCodigoAcesso(
+    codigo,
+    botao
+) {
+
+    if (!codigo) {
+        return;
+    }
+
+
+    try {
+
+        await navigator.clipboard.writeText(
+            codigo
+        );
+
+
+        const textoOriginal =
+            botao.textContent;
+
+
+        botao.textContent =
+            "Copiado!";
+
+
+        setTimeout(
+            function () {
+
+                botao.textContent =
+                    textoOriginal;
+
+            },
+            1500
+        );
+
+    }
+
+    catch (erro) {
+
+        console.error(
+            "Erro ao copiar código:",
+            erro
+        );
+
+
+        const campo =
+            document.createElement("input");
+
+
+        campo.value =
+            codigo;
+
+
+        document.body.appendChild(
+            campo
+        );
+
+
+        campo.select();
+
+
+        try {
+
+            document.execCommand(
+                "copy"
+            );
+
+
+            botao.textContent =
+                "Copiado!";
+
+
+            setTimeout(
+                function () {
+
+                    botao.textContent =
+                        "Copiar";
+
+                },
+                1500
+            );
+
+        }
+
+        catch (erroCopia) {
+
+            alert(
+                `Código de acesso: ${codigo}`
+            );
+
+        }
+
+
+        campo.remove();
+
+    }
 
 }
 
@@ -2128,11 +2775,17 @@ function mostrarMensagemFormulario(
     elemento.innerHTML =
         mensagem;
 
+
+    elemento.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+    });
+
 }
 
 
 // =========================================
-// FECHAR MODAL
+// FECHAR TELA DO FORMULÁRIO
 // =========================================
 
 function fecharModal() {
@@ -2148,6 +2801,38 @@ function fecharModal() {
         modal.remove();
 
     }
+
+
+    document.body.classList.remove(
+        "formulario-aberto"
+    );
+
+
+    document.removeEventListener(
+        "keydown",
+        tratarTeclaEscape
+    );
+
+}
+
+
+// =========================================
+// TEXTO
+// =========================================
+
+function texto(valor) {
+
+    if (
+        valor === undefined ||
+        valor === null
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(valor).trim();
 
 }
 

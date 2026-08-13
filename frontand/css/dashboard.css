@@ -1,6 +1,12 @@
-/* =========================================
+/* =========================================================
+   DASHBOARD ADMINISTRATIVO
+   TRANSPORTE FÁCIL
+   ========================================================= */
+
+
+/* =========================================================
    RESET
-========================================= */
+   ========================================================= */
 
 * {
     margin: 0;
@@ -9,9 +15,9 @@
 }
 
 
-/* =========================================
-   BODY
-========================================= */
+/* =========================================================
+   HTML / BODY
+   ========================================================= */
 
 html,
 body {
@@ -20,48 +26,39 @@ body {
 }
 
 body {
-
     font-family:
         Arial,
         Helvetica,
         sans-serif;
 
     background: #f4f7f5;
-
     color: #173b2c;
 }
 
 
-/* =========================================
+/* =========================================================
    DASHBOARD
-========================================= */
+   ========================================================= */
 
 .dashboard {
-
     width: 100%;
-
     min-height: 100vh;
-
     background: #f4f7f5;
 }
 
 
-/* =========================================
+/* =========================================================
    CABEÇALHO
-========================================= */
+   ========================================================= */
 
 .cabecalho {
-
     width: 100%;
-
     min-height: 76px;
 
     padding: 0 28px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
 
     background:
@@ -79,30 +76,24 @@ body {
 }
 
 
-/* =========================================
+/* =========================================================
    TÍTULO DO CABEÇALHO
-========================================= */
+   ========================================================= */
 
 .titulo-cabecalho {
-
     display: flex;
-
     align-items: center;
-
     gap: 13px;
 }
 
-
 .icone-dashboard {
-
     width: 46px;
-
     height: 46px;
 
+    flex-shrink: 0;
+
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 13px;
@@ -113,19 +104,13 @@ body {
     font-size: 25px;
 }
 
-
 .titulo-cabecalho h1 {
-
     font-size: 21px;
-
     font-weight: 600;
-
     letter-spacing: 0.2px;
 }
 
-
 .titulo-cabecalho p {
-
     margin-top: 3px;
 
     color:
@@ -135,27 +120,21 @@ body {
 }
 
 
-/* =========================================
+/* =========================================================
    BOTÃO SAIR
-========================================= */
+   ========================================================= */
 
 .btn-sair {
-
     min-height: 40px;
 
     padding: 0 15px;
 
     border: none;
-
     border-radius: 10px;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
-    gap: 7px;
 
     background:
         rgba(255, 255, 255, 0.14);
@@ -171,9 +150,7 @@ body {
         transform 0.2s ease;
 }
 
-
 .btn-sair:hover {
-
     background:
         rgba(255, 255, 255, 0.25);
 
@@ -182,14 +159,12 @@ body {
 }
 
 
-/* =========================================
-   CONTEÚDO
-========================================= */
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================= */
 
 .conteudo {
-
-    width:
-        min(100%, 1100px);
+    width: min(100%, 1100px);
 
     margin: 0 auto;
 
@@ -200,12 +175,11 @@ body {
 }
 
 
-/* =========================================
+/* =========================================================
    BOAS-VINDAS
-========================================= */
+   ========================================================= */
 
 .boas-vindas {
-
     width: 100%;
 
     padding: 26px;
@@ -227,13 +201,10 @@ body {
         rgba(20, 80, 50, 0.05);
 }
 
-
 .boas-vindas span {
-
     color: #0d934d;
 
     font-size: 12px;
-
     font-weight: bold;
 
     text-transform: uppercase;
@@ -241,9 +212,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-
 .boas-vindas h2 {
-
     margin-top: 7px;
 
     color: #173b2c;
@@ -251,9 +220,7 @@ body {
     font-size: 25px;
 }
 
-
 .boas-vindas p {
-
     max-width: 700px;
 
     margin-top: 7px;
@@ -261,17 +228,15 @@ body {
     color: #718078;
 
     font-size: 14px;
-
     line-height: 1.5;
 }
 
 
-/* =========================================
+/* =========================================================
    RESUMO
-========================================= */
+   ========================================================= */
 
 .resumo {
-
     width: 100%;
 
     margin-top: 22px;
@@ -284,15 +249,12 @@ body {
     gap: 15px;
 }
 
-
 .card-resumo {
-
     min-height: 110px;
 
     padding: 18px;
 
     display: flex;
-
     align-items: center;
 
     gap: 14px;
@@ -309,19 +271,14 @@ body {
         rgba(30, 80, 55, 0.06);
 }
 
-
 .icone-resumo {
-
     width: 48px;
-
     height: 48px;
 
     flex-shrink: 0;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 12px;
@@ -331,59 +288,42 @@ body {
     font-size: 23px;
 }
 
-
 .card-resumo div:last-child {
-
     display: flex;
-
     flex-direction: column;
 
     gap: 4px;
 }
 
-
 .card-resumo span {
-
     color: #78877f;
-
     font-size: 12px;
 }
 
-
 .card-resumo strong {
-
     color: #173b2c;
-
     font-size: 25px;
 }
 
 
-/* =========================================
+/* =========================================================
    SEÇÕES
-========================================= */
+   ========================================================= */
 
 .secao {
-
     margin-top: 32px;
 }
 
-
 .titulo-secao {
-
     margin-bottom: 16px;
 }
 
-
 .titulo-secao h2 {
-
     color: #173b2c;
-
     font-size: 20px;
 }
 
-
 .titulo-secao p {
-
     margin-top: 5px;
 
     color: #78877f;
@@ -392,12 +332,11 @@ body {
 }
 
 
-/* =========================================
-   AÇÕES
-========================================= */
+/* =========================================================
+   CARDS DE GERENCIAMENTO
+   ========================================================= */
 
 .acoes {
-
     display: grid;
 
     grid-template-columns:
@@ -406,9 +345,7 @@ body {
     gap: 14px;
 }
 
-
 .card-acao {
-
     min-height: 90px;
 
     padding: 16px;
@@ -419,7 +356,6 @@ body {
     border-radius: 15px;
 
     display: flex;
-
     align-items: center;
 
     gap: 14px;
@@ -442,9 +378,7 @@ body {
         border-color 0.2s ease;
 }
 
-
 .card-acao:hover {
-
     transform:
         translateY(-2px);
 
@@ -456,19 +390,14 @@ body {
         rgba(30, 80, 55, 0.10);
 }
 
-
 .icone-acao {
-
     width: 48px;
-
     height: 48px;
 
     flex-shrink: 0;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     border-radius: 12px;
@@ -478,73 +407,53 @@ body {
     font-size: 23px;
 }
 
-
 .card-acao div {
-
     flex: 1;
 
     display: flex;
-
     flex-direction: column;
 
     gap: 5px;
 }
 
-
 .card-acao strong {
-
     color: #244536;
-
     font-size: 15px;
 }
 
-
 .card-acao div span {
-
     color: #87948e;
-
     font-size: 12px;
 }
 
-
 .card-acao .seta {
-
     color: #13a45b;
 
     font-size: 22px;
-
     font-weight: bold;
 }
 
 
-/* =========================================
-   TÍTULO DA LISTA
-========================================= */
+/* =========================================================
+   TÍTULO DA LISTA DE ROTAS
+   ========================================================= */
 
 .titulo-lista {
-
-    margin-bottom: 16px;
+    margin-bottom: 18px;
 
     display: flex;
-
-    align-items: center;
-
+    align-items: flex-end;
     justify-content: space-between;
 
-    gap: 15px;
+    gap: 20px;
 }
 
-
 .titulo-lista h2 {
-
     color: #173b2c;
-
     font-size: 20px;
 }
 
-
 .titulo-lista p {
-
     margin-top: 5px;
 
     color: #78877f;
@@ -553,16 +462,15 @@ body {
 }
 
 
-/* =========================================
-   BOTÃO ADICIONAR
-========================================= */
+/* =========================================================
+   BOTÃO ADICIONAR ROTA
+   ========================================================= */
 
 .btn-adicionar {
-
     min-height: 40px;
 
     padding:
-        0 15px;
+        0 16px;
 
     border: none;
 
@@ -573,206 +481,578 @@ body {
     color: white;
 
     font-size: 13px;
-
     font-weight: bold;
 
     cursor: pointer;
 
+    white-space: nowrap;
+
     transition:
         background 0.2s ease,
-        transform 0.2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
-
 .btn-adicionar:hover {
-
     background: #087c48;
 
     transform:
         translateY(-1px);
+
+    box-shadow:
+        0 5px 12px
+        rgba(19, 164, 91, 0.22);
 }
 
 
-/* =========================================
+/* =========================================================
    LISTA DE ROTAS
-========================================= */
+   ========================================================= */
 
 .lista-rotas {
+    width: 100%;
 
     display: flex;
-
     flex-direction: column;
 
-    gap: 12px;
+    gap: 18px;
 }
 
 
-/* =========================================
-   CARD DA ROTA
-========================================= */
+/* =========================================================
+   CARD PRINCIPAL DA ROTA
+   ========================================================= */
 
 .card-rota {
+    width: 100%;
 
-    min-height: 76px;
+    padding: 22px;
 
-    padding: 14px 16px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 13px;
+    display: block;
 
     background: white;
 
     border:
-        1px solid #e4ece7;
+        1px solid #e0e9e4;
 
-    border-radius: 15px;
+    border-radius: 18px;
 
     box-shadow:
-        0 4px 15px
-        rgba(30, 80, 55, 0.05);
+        0 5px 20px
+        rgba(30, 80, 55, 0.06);
+
+    overflow: hidden;
+
+    transition:
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.card-rota:hover {
+    border-color:
+        #cfe3d8;
+
+    box-shadow:
+        0 8px 26px
+        rgba(30, 80, 55, 0.09);
 }
 
 
-.icone-rota {
+/* =========================================================
+   CABEÇALHO DA ROTA
+   ========================================================= */
 
-    width: 45px;
+.rota-cabecalho {
+    width: 100%;
 
-    height: 45px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 18px;
+
+    border-bottom:
+        1px solid #edf2ef;
+}
+
+.rota-tipo {
+    display: inline-block;
+
+    margin-bottom: 5px;
+
+    color: #0d934d;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    text-transform: lowercase;
+}
+
+.rota-cabecalho h3 {
+    color: #173b2c;
+
+    font-size: 21px;
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+.rota-id {
+    flex-shrink: 0;
+
+    padding:
+        5px 9px;
+
+    border-radius: 8px;
+
+    background: #eef7f1;
+
+    color: #278354;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   ORIGEM / DESTINO
+   ========================================================= */
+
+.rota-caminho {
+    width: 100%;
+
+    margin-top: 18px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        45px
+        minmax(0, 1fr);
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.local-rota {
+    min-width: 0;
+
+    padding: 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    background: #f7faf8;
+
+    border:
+        1px solid #e5eee9;
+
+    border-radius: 12px;
+}
+
+.icone-local {
+    width: 34px;
+    height: 34px;
 
     flex-shrink: 0;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    border-radius: 11px;
+    border-radius: 9px;
 
-    background: #e6f6ed;
+    background: #e5f5ec;
 
-    font-size: 22px;
+    font-size: 16px;
 }
 
+.local-rota div {
+    min-width: 0;
 
-/* =========================================
-   INFORMAÇÕES DA ROTA
-========================================= */
+    display: flex;
+    flex-direction: column;
 
-.info-rota {
-
-    flex: 1;
+    gap: 3px;
 }
 
+.local-rota small {
+    color: #829088;
 
-.info-rota h3 {
+    font-size: 11px;
+}
 
+.local-rota strong {
     color: #244536;
 
-    font-size: 15px;
+    font-size: 14px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.seta-rota {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #13a45b;
+
+    font-size: 25px;
+    font-weight: bold;
 }
 
 
-.info-rota p {
+/* =========================================================
+   VIA
+   ========================================================= */
 
-    margin-top: 4px;
+.informacao-rota {
+    width: 100%;
 
-    color: #87948e;
-
-    font-size: 12px;
-}
-
-
-/* =========================================
-   STATUS
-========================================= */
-
-.status {
+    margin-top: 14px;
 
     padding:
-        5px 10px;
+        10px 13px;
+
+    border-radius: 10px;
+
+    background: #f8faf9;
+
+    border:
+        1px solid #e8efeb;
+
+    color: #66766e;
+
+    font-size: 13px;
+}
+
+.informacao-rota strong {
+    color: #244536;
+
+    margin-right: 5px;
+}
+
+
+/* =========================================================
+   BLOCO DE INFORMAÇÕES
+   ========================================================= */
+
+.informacoes-rota {
+    width: 100%;
+
+    margin-top: 18px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 0.75fr)
+        minmax(0, 1.25fr);
+
+    gap: 15px;
+}
+
+
+/* =========================================================
+   CADA BLOCO DE INFORMAÇÃO
+   ========================================================= */
+
+.info-rota {
+    min-width: 0;
+
+    padding: 15px;
+
+    background: #f8faf9;
+
+    border:
+        1px solid #e5eee9;
+
+    border-radius: 13px;
+}
+
+.info-rota > small {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #78877f;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.4px;
+}
+
+
+/* =========================================================
+   DIAS
+   ========================================================= */
+
+.lista-dias {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+}
+
+.dia-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 28px;
+
+    padding:
+        0 10px;
 
     border-radius: 20px;
 
+    background: #e6f6ed;
+
+    color: #13864c;
+
     font-size: 11px;
-
     font-weight: bold;
 }
 
 
-.status.ativo {
+/* =========================================================
+   LISTA DE HORÁRIOS
+   ========================================================= */
 
-    background: #e1f4e9;
+.lista-horarios {
+    display: flex;
+    flex-direction: column;
 
-    color: #11894b;
+    gap: 7px;
 }
 
 
-/* =========================================
-   BOTÃO EDITAR
-========================================= */
+/* =========================================================
+   ITEM DE HORÁRIO
+   ========================================================= */
 
-.btn-editar {
-
-    min-height: 36px;
+.horario-item {
+    min-height: 38px;
 
     padding:
-        0 13px;
+        7px 11px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    background: white;
 
     border:
-        1px solid #d5e6dc;
+        1px solid #e3ebe7;
 
     border-radius: 9px;
 
-    background: #f7faf8;
+    color: #244536;
 
-    color: #11894b;
+    font-size: 13px;
+
+    box-shadow:
+        0 1px 3px
+        rgba(30, 80, 55, 0.03);
+}
+
+.icone-horario {
+    width: 23px;
+    height: 23px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #e6f6ed;
 
     font-size: 12px;
+}
 
+.horario-item span:nth-child(2) {
+    color: #173b2c;
+
+    font-weight: 700;
+}
+
+.horario-item span:nth-child(3) {
+    color: #13a45b;
+
+    font-size: 15px;
     font-weight: bold;
+}
 
-    cursor: pointer;
+.horario-item span:nth-child(4) {
+    color: #173b2c;
 
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease;
+    font-weight: 700;
 }
 
 
-.btn-editar:hover {
+/* =========================================================
+   INFORMAÇÕES ADICIONAIS
+   ========================================================= */
 
-    background: #e8f7ef;
+.observacao-rota {
+    width: 100%;
 
-    border-color: #bfe3ce;
-}
+    margin-top: 15px;
 
+    padding: 14px;
 
-/* =========================================
-BOTÃO EXCLUIR
-========================================= */
+    border-radius: 11px;
 
-.btn-excluir {
-
-    min-height: 36px;
-
-    padding:
-        0 13px;
+    background: #fbfcfb;
 
     border:
-        1px solid #f0caca;
+        1px solid #e7eeea;
+}
 
-    border-radius: 9px;
+.observacao-rota small {
+    display: block;
 
-    background: #fff5f5;
+    margin-bottom: 6px;
 
-    color: #c62828;
+    color: #78877f;
+
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.observacao-rota p {
+    color: #596961;
 
     font-size: 12px;
 
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   RESPONSÁVEL + CÓDIGO
+   ========================================================= */
+
+.responsavel-rota {
+    width: 100%;
+
+    margin-top: 17px;
+
+    padding-top: 15px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    border-top:
+        1px solid #edf2ef;
+}
+
+.responsavel-rota small {
+    color: #78877f;
+
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.responsavel-rota span {
+    color: #244536;
+
+    font-size: 12px;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   CÓDIGO DE ACESSO
+   ========================================================= */
+
+.codigo-acesso-rota {
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 12px 14px;
+
+    display: flex;
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    background: #f4faf6;
+
+    border:
+        1px solid #dcefe3;
+
+    border-radius: 11px;
+}
+
+.codigo-acesso-rota > div {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    flex-wrap: wrap;
+}
+
+.codigo-acesso-rota small {
+    color: #78877f;
+
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.codigo-acesso-rota strong {
+    color: #173b2c;
+
+    font-size: 14px;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   BOTÃO COPIAR
+   ========================================================= */
+
+.btn-copiar-codigo {
+    min-height: 32px;
+
+    padding:
+        0 11px;
+
+    flex-shrink: 0;
+
+    border:
+        1px solid #cfe4d7;
+
+    border-radius: 8px;
+
+    background: white;
+
+    color: #11894b;
+
+    font-size: 11px;
     font-weight: bold;
 
     cursor: pointer;
@@ -781,37 +1061,773 @@ BOTÃO EXCLUIR
         background 0.2s ease,
         border-color 0.2s ease,
         transform 0.2s ease;
-
 }
 
+.btn-copiar-codigo:hover {
+    background: #eaf7ef;
 
-.btn-excluir:hover {
-
-    background: #ffe5e5;
-
-    border-color: #e8a8a8;
+    border-color: #b8dcc7;
 
     transform:
         translateY(-1px);
-
 }
 
 
-/* =========================================
-   RESPONSIVIDADE
-========================================= */
+/* =========================================================
+   AÇÕES DA ROTA
+   ========================================================= */
 
-@media (max-width: 800px) {
+.acoes-rota {
+    width: 100%;
+
+    margin-top: 15px;
+
+    padding-top: 14px;
+
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 8px;
+
+    border-top:
+        1px solid #edf2ef;
+}
+
+
+/* =========================================================
+   BOTÃO EDITAR
+   ========================================================= */
+
+.btn-editar-rota {
+    min-height: 35px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid #cfe4d7;
+
+    border-radius: 9px;
+
+    background: #f7fbf8;
+
+    color: #11894b;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn-editar-rota:hover {
+    background: #e8f7ef;
+
+    border-color: #b8dcc7;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   BOTÃO EXCLUIR
+   ========================================================= */
+
+.btn-excluir-rota {
+    min-height: 35px;
+
+    padding:
+        0 13px;
+
+    border:
+        1px solid #f0cccc;
+
+    border-radius: 9px;
+
+    background: #fff7f7;
+
+    color: #c62828;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn-excluir-rota:hover {
+    background: #ffeaea;
+
+    border-color: #e7abab;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   ESTADO DE CARREGAMENTO
+   ========================================================= */
+
+.estado-carregamento {
+    width: 100%;
+
+    padding: 35px 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: white;
+
+    border:
+        1px solid #e4ece7;
+
+    border-radius: 15px;
+
+    color: #78877f;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   ROTA VAZIA
+   ========================================================= */
+
+.rota-vazia {
+    width: 100%;
+
+    padding: 45px 25px;
+
+    text-align: center;
+
+    background: white;
+
+    border:
+        1px solid #e4ece7;
+
+    border-radius: 16px;
+}
+
+.icone-rota-vazia {
+    font-size: 38px;
+
+    margin-bottom: 10px;
+}
+
+.rota-vazia h3 {
+    color: #244536;
+
+    font-size: 18px;
+}
+
+.rota-vazia p {
+    margin-top: 7px;
+
+    color: #78877f;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   ERRO
+   ========================================================= */
+
+.erro-dashboard {
+    width: 100%;
+
+    padding: 25px;
+
+    text-align: center;
+
+    background: #fff8f8;
+
+    border:
+        1px solid #f1d1d1;
+
+    border-radius: 15px;
+
+    color: #8d3b3b;
+}
+
+.erro-dashboard strong {
+    font-size: 15px;
+}
+
+.erro-dashboard p {
+    margin-top: 7px;
+
+    font-size: 13px;
+}
+
+.erro-dashboard button {
+    margin-top: 15px;
+
+    min-height: 35px;
+
+    padding:
+        0 14px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #c62828;
+
+    color: white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MODAL DE EDIÇÃO
+   ========================================================= */
+
+.modal-dashboard {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    padding: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(17, 45, 34, 0.58);
+
+    backdrop-filter:
+        blur(3px);
+
+    overflow-y: auto;
+}
+
+
+/* =========================================================
+   CONTEÚDO DO MODAL
+   ========================================================= */
+
+.modal-conteudo {
+    width: min(100%, 650px);
+
+    max-height: calc(100vh - 50px);
+
+    padding: 24px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 20px 60px
+        rgba(0, 0, 0, 0.25);
+
+    overflow-y: auto;
+}
+
+
+/* =========================================================
+   CABEÇALHO DO MODAL
+   ========================================================= */
+
+.modal-cabecalho {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 20px;
+}
+
+.modal-cabecalho h2 {
+    color: #173b2c;
+
+    font-size: 22px;
+}
+
+.modal-cabecalho p {
+    margin-top: 5px;
+
+    color: #78877f;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   FECHAR MODAL
+   ========================================================= */
+
+.btn-fechar-modal {
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    border: none;
+
+    border-radius: 9px;
+
+    background: #f1f5f3;
+
+    color: #52645b;
+
+    font-size: 22px;
+
+    cursor: pointer;
+}
+
+.btn-fechar-modal:hover {
+    background: #e5ece8;
+}
+
+
+/* =========================================================
+   FORMULÁRIO DO MODAL
+   ========================================================= */
+
+.form-rota {
+    width: 100%;
+}
+
+.grupo-formulario {
+    width: 100%;
+
+    margin-bottom: 15px;
+}
+
+.grupo-formulario label {
+    display: block;
+
+    margin-bottom: 6px;
+
+    color: #244536;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.grupo-formulario input,
+.grupo-formulario select,
+.grupo-formulario textarea {
+    width: 100%;
+
+    min-height: 40px;
+
+    padding:
+        9px 11px;
+
+    border:
+        1px solid #dce6e0;
+
+    border-radius: 9px;
+
+    background: white;
+
+    color: #244536;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.grupo-formulario textarea {
+    min-height: 95px;
+
+    resize: vertical;
+}
+
+.grupo-formulario input:focus,
+.grupo-formulario select:focus,
+.grupo-formulario textarea:focus {
+    border-color: #13a45b;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(19, 164, 91, 0.10);
+}
+
+.grupo-formulario small {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #87948e;
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   LINHA ORIGEM / DESTINO
+   ========================================================= */
+
+.linha-formulario {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 12px;
+}
+
+
+/* =========================================================
+   CHECKBOX DOS DIAS
+   ========================================================= */
+
+.dias-checkbox {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 7px;
+}
+
+.checkbox-dia {
+    min-height: 36px;
+
+    padding:
+        0 8px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 6px;
+
+    border:
+        1px solid #e2ebe6;
+
+    border-radius: 8px;
+
+    background: #f8faf9;
+
+    cursor: pointer;
+}
+
+.checkbox-dia input {
+    width: auto;
+
+    min-height: auto;
+
+    accent-color: #13a45b;
+}
+
+.checkbox-dia span {
+    color: #52645b;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   TÍTULO DOS HORÁRIOS
+   ========================================================= */
+
+.titulo-horarios {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 10px;
+}
+
+.titulo-horarios label {
+    margin-bottom: 3px;
+}
+
+.titulo-horarios small {
+    margin-top: 0;
+}
+
+
+/* =========================================================
+   BOTÃO ADICIONAR HORÁRIO
+   ========================================================= */
+
+.btn-adicionar-horario {
+    min-height: 34px;
+
+    padding:
+        0 11px;
+
+    flex-shrink: 0;
+
+    border:
+        1px solid #cfe4d7;
+
+    border-radius: 8px;
+
+    background: #f5fbf7;
+
+    color: #11894b;
+
+    font-size: 11px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.btn-adicionar-horario:hover {
+    background: #e7f6ed;
+}
+
+
+/* =========================================================
+   LISTA DE HORÁRIOS DO FORMULÁRIO
+   ========================================================= */
+
+.lista-horarios-formulario {
+    display: flex;
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+
+/* =========================================================
+   LINHA DE HORÁRIO DO FORMULÁRIO
+   ========================================================= */
+
+.linha-horario {
+    width: 100%;
+
+    padding: 11px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        34px;
+
+    align-items: end;
+
+    gap: 9px;
+
+    background: #f8faf9;
+
+    border:
+        1px solid #e3ebe7;
+
+    border-radius: 10px;
+}
+
+.campo-horario label {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #78877f;
+
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.campo-horario input {
+    width: 100%;
+
+    min-height: 38px;
+
+    padding:
+        7px 9px;
+
+    border:
+        1px solid #dce6e0;
+
+    border-radius: 8px;
+
+    background: white;
+}
+
+
+/* =========================================================
+   REMOVER HORÁRIO
+   ========================================================= */
+
+.btn-remover-horario {
+    width: 34px;
+    height: 34px;
+
+    border:
+        1px solid #f0cccc;
+
+    border-radius: 8px;
+
+    background: #fff7f7;
+
+    color: #c62828;
+
+    font-size: 19px;
+
+    cursor: pointer;
+}
+
+.btn-remover-horario:hover {
+    background: #ffeaea;
+}
+
+
+/* =========================================================
+   MENSAGEM DO FORMULÁRIO
+   ========================================================= */
+
+.mensagem-formulario {
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 12px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+.mensagem-formulario:empty {
+    display: none;
+}
+
+.mensagem-formulario.erro {
+    background: #fff4f4;
+
+    border:
+        1px solid #f0cccc;
+
+    color: #a12626;
+}
+
+.mensagem-formulario.sucesso {
+    background: #eef9f2;
+
+    border:
+        1px solid #cce8d6;
+
+    color: #176b3d;
+}
+
+.codigo-acesso-sucesso {
+    margin-top: 8px;
+
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+
+.codigo-acesso-sucesso strong {
+    letter-spacing: 1px;
+}
+
+
+/* =========================================================
+   AÇÕES DO FORMULÁRIO
+   ========================================================= */
+
+.acoes-formulario {
+    width: 100%;
+
+    margin-top: 20px;
+
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 9px;
+}
+
+.btn-cancelar,
+.btn-salvar {
+    min-height: 40px;
+
+    padding:
+        0 15px;
+
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.btn-cancelar {
+    border:
+        1px solid #dce5e0;
+
+    background: white;
+
+    color: #66766e;
+}
+
+.btn-cancelar:hover {
+    background: #f4f7f5;
+}
+
+.btn-salvar {
+    border: none;
+
+    background: #13a45b;
+
+    color: white;
+}
+
+.btn-salvar:hover {
+    background: #087c48;
+}
+
+.btn-salvar:disabled {
+    opacity: 0.65;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE — TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .conteudo {
+        width: 100%;
+    }
 
     .resumo {
-
         grid-template-columns:
             repeat(2, 1fr);
     }
 
-
-    .acoes {
-
+    .informacoes-rota {
         grid-template-columns:
             1fr;
     }
@@ -819,45 +1835,35 @@ BOTÃO EXCLUIR
 }
 
 
-/* =========================================
-   CELULAR
-========================================= */
+/* =========================================================
+   RESPONSIVIDADE — CELULAR
+   ========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
 
     .cabecalho {
-
         min-height: 68px;
 
         padding:
             0 15px;
     }
 
-
     .icone-dashboard {
-
         width: 40px;
-
         height: 40px;
 
         font-size: 21px;
     }
 
-
     .titulo-cabecalho h1 {
-
         font-size: 18px;
     }
 
-
     .titulo-cabecalho p {
-
         font-size: 10px;
     }
 
-
     .btn-sair {
-
         min-height: 36px;
 
         padding:
@@ -866,39 +1872,29 @@ BOTÃO EXCLUIR
         font-size: 12px;
     }
 
-
     .conteudo {
-
         padding:
             22px
             15px
             40px;
     }
 
-
     .boas-vindas {
-
         padding: 20px;
     }
 
-
     .boas-vindas h2 {
-
         font-size: 21px;
     }
 
-
     .resumo {
-
         grid-template-columns:
             1fr 1fr;
 
         gap: 10px;
     }
 
-
     .card-resumo {
-
         min-height: 95px;
 
         padding: 13px;
@@ -906,222 +1902,152 @@ BOTÃO EXCLUIR
         gap: 10px;
     }
 
-
     .icone-resumo {
-
         width: 40px;
-
         height: 40px;
 
         font-size: 19px;
     }
 
-
     .card-resumo strong {
-
         font-size: 21px;
     }
 
-
     .titulo-lista {
-
         align-items: flex-start;
 
         flex-direction: column;
     }
 
-
     .btn-adicionar {
-
         width: 100%;
     }
 
+    .rota-caminho {
+        grid-template-columns:
+            1fr;
 
-    .card-rota {
-
-        align-items: flex-start;
-
-        flex-wrap: wrap;
+        gap: 8px;
     }
 
-
-    .info-rota {
-
-        min-width: 120px;
+    .seta-rota {
+        transform:
+            rotate(90deg);
     }
 
-
-    .status {
-
-        margin-left: auto;
-    }
-
-
-    .btn-editar {
-
-        width: 100%;
-
-        margin-top: 5px;
-    }
-
-}
-
-
-/* =========================================
-   CELULARES PEQUENOS
-========================================= */
-
-@media (max-width: 380px) {
-
-    .resumo {
-
+    .informacoes-rota {
         grid-template-columns:
             1fr;
     }
 
+    .codigo-acesso-rota {
+        align-items: flex-start;
 
-    .titulo-cabecalho p {
-
-        display: none;
+        flex-direction: column;
     }
 
-
-    .boas-vindas h2 {
-
-        font-size: 19px;
+    .acoes-rota {
+        justify-content: stretch;
     }
 
-}
+    .btn-editar-rota,
+    .btn-excluir-rota {
+        flex: 1;
+    }
 
+    .linha-formulario {
+        grid-template-columns:
+            1fr;
+    }
 
-/* =========================================
-   HORÁRIOS DAS ROTAS
-========================================= */
+    .dias-checkbox {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
 
-.horarios-rota {
-    margin-top: 14px;
-    padding: 14px 16px;
-    border-radius: 12px;
-    background: #f7f9fc;
-    border: 1px solid #e4e9f0;
-}
+    .linha-horario {
+        grid-template-columns:
+            1fr 1fr;
+    }
 
+    .btn-remover-horario {
+        width: 100%;
 
-/* TÍTULO */
+        grid-column:
+            1 / -1;
+    }
 
-.horarios-rota > p {
-    margin: 0 0 10px 0;
-    font-size: 14px;
-    color: #374151;
-}
-
-
-/* ÍCONE + TÍTULO */
-
-.horarios-rota > p strong {
-    font-weight: 600;
-    color: #1f2937;
-}
-
-
-/* CADA HORÁRIO */
-
-.horario-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    padding: 9px 12px;
-
-    margin-top: 7px;
-
-    background: #ffffff;
-
-    border: 1px solid #e6eaf0;
-
-    border-radius: 9px;
-
-    font-size: 13px;
-
-    color: #4b5563;
-
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
-}
-
-
-/* PRIMEIRO ITEM DO HORÁRIO */
-
-.horario-item span:first-child {
-    font-weight: 600;
-    color: #374151;
-}
-
-
-/* HORÁRIO DE SAÍDA */
-
-.horario-item span:nth-child(2) {
-    font-weight: 700;
-    color: #1f2937;
-}
-
-
-/* SETA */
-
-.horario-item span:nth-child(3) {
-    color: #9ca3af;
-    font-weight: 600;
-}
-
-
-/* HORÁRIO DE CHEGADA */
-
-.horario-item span:nth-child(4) {
-    font-weight: 700;
-    color: #1f2937;
-}
-
-
-/* =========================================
-   PERÍODOS - COMPATIBILIDADE COM FORMATO ANTIGO
-========================================= */
-
-.periodo-horarios {
-    margin-top: 10px;
-}
-
-
-.periodo-horarios > strong {
-    display: block;
-
-    margin-bottom: 7px;
-
-    font-size: 13px;
-
-    color: #6b7280;
-
-    font-weight: 600;
-}
-
-
-/* =========================================
-   RESPONSIVO
-========================================= */
-
-@media (max-width: 600px) {
-
-    .horarios-rota {
+    .modal-dashboard {
         padding: 12px;
     }
 
+    .modal-conteudo {
+        max-height:
+            calc(100vh - 24px);
 
-    .horario-item {
-        gap: 7px;
+        padding: 18px;
+    }
 
-        padding: 8px 10px;
+}
 
-        font-size: 12px;
 
-        flex-wrap: wrap;
+/* =========================================================
+   CELULAR PEQUENO
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .resumo {
+        grid-template-columns:
+            1fr;
+    }
+
+    .titulo-cabecalho p {
+        display: none;
+    }
+
+    .boas-vindas h2 {
+        font-size: 19px;
+    }
+
+    .card-rota {
+        padding: 16px;
+    }
+
+    .rota-cabecalho h3 {
+        font-size: 18px;
+    }
+
+    .responsavel-rota {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 4px;
+    }
+
+    .dias-checkbox {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .titulo-horarios {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .btn-adicionar-horario {
+        width: 100%;
+    }
+
+    .acoes-formulario {
+        flex-direction: column;
+    }
+
+    .btn-cancelar,
+    .btn-salvar {
+        width: 100%;
     }
 
 }
