@@ -41,7 +41,7 @@ const pool = new Pool({
 
 
 // =========================================
-// TESTE DE ERRO DO POOL
+// MONITORAR ERROS DO POOL
 // =========================================
 
 pool.on(
@@ -378,38 +378,12 @@ app.get(
     "/",
     async function (req, res) {
 
-        const inicio =
-            Date.now();
-
-        console.log(
-            "================================="
-        );
-
-        console.log(
-            "TESTE / INICIADO"
-        );
-
-        console.log(
-            "Horário:",
-            new Date().toISOString()
-        );
-
         try {
-
-            console.log(
-                "Consultando PostgreSQL..."
-            );
 
             const resultado =
                 await pool.query(
                     "SELECT NOW()"
                 );
-
-            console.log(
-                "PostgreSQL respondeu em:",
-                Date.now() - inicio,
-                "ms"
-            );
 
             res.json({
 
@@ -429,25 +403,8 @@ app.get(
         catch (erro) {
 
             console.error(
-                "================================="
-            );
-
-            console.error(
-                "ERRO AO CONECTAR AO POSTGRESQL:"
-            );
-
-            console.error(
+                "Erro ao conectar ao PostgreSQL:",
                 erro
-            );
-
-            console.error(
-                "Tempo até o erro:",
-                Date.now() - inicio,
-                "ms"
-            );
-
-            console.error(
-                "================================="
             );
 
             res.status(500).json({
@@ -474,28 +431,11 @@ app.post(
     "/rotas",
     async function (req, res) {
 
-        const inicioCadastro =
-            Date.now();
-
-        console.log(
-            "================================="
-        );
-
-        console.log(
-            "INÍCIO DO CADASTRO DA ROTA"
-        );
-
-        console.log(
-            "Horário:",
-            new Date().toISOString()
-        );
-
-        console.log(
-            "================================="
-        );
-
-
         try {
+
+            console.log(
+                "================================="
+            );
 
             console.log(
                 "DADOS RECEBIDOS EM POST /rotas:"
@@ -519,31 +459,11 @@ app.post(
 
 
             // =================================
-            // TESTE - RECEBIMENTO
-            // =================================
-
-            console.log(
-                "[TESTE 1] Dados recebidos em:",
-                Date.now() - inicioCadastro,
-                "ms"
-            );
-
-
-            // =================================
             // VALIDAR
             // =================================
 
-            const inicioValidacao =
-                Date.now();
-
             const erros =
                 validarDadosRota(dados);
-
-            console.log(
-                "[TESTE 2] Validação concluída em:",
-                Date.now() - inicioValidacao,
-                "ms"
-            );
 
 
             if (erros.length > 0) {
@@ -610,52 +530,12 @@ app.post(
                 );
 
 
-            console.log(
-                "[TESTE 3] Dados preparados em:",
-                Date.now() - inicioCadastro,
-                "ms"
-            );
-
-
             // =================================
             // GERAR CÓDIGO
             // =================================
 
-            const inicioCodigo =
-                Date.now();
-
             const codigoAcesso =
                 gerarCodigoAcesso();
-
-            console.log(
-                "[TESTE 4] Código gerado:",
-                codigoAcesso
-            );
-
-            console.log(
-                "[TESTE 4] Geração do código levou:",
-                Date.now() - inicioCodigo,
-                "ms"
-            );
-
-
-            // =================================
-            // TESTAR CONEXÃO ANTES DO INSERT
-            // =================================
-
-            console.log(
-                "[TESTE 5] Preparando INSERT no PostgreSQL..."
-            );
-
-            console.log(
-                "Tempo desde o início:",
-                Date.now() - inicioCadastro,
-                "ms"
-            );
-
-
-            const inicioInsert =
-                Date.now();
 
 
             // =================================
@@ -726,27 +606,6 @@ app.post(
                 );
 
 
-            const tempoInsert =
-                Date.now() - inicioInsert;
-
-
-            console.log(
-                "[TESTE 6] INSERT terminou."
-            );
-
-            console.log(
-                "[TESTE 6] Tempo do INSERT:",
-                tempoInsert,
-                "ms"
-            );
-
-            console.log(
-                "[TESTE 6] Tempo total até agora:",
-                Date.now() - inicioCadastro,
-                "ms"
-            );
-
-
             const rotaSalva =
                 resultado.rows[0];
 
@@ -790,10 +649,10 @@ app.post(
 
 
             // =================================
-            // TESTE DA RESPOSTA
+            // RESPONDER AO FRONTEND
             // =================================
 
-            const respostaFinal = {
+            return res.status(201).json({
 
                 sucesso:
                     true,
@@ -807,42 +666,7 @@ app.post(
                 rota:
                     rotaSalva
 
-            };
-
-
-            console.log(
-                "[TESTE 7] Preparando resposta..."
-            );
-
-            console.log(
-                "Tempo total antes de enviar:",
-                Date.now() - inicioCadastro,
-                "ms"
-            );
-
-
-            // =================================
-            // RESPONDER
-            // =================================
-
-            res.status(201).json(
-                respostaFinal
-            );
-
-
-            console.log(
-                "[TESTE 8] RESPOSTA ENVIADA AO FRONTEND."
-            );
-
-            console.log(
-                "Tempo TOTAL DO CADASTRO:",
-                Date.now() - inicioCadastro,
-                "ms"
-            );
-
-            console.log(
-                "================================="
-            );
+            });
 
         }
 
@@ -858,12 +682,6 @@ app.post(
 
             console.error(
                 erro
-            );
-
-            console.error(
-                "Tempo até o erro:",
-                Date.now() - inicioCadastro,
-                "ms"
             );
 
             console.error(
@@ -898,13 +716,6 @@ app.get(
     "/rotas",
     async function (req, res) {
 
-        const inicio =
-            Date.now();
-
-        console.log(
-            "[LISTAR ROTAS] Iniciando consulta..."
-        );
-
         try {
 
             const resultado =
@@ -917,12 +728,6 @@ app.get(
                     `
 
                 );
-
-            console.log(
-                "[LISTAR ROTAS] Consulta terminou em:",
-                Date.now() - inicio,
-                "ms"
-            );
 
             res.json({
 
@@ -964,9 +769,6 @@ app.get(
     "/rotas/:id",
     async function (req, res) {
 
-        const inicio =
-            Date.now();
-
         try {
 
             const id =
@@ -991,13 +793,6 @@ app.get(
                     [id]
 
                 );
-
-
-            console.log(
-                "[BUSCAR ROTA] Consulta terminou em:",
-                Date.now() - inicio,
-                "ms"
-            );
 
 
             if (
@@ -1057,9 +852,6 @@ app.get(
 app.put(
     "/rotas/:id",
     async function (req, res) {
-
-        const inicioEdicao =
-            Date.now();
 
         try {
 
@@ -1150,15 +942,6 @@ app.put(
                 texto(dados.informacoes);
 
 
-            console.log(
-                "[EDIÇÃO] Executando UPDATE..."
-            );
-
-
-            const inicioUpdate =
-                Date.now();
-
-
             const resultado =
                 await pool.query(
 
@@ -1219,13 +1002,6 @@ app.put(
                 );
 
 
-            console.log(
-                "[EDIÇÃO] UPDATE terminou em:",
-                Date.now() - inicioUpdate,
-                "ms"
-            );
-
-
             if (
                 resultado.rows.length === 0
             ) {
@@ -1238,13 +1014,6 @@ app.put(
                 });
 
             }
-
-
-            console.log(
-                "[EDIÇÃO] Tempo total:",
-                Date.now() - inicioEdicao,
-                "ms"
-            );
 
 
             res.json({
@@ -1277,12 +1046,6 @@ app.put(
 
             console.error(
                 erro
-            );
-
-            console.error(
-                "Tempo até o erro:",
-                Date.now() - inicioEdicao,
-                "ms"
             );
 
             console.error(
@@ -1500,39 +1263,12 @@ app.get(
     "/teste-banco",
     async function (req, res) {
 
-        const inicio =
-            Date.now();
-
-        console.log(
-            "================================="
-        );
-
-        console.log(
-            "TESTE DO BANCO INICIADO"
-        );
-
         try {
-
-            console.log(
-                "Executando COUNT(*)..."
-            );
-
 
             const resultado =
                 await pool.query(
                     "SELECT COUNT(*) AS total FROM rotas"
                 );
-
-
-            const tempo =
-                Date.now() - inicio;
-
-
-            console.log(
-                "Banco respondeu em:",
-                tempo,
-                "ms"
-            );
 
 
             res.json({
@@ -1541,10 +1277,7 @@ app.get(
                     "Banco conectado corretamente.",
 
                 totalRotas:
-                    resultado.rows[0].total,
-
-                tempoMs:
-                    tempo
+                    resultado.rows[0].total
 
             });
 
@@ -1556,13 +1289,6 @@ app.get(
                 "Erro no teste do banco:",
                 erro
             );
-
-            console.error(
-                "Tempo até o erro:",
-                Date.now() - inicio,
-                "ms"
-            );
-
 
             res.status(500).json({
 
@@ -1615,7 +1341,7 @@ const PORT =
 
 app.listen(
     PORT,
-    async function () {
+    function () {
 
         console.log(
             "================================="
@@ -1637,75 +1363,6 @@ app.listen(
         console.log(
             "================================="
         );
-
-
-        // =====================================
-        // TESTAR BANCO AO INICIAR
-        // =====================================
-
-        const inicioBanco =
-            Date.now();
-
-
-        try {
-
-            console.log(
-                "Testando conexão com PostgreSQL..."
-            );
-
-
-            const resultado =
-                await pool.query(
-                    "SELECT NOW()"
-                );
-
-
-            console.log(
-                "PostgreSQL conectado com sucesso!"
-            );
-
-            console.log(
-                "Horário do banco:",
-                resultado.rows[0].now
-            );
-
-            console.log(
-                "Tempo da conexão inicial:",
-                Date.now() - inicioBanco,
-                "ms"
-            );
-
-            console.log(
-                "================================="
-            );
-
-        }
-
-        catch (erro) {
-
-            console.error(
-                "================================="
-            );
-
-            console.error(
-                "ERRO NA CONEXÃO INICIAL COM POSTGRESQL:"
-            );
-
-            console.error(
-                erro
-            );
-
-            console.error(
-                "Tempo até o erro:",
-                Date.now() - inicioBanco,
-                "ms"
-            );
-
-            console.error(
-                "================================="
-            );
-
-        }
 
     }
 );
