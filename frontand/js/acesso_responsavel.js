@@ -7,7 +7,7 @@
 // ENDEREÇO DA API
 // =========================================
 
-const API_URL = "http://localhost:3000";
+const API_URL = "https://transporte-facil-api.onrender.com";
 
 // =========================================
 // ELEMENTOS
